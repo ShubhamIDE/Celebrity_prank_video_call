@@ -1,0 +1,73 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.videocall.livecelebrity.prankcall'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.videocall.livecelebrity.prankcall"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        applicationVariants.all {
+            variant ->
+                variant.outputs.each {
+                    output ->
+                        def name = "Celebrity Prank Video Call_${variant.versionName}.apk"
+                        output.outputFileName = name
+                }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // flurry
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    implementation 'com.flurry.android:analytics:14.4.0'
+
+    // review
+    implementation 'com.google.android.play:review:2.0.1'
+
+    // glide
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+
+}
