@@ -3,13 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/getStartedFragment">
 
 
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.videocall.livecelebrity.prankcall.splash.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.videocall.livecelebrity.prankcall.splash.OnboardingFragment"
+        android:label="fragment_onboarding"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsOfUseFragment"
+        android:name="com.videocall.livecelebrity.prankcall.splash.TermsOfUseFragment"
+        android:label="TermsOfUseFragment" >
+        <action
+            android:id="@+id/action_termsOfUseFragment_to_tcsFragment"
+            app:destination="@id/tcsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/permissionFragment"
+        android:name="com.videocall.livecelebrity.prankcall.splash.PermissionFragment"
+        android:label="fragment_permission"
+        tools:layout="@layout/fragment_permission" />
+    <fragment
+        android:id="@+id/tcsFragment"
+        android:name="com.videocall.livecelebrity.prankcall.splash.TCSFragment"
+        android:label="fragment_tcs"
+        tools:layout="@layout/fragment_tcs" >
+        <action
+            android:id="@+id/action_tcsFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/getStartedFragment"
+        android:name="com.videocall.livecelebrity.prankcall.home.GetStartedFragment"
+        android:label="fragment_get_started"
+        tools:layout="@layout/fragment_get_started" />
 
 </navigation>

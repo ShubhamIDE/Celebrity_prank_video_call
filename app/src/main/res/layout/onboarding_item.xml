@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_onboarding_1"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gd1"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gd1"
+        android:fontFamily="@font/inter_bold"
+        android:textStyle="bold"
+        android:id="@+id/tvTitle"
+        android:textColor="@color/white"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvSubtitle"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/white"
+        android:textAlignment="center"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="116dp"
+        app:strokeWidth="1dp"
+        app:cornerRadius="25dp"
+        app:strokeColor="@color/white"
+        android:text="@string/next"
+        android:layout_height="45dp"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/btnNext"
+        android:maxLines="1"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/inter_medium"
+        android:backgroundTint="#45ffffff"/>
+
+    <com.adsmodule.api.adsModule.interfaces.CustomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/smallNativeAd"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:adType="small"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

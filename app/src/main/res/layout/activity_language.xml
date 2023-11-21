@@ -5,18 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_blue"
     tools:context=".splash.LanguageActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/toolbarCard"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:paddingTop="40dp"
-            android:paddingBottom="15dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -29,14 +31,49 @@
                 android:text="@string/select_language"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="18.5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     </com.google.android.material.card.MaterialCardView>
-<!--    <LinearLayout-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:id="@+id/whiteLine"
+        app:layout_constraintTop_toBottomOf="@id/toolbarCard"
+        android:layout_height="1dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/rvLanguages"
+        app:layout_constraintTop_toBottomOf="@id/whiteLine"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="184dp"
+        app:cornerRadius="43dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/darkBlue"
+        android:layout_height="48dp"
+        android:text="@string/next"
+        android:id="@+id/btnNext"
+        android:fontFamily="@font/inter_semibold"
+        android:layout_marginBottom="35dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mediumNativeAd"/>
+
+    <com.adsmodule.api.adsModule.interfaces.CustomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:adType="medium"
+        android:visibility="gone"
+        android:id="@+id/mediumNativeAd"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

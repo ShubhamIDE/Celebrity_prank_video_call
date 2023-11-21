@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/home_bg"
+    tools:context=".home.GetStartedFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/gdImg"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:src="@drawable/get_started_connected_people_img"
+        app:layout_constraintTop_toTopOf="@id/gdImg"
+        app:layout_constraintBottom_toBottomOf="@id/gdImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65"
+        android:layout_height="wrap_content"
+        android:id="@+id/gd1"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/llRateUs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/llShare"
+        app:layout_constraintTop_toTopOf="@id/gd1"
+        app:layout_constraintBottom_toBottomOf="@id/gd1">
+
+        <eightbitlab.com.blurview.BlurView
+            android:layout_width="wrap_content"
+            android:id="@+id/bvRateUs"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="89dp"
+                android:padding="15dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="97dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_rate_us"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/rate_us"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+        </eightbitlab.com.blurview.BlurView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/llShare"
+        app:layout_constraintStart_toEndOf="@id/llRateUs"
+        app:layout_constraintEnd_toStartOf="@id/llPP"
+        app:layout_constraintTop_toTopOf="@id/gd1"
+        app:layout_constraintBottom_toBottomOf="@id/gd1"
+        android:layout_height="wrap_content">
+
+        <eightbitlab.com.blurview.BlurView
+            android:layout_width="wrap_content"
+            android:id="@+id/bvShare"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="89dp"
+                android:padding="15dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="97dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_share_arrow"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="6dp"
+                    android:text="Share"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+
+        </eightbitlab.com.blurview.BlurView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:id="@+id/llPP"
+        app:layout_constraintStart_toEndOf="@id/llShare"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/gd1"
+        app:layout_constraintBottom_toBottomOf="@id/gd1"
+        android:layout_height="wrap_content">
+
+        <eightbitlab.com.blurview.BlurView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bvPP">
+
+            <LinearLayout
+                android:layout_width="89dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="97dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/ic_lock"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_marginTop="6dp"
+                    android:textAlignment="center"
+                    android:text="@string/privacy_policy"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/white"/>
+
+
+            </LinearLayout>
+
+        </eightbitlab.com.blurview.BlurView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

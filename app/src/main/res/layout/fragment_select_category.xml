@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/home_bg"
+    tools:context=".home.SelectCategoryFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeWidth="0dp"
+        android:id="@+id/toolbarCard"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingTop="40dp"
+            android:paddingHorizontal="15dp"
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_back_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:id="@+id/ivMenu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="0dp"
+                app:layout_constraintStart_toEndOf="@id/ivMenu"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="15dp"
+                app:layout_constraintTop_toTopOf="@id/ivMenu"
+                app:layout_constraintBottom_toBottomOf="@id/ivMenu"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:text="@string/select_category"
+                android:fontFamily="@font/inter_medium"
+                android:maxLines="1"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:id="@+id/whiteLine"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarCard"
+        android:layout_height="1dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.3"
+        android:id="@+id/gdCardHollywood"
+        android:orientation="horizontal"/>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
+        android:id="@+id/cardHollywood"
+        android:background="@drawable/ic_hollywood_card_bg"
+        app:layout_constraintTop_toTopOf="@id/gdCardHollywood"
+        app:layout_constraintBottom_toBottomOf="@id/gdCardHollywood"
+        android:layout_marginHorizontal="30dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6"
+            android:id="@+id/gdTvHollywood"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/hollywood"
+            android:textSize="22sp"
+            android:fontFamily="@font/inter_bold"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@id/gdTvHollywood"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="109dp"
+        android:background="@drawable/bollwood_card"
+        app:layout_constraintTop_toBottomOf="@id/cardHollywood"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="30dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.35"
+            android:id="@+id/gdTvBollwood"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/bollywood"
+            android:textSize="22sp"
+            android:fontFamily="@font/inter_bold"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/gdTvBollwood"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

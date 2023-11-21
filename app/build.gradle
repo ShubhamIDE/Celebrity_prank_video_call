@@ -70,4 +70,18 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
 
+    // ads module
+    implementation 'androidx.lifecycle:lifecycle-process:2.6.1'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':adsmoduleNew')
+
+    // blur view
+    implementation 'com.github.Dimezis:BlurView:version-2.0.3'
+
+    // review
+    implementation ("com.google.android.play:review:2.0.1")
+
+    // flurry
+    implementation ("com.google.android.gms:play-services-ads-identifier:18.0.1")
+    implementation ("com.flurry.android:analytics:14.4.0")
 }
