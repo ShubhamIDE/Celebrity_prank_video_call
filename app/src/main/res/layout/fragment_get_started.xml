@@ -51,6 +51,7 @@
                 android:layout_width="89dp"
                 android:padding="15dp"
                 android:gravity="center"
+                android:background="@drawable/white_bg_stroke"
                 android:orientation="vertical"
                 android:layout_height="97dp">
 
@@ -93,20 +94,21 @@
                 android:layout_width="89dp"
                 android:padding="15dp"
                 android:gravity="center"
+                android:background="@drawable/white_bg_stroke"
                 android:orientation="vertical"
                 android:layout_height="97dp">
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_share_arrow"/>
+                    android:src="@drawable/ic_share"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_marginTop="6dp"
-                    android:text="Share"
+                    android:text="@string/share"
                     android:fontFamily="@font/inter_medium"
                     android:textColor="@color/white"/>
 
@@ -135,6 +137,7 @@
             <LinearLayout
                 android:layout_width="89dp"
                 android:padding="5dp"
+                android:background="@drawable/white_bg_stroke"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_height="97dp">
@@ -158,6 +161,30 @@
             </LinearLayout>
 
         </eightbitlab.com.blurview.BlurView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:id="@+id/llGetStarted"
+        app:layout_constraintTop_toBottomOf="@id/llShare"
+        android:layout_marginTop="37dp"
+        android:gravity="center"
+        android:background="@drawable/white_bg_stroke"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="27dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/get_started"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

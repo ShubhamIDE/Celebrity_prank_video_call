@@ -16,7 +16,7 @@
         android:layout_width="321dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="gone"
+        android:visibility="visible"
         app:itemIconTint="@null">
 
         <androidx.fragment.app.FragmentContainerView
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:strokeWidth="0dp"
@@ -71,7 +71,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        </androidx.appcompat.widget.Toolbar>
 
         <View
             android:layout_width="match_parent"

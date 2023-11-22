@@ -1,11 +1,14 @@
 package com.videocall.livecelebrity.prankcall.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.FragmentGetStartedBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -31,6 +34,24 @@ class GetStartedFragment : Fragment() {
         binding.bvShare.setupWith(binding.llShare, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.white_blur))
             .setBlurRadius(20f)
+
+        binding.llRateUs.setOnClickListener {
+            reviewDialog(requireActivity())
+        }
+
+        binding.llPP.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://picturesaentertainment.blogspot.com/p/privacy-policy-for-dual-wallpaper.html")
+            startActivity(intent)
+        }
+
+        binding.llShare.setOnClickListener {
+            shareApp(requireContext())
+        }
+
+        binding.llGetStarted.setOnClickListener {
+            findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
+        }
 
         return binding.root
     }

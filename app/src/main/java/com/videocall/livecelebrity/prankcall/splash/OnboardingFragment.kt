@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.R
@@ -25,6 +26,9 @@ class OnboardingFragment : Fragment() {
         binding.onboardingVP.adapter = OnboardingAdapter{
             if(it != 2){
                 binding.onboardingVP.setCurrentItem(it+1, true)
+            }
+            else {
+                findNavController().navigate(R.id.action_onboardingFragment_to_permissionFragment)
             }
         }
         return binding.root

@@ -67,4 +67,17 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="hollywood">Hollywood</string>
     <string name="bollywood">Bollywood</string>
     <string name="rate_us1">Rate Us!</string>
+    <string name="do_you_really_want_to_exit_the_app">Do you really want to exit the app?</string>
+    <string name="exit_app">Exit App</string>
+    <string name="type_here_to_search_something">Type here to search something</string>
+    <string name="get_started">Get Started</string>
+    <string name="drawer_close">Drawer close</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="chat">Chat</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="speaker">Speaker</string>
+    <string name="mute">Mute</string>
+    <string name="type_something">Type something</string>
+    <string name="suggestions">Suggestions</string>
 </resources>

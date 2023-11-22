@@ -1,8 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CelebrityPrankVideoCall" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:textColorHint">#45ffffff</item>
+        <item name="editTextColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/darkBlue</item>
     </style>
 
     <style name="Theme.CelebrityPrankVideoCall" parent="Base.Theme.CelebrityPrankVideoCall" />

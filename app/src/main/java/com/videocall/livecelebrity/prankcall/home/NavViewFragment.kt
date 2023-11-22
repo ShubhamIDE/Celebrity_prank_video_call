@@ -52,7 +52,7 @@ class NavViewFragment : Fragment() {
 }
 
 
-private fun shareApp(context: Context) {
+fun shareApp(context: Context) {
     FlurryAgent.logEvent("Share app is clicked")
     val intent = Intent()
     intent.action = Intent.ACTION_SEND

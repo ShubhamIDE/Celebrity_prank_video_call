@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -26,6 +27,8 @@ import com.adsmodule.api.adsModule.retrofit.AdsDataRequestModel;
 import com.adsmodule.api.adsModule.retrofit.AdsResponseModel;
 import com.adsmodule.api.adsModule.utils.Constants;
 import com.videocall.livecelebrity.prankcall.MainActivity;
+import com.videocall.livecelebrity.prankcall.splash.LanguageActivity;
+import com.videocall.livecelebrity.prankcall.utils.LocaleHelper;
 
 public class AppOpenAds implements LifecycleObserver, Application.ActivityLifecycleCallbacks {
 
@@ -47,6 +50,9 @@ public class AppOpenAds implements LifecycleObserver, Application.ActivityLifecy
     @Override
     public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
         AppOpenAds.activity = activity;
+        SharedPreferences pref = activity.getSharedPreferences(LanguageActivity.LANG_PREF, Context.MODE_PRIVATE);
+        String locale = pref.getString(LocaleHelper.SELECTED_LANGUAGE, "en");
+        LocaleHelper.setLocale(activity.getApplicationContext() , locale);
         bundle = savedInstanceState;
     }
 

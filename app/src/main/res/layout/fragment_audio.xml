@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/audio_bg"
+    tools:context=".audio.AudioFragment">
+    
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gdCallImg"
+        app:layout_constraintGuide_percent="0.32"
+        android:orientation="horizontal"/>
+    
+    <LinearLayout
+        android:layout_width="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="40dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@id/gdCallImg"
+        app:layout_constraintBottom_toBottomOf="@id/gdCallImg"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="127dp"
+            android:id="@+id/ivImg"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="127dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Name"
+            android:layout_marginTop="24dp"
+            android:textSize="24sp"
+            android:id="@+id/tvName"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="00:00"
+            android:layout_marginTop="9dp"
+            android:textSize="16sp"
+            android:id="@+id/tvDuratoin"
+            android:fontFamily="@font/inter_regular"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:id="@+id/gdCallOptions"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.67"
+        android:layout_height="wrap_content"/>
+    
+    <ImageButton
+        android:layout_width="69dp"
+        android:layout_height="69dp"
+        app:layout_constraintEnd_toStartOf="@id/ivMute"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_speaker_unselected"
+        android:id="@+id/ivSpeaker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvSpeaker"
+        app:layout_constraintTop_toTopOf="@id/gdCallOptions"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/speaker"
+        android:layout_marginTop="9dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/ivSpeaker"
+        app:layout_constraintStart_toStartOf="@id/ivSpeaker"
+        app:layout_constraintEnd_toEndOf="@id/ivSpeaker"
+        app:layout_constraintBottom_toBottomOf="@id/gdCallOptions"
+        android:id="@+id/tvSpeaker"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_height="wrap_content"/>
+
+
+    <ImageButton
+        android:layout_width="69dp"
+        android:layout_height="69dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_mute_unselected"
+        android:id="@+id/ivMute"
+        app:layout_constraintEnd_toStartOf="@id/ivHold"
+        app:layout_constraintStart_toEndOf="@id/ivSpeaker"
+        app:layout_constraintBottom_toTopOf="@id/tvMute"
+        app:layout_constraintTop_toTopOf="@id/gdCallOptions"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/mute"
+        android:layout_marginTop="9dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/ivMute"
+        app:layout_constraintStart_toStartOf="@id/ivMute"
+        app:layout_constraintEnd_toEndOf="@id/ivMute"
+        app:layout_constraintBottom_toBottomOf="@id/gdCallOptions"
+        android:id="@+id/tvMute"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_height="wrap_content"/>
+
+
+    <ImageButton
+        android:layout_width="69dp"
+        android:layout_height="69dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_hold_unselected"
+        android:id="@+id/ivHold"
+        app:layout_constraintStart_toEndOf="@id/ivMute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvHold"
+        app:layout_constraintTop_toTopOf="@id/gdCallOptions"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Hold"
+        android:layout_marginTop="9dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/ivHold"
+        app:layout_constraintStart_toStartOf="@id/ivHold"
+        app:layout_constraintEnd_toEndOf="@id/ivHold"
+        app:layout_constraintBottom_toBottomOf="@id/gdCallOptions"
+        android:id="@+id/tvHold"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:id="@+id/btnEndCall"
+        android:src="@drawable/ic_end_call"
+        app:layout_constraintTop_toBottomOf="@id/tvMute"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_height="70dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

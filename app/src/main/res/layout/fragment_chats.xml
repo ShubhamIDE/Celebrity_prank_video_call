@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".message.ChatsFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeWidth="0dp"
+        android:id="@+id/toolbarCard"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingTop="40dp"
+            android:paddingHorizontal="15dp"
+            android:paddingBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_back_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:id="@+id/btnBack"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="0dp"
+                app:layout_constraintStart_toEndOf="@id/btnBack"
+                app:layout_constraintEnd_toStartOf="@id/ivCall"
+                android:layout_marginHorizontal="15dp"
+                app:layout_constraintTop_toTopOf="@id/btnBack"
+                app:layout_constraintBottom_toBottomOf="@id/btnBack"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_medium"
+                android:maxLines="1"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:src="@drawable/ic_call"
+                app:layout_constraintEnd_toStartOf="@id/btnVideoCall"
+                android:layout_width="30dp"
+                android:id="@+id/ivCall"
+                android:layout_marginEnd="25dp"
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="30dp"/>
+
+            <ImageButton
+                android:src="@drawable/ic_video"
+                android:layout_width="35dp"
+                android:id="@+id/btnVideoCall"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="30dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:id="@+id/whiteLine"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbarCard"
+        android:layout_height="1dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/svMsgs"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toTopOf="@id/llEditText"
+        app:layout_constraintTop_toBottomOf="@id/whiteLine">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/msgLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/white"
+        android:text="@string/suggestions"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/suggestionsHSV"
+        android:layout_marginStart="23dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/tvSuggestions"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:id="@+id/suggestionsHSV"
+        app:layout_constraintBottom_toTopOf="@id/llEditText"
+        android:layout_marginBottom="10dp"
+        android:maxHeight="87dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/llEditText"
+        android:background="@drawable/white_bg_stroke"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="25dp">
+
+        <EditText
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/edtTxtMsgs"
+            android:layout_marginStart="15dp"
+            android:hint="@string/type_something"
+            android:textColor="@color/white"
+            android:textColorHint="#65ffffff"
+            android:layout_marginVertical="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/btnSendMsg"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/btn_send_msg"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

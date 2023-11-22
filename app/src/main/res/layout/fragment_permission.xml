@@ -113,6 +113,7 @@
         android:layout_width="207dp"
         android:layout_height="50dp"
         android:textSize="16sp"
+        android:id="@+id/btnGrantPerm"
         android:text="@string/grant_permission"
         android:fontFamily="@font/inter_medium"
         app:layout_constraintStart_toStartOf="parent"

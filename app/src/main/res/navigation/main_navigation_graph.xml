@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/getStartedFragment">
+    app:startDestination="@id/splashFragment">
 
 
     <fragment
@@ -12,9 +12,11 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
-
+            android:id="@+id/action_splashFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_getStartedFragment"
+            app:destination="@id/getStartedFragment" />
     </fragment>
 
     <fragment
@@ -23,8 +25,8 @@
         android:label="fragment_onboarding"
         tools:layout="@layout/fragment_onboarding" >
         <action
-            android:id="@+id/action_onboardingFragment_to_termsOfUseFragment"
-            app:destination="@id/termsOfUseFragment" />
+            android:id="@+id/action_onboardingFragment_to_permissionFragment"
+            app:destination="@id/permissionFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsOfUseFragment"
@@ -33,26 +35,87 @@
         <action
             android:id="@+id/action_termsOfUseFragment_to_tcsFragment"
             app:destination="@id/tcsFragment" />
+        <action
+            android:id="@+id/action_termsOfUseFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionFragment"
         android:name="com.videocall.livecelebrity.prankcall.splash.PermissionFragment"
         android:label="fragment_permission"
-        tools:layout="@layout/fragment_permission" />
+        tools:layout="@layout/fragment_permission" >
+        <action
+            android:id="@+id/action_permissionFragment_to_getStartedFragment"
+            app:destination="@id/getStartedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tcsFragment"
         android:name="com.videocall.livecelebrity.prankcall.splash.TCSFragment"
         android:label="fragment_tcs"
-        tools:layout="@layout/fragment_tcs" >
-        <action
-            android:id="@+id/action_tcsFragment_to_permissionFragment"
-            app:destination="@id/permissionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_tcs" />
 
     <fragment
         android:id="@+id/getStartedFragment"
         android:name="com.videocall.livecelebrity.prankcall.home.GetStartedFragment"
         android:label="fragment_get_started"
-        tools:layout="@layout/fragment_get_started" />
+        tools:layout="@layout/fragment_get_started" >
+        <action
+            android:id="@+id/action_getStartedFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.videocall.livecelebrity.prankcall.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_partnerChooseFragment"
+            app:destination="@id/partnerChooseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_callLogFragment"
+            app:destination="@id/callLogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/partnerChooseFragment"
+        android:name="com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment"
+        android:label="fragment_partner_choose"
+        tools:layout="@layout/fragment_partner_choose" >
+        <action
+            android:id="@+id/action_partnerChooseFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
+        <action
+            android:id="@+id/action_partnerChooseFragment_to_audioFragment"
+            app:destination="@id/audioFragment" />
+        <action
+            android:id="@+id/action_partnerChooseFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/callLogFragment"
+        android:name="com.videocall.livecelebrity.prankcall.calllog.CallLogFragment"
+        android:label="fragment_call_log"
+        tools:layout="@layout/fragment_call_log" />
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="com.videocall.livecelebrity.prankcall.message.ChatsFragment"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_audioFragment"
+            app:destination="@id/audioFragment" />
+        <action
+            android:id="@+id/action_chatsFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/audioFragment"
+        android:name="com.videocall.livecelebrity.prankcall.audio.AudioFragment"
+        android:label="fragment_audio"
+        tools:layout="@layout/fragment_audio" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.videocall.livecelebrity.prankcall.video.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video" />
 
 </navigation>

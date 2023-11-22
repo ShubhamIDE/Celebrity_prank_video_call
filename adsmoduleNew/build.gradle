@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace 'com.adsmodule.api'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
-        minSdk 26
-        targetSdk 33
+        minSdk 24
+        targetSdk 34
     }
 
     buildTypes {
