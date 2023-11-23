@@ -102,4 +102,7 @@ dependencies {
 
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    // youtube player view
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
 }

@@ -81,4 +81,5 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="mute">Mute</string>
     <string name="type_something">Type something</string>
     <string name="suggestions">Suggestions</string>
+    <string name="connecting_please_wait">Connecting please wait...</string>
 </resources>

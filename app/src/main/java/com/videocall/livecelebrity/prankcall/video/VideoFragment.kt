@@ -1,8 +1,6 @@
 package com.videocall.livecelebrity.prankcall.video
 
 import android.os.Bundle
-import android.telecom.Call
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +13,26 @@ import androidx.camera.video.Quality
 import androidx.camera.video.QualitySelector
 import androidx.camera.video.Recorder
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants.PlayerState
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.FragmentVideoBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class VideoFragment : Fragment() {
 
@@ -32,6 +43,7 @@ class VideoFragment : Fragment() {
     private var cameraExecutor: ExecutorService? = null
     var preview: Preview? = null
     var videoOn = true;
+    var baseUrl = "https://www.youtube.com/watch?v="
 
     companion object{
         var videoHistory: CallHistory? = null
@@ -42,9 +54,50 @@ class VideoFragment : Fragment() {
     ): View {
         binding = FragmentVideoBinding.inflate(inflater, container, false)
 
+        Glide.with(requireContext()).load(R.drawable.call_loading_gif).into(binding.ivLoading)
 
         videoHistory?.let{
-            //TODO play yt video and the start the timer
+            val iFrameOptions = IFramePlayerOptions.Builder().controls(0).rel(0).ivLoadPolicy(1).ccLoadPolicy(1).build()
+            lifecycle.addObserver(binding.videoView)
+
+            binding.videoView.matchParent()
+            binding.videoView.initialize(object : AbstractYouTubePlayerListener(){
+                override fun onReady(youTubePlayer: YouTubePlayer) {
+                    super.onReady(youTubePlayer)
+                    binding.loaderCl.visibility = View.VISIBLE
+                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0F)
+                    youTubePlayer.mute()
+                    youTubePlayer.setLoop(true)
+                    lifecycleScope.launch {
+                        delay(4000)
+                        withContext(Dispatchers.Main){
+                            binding.loaderCl.visibility = View.GONE
+                            youTubePlayer.unMute()
+                        }
+                    }
+                }
+
+                override fun onStateChange(
+                    youTubePlayer: YouTubePlayer,
+                    state: PlayerConstants.PlayerState
+                ) {
+                    super.onStateChange(youTubePlayer, state)
+                    if (state === PlayerState.ENDED) {
+                        binding.loaderCl.setVisibility(View.VISIBLE)
+                        youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
+                        youTubePlayer.mute()
+                        youTubePlayer.setLoop(true)
+                        lifecycleScope.launch {
+                            delay(4000)
+                            withContext(Dispatchers.Main){
+                                binding.loaderCl.visibility = View.GONE
+                                youTubePlayer.unMute()
+                            }
+                        }
+                    }
+                }
+            }, true, iFrameOptions)
+
         }
 
         startCamera(CameraSelector.DEFAULT_BACK_CAMERA);
