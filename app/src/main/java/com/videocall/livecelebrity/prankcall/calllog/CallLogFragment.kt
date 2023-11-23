@@ -1,23 +1,26 @@
 package com.videocall.livecelebrity.prankcall.calllog
 
-import android.app.Person
 import android.os.Bundle
-import android.provider.CallLog
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentCallLogBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvChatItemBinding
-import com.videocall.livecelebrity.prankcall.databinding.RvPartnerItemBinding
-import com.videocall.livecelebrity.prankcall.home.ChoosePartnerAdapter
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_AUDIO
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_MESSAGE
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_VIDEO
+import com.videocall.livecelebrity.prankcall.message.ChatsFragment
+import com.videocall.livecelebrity.prankcall.utils.CallHistory
+import com.videocall.livecelebrity.prankcall.utils.ChatHistory
+import com.videocall.livecelebrity.prankcall.utils.PreferenceManager
+import com.videocall.livecelebrity.prankcall.video.VideoFragment
 
 class CallLogFragment : Fragment() {
 
@@ -26,94 +29,47 @@ class CallLogFragment : Fragment() {
     private lateinit var audioAdapter: CallLogRVAdapter
     private lateinit var videoAdapter: CallLogRVAdapter
 
-    private val historyList = listOf(
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-        PersonCallHistory(
-            R.drawable.ic_launcher_background,
-            "Name 1",
-            "Hello there how are you",
-            "Today 5:37 pm"
-        ),
-    )
+    private lateinit var audioCallHistory: ArrayList<CallHistory>
+    private lateinit var videoCallHistory: ArrayList<CallHistory>
+    private lateinit var chatsHistoryList: ArrayList<ChatHistory>
+
+    private lateinit var preferenceManager: PreferenceManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCallLogBinding.inflate(inflater, container, false)
 
-        chatsAdapter = CallLogRVAdapter(historyList, TYPE_MESSAGE,
-            onCallClicked = {
+        preferenceManager = PreferenceManager(requireContext())
 
-            },
-            onVideoCallClicked = {
+        audioCallHistory = preferenceManager.getAudioList()
+        videoCallHistory = preferenceManager.getVideoCallList()
+        chatsHistoryList = preferenceManager.getChatsList()
 
-            },
+        chatsAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_MESSAGE,
+            onCallClicked = {},
+            onVideoCallClicked = {},
             onItemClick = {
-
+                ChatsFragment.chatHistory = chatsHistoryList[it]
+                findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
             })
 
-        audioAdapter = CallLogRVAdapter(historyList, TYPE_AUDIO,
+        audioAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_AUDIO,
             onCallClicked = {
-
+                AudioFragment.audioHistory = audioCallHistory[it]
+                findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
             },
+            onVideoCallClicked = {},
+            onItemClick = {})
+
+        videoAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_VIDEO,
+            onCallClicked = {},
             onVideoCallClicked = {
-
+                VideoFragment.videoHistory = videoCallHistory[it]
+                findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
             },
-            onItemClick = {
-
-            })
-
-        videoAdapter = CallLogRVAdapter(historyList, TYPE_VIDEO,
-            onCallClicked = {
-
-            },
-            onVideoCallClicked = {
-
-            },
-            onItemClick = {
-
-            })
+            onItemClick = {})
 
         binding.rvVideoCalls.adapter = videoAdapter
         binding.rvVideoCalls.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -156,7 +112,9 @@ class CallLogFragment : Fragment() {
 }
 
 class CallLogRVAdapter(
-    private val personsList: List<PersonCallHistory>,
+    private val chatsList: List<ChatHistory>,
+    private val audioList: List<CallHistory>,
+    private val videoList: List<CallHistory>,
     val type: String,
     val onItemClick: (pos: Int) -> Unit,
     val onCallClicked: (pos: Int) -> Unit,
@@ -171,30 +129,44 @@ class CallLogRVAdapter(
         return HistoryVH(binding);
     }
 
-    override fun getItemCount() = personsList.size
+    override fun getItemCount() = if(type == TYPE_MESSAGE) {
+        chatsList.size
+    }else if(type == TYPE_AUDIO) audioList.size
+    else videoList.size
 
     override fun onBindViewHolder(holder: HistoryVH, position: Int) {
-        val history = personsList[holder.adapterPosition]
-        Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
-        holder.binding.tvName.text = history.name
         if(type == TYPE_MESSAGE){
+
+            val history = chatsList[holder.adapterPosition]
+            Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
+            holder.binding.tvName.text = history.name
+            holder.binding.tvMessage.text = history.msgList[history.msgList.size-1].second.content
+            holder.binding.msgCount.text = history.msgList.size.toString()
+
             holder.binding.cardMsgCount.visibility = View.VISIBLE
             holder.binding.ivCall.visibility = View.GONE
             holder.binding.ivVideoCall.visibility = View.GONE
-            holder.binding.tvMessage.text = history.msg
-            holder.binding.msgCount.text = history.msgCount.toString()
         }
         else if(type == TYPE_AUDIO){
+
+            val history = audioList[holder.adapterPosition]
+            Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
+            holder.binding.tvMessage.text = history.lastCallDateString
+
             holder.binding.cardMsgCount.visibility = View.GONE
             holder.binding.ivCall.visibility = View.VISIBLE
             holder.binding.ivVideoCall.visibility = View.GONE
-            holder.binding.tvMessage.text = history.lastCall
         }
         else {
+
+            val history = videoList[holder.adapterPosition]
+            Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
+            holder.binding.tvMessage.text = history.lastCallDateString
+
             holder.binding.cardMsgCount.visibility = View.GONE
             holder.binding.ivCall.visibility = View.GONE
             holder.binding.ivVideoCall.visibility = View.VISIBLE
-            holder.binding.tvMessage.text = history.lastCall
+            holder.binding.tvMessage.text = history.lastCallDateString
         }
         holder.binding.ivCall.setOnClickListener {
             onCallClicked(holder.adapterPosition)

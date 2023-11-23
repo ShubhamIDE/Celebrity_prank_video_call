@@ -94,7 +94,17 @@
         android:id="@+id/callLogFragment"
         android:name="com.videocall.livecelebrity.prankcall.calllog.CallLogFragment"
         android:label="fragment_call_log"
-        tools:layout="@layout/fragment_call_log" />
+        tools:layout="@layout/fragment_call_log" >
+        <action
+            android:id="@+id/action_callLogFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+        <action
+            android:id="@+id/action_callLogFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
+        <action
+            android:id="@+id/action_callLogFragment_to_audioFragment"
+            app:destination="@id/audioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chatsFragment"
         android:name="com.videocall.livecelebrity.prankcall.message.ChatsFragment"

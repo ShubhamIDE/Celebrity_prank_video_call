@@ -44,11 +44,10 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="terms_of_use">Terms of Use</string>
     <string name="permission_required">Permission Required</string>
     <string name="grant_permission">Grant permission</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="call_any_celebrity">Call any celebrity</string>
     <string name="Celebrity_Video_call">Celebrity video call</string>
     <string name="Celebrity_chat">Celebrity Chat</string>
+
     <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">One-tap calling to connect with your favourite\ncelebrities.</string>
     <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">Experience face-to-face calls with any\ncelebrity you want.</string>
     <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">Send messages and fan love directly to\nyour beloved celebrity</string>
@@ -72,6 +71,8 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="type_here_to_search_something">Type here to search something</string>
     <string name="get_started">Get Started</string>
     <string name="drawer_close">Drawer close</string>
+
+
     <string name="drawer_open">Drawer Open</string>
     <string name="chat">Chat</string>
     <string name="audio">Audio</string>

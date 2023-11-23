@@ -6,7 +6,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/audio_bg"
     tools:context=".audio.AudioFragment">
-    
+
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnBackArrow"
+        android:layout_marginTop="35dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +84,7 @@
         android:backgroundTint="@android:color/transparent"
         android:src="@drawable/ic_speaker_unselected"
         android:id="@+id/ivSpeaker"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvSpeaker"
         app:layout_constraintTop_toTopOf="@id/gdCallOptions"/>
@@ -78,6 +93,7 @@
         android:layout_width="wrap_content"
         android:text="@string/speaker"
         android:layout_marginTop="9dp"
+        android:visibility="gone"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/ivSpeaker"
         app:layout_constraintStart_toStartOf="@id/ivSpeaker"
