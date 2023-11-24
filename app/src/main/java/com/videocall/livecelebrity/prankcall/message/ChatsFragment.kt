@@ -1,19 +1,34 @@
 package com.videocall.livecelebrity.prankcall.message
 
 import android.os.Bundle
+import android.telecom.Call
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.flurry.sdk.p
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.CustomReceiveMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.CustomSendMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentChatsBinding
+import com.videocall.livecelebrity.prankcall.utils.ChatGptCompletions
 import com.videocall.livecelebrity.prankcall.utils.ChatHistory
 import com.videocall.livecelebrity.prankcall.utils.Msg
 import com.videocall.livecelebrity.prankcall.utils.PreferenceManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -23,16 +38,24 @@ class ChatsFragment : Fragment() {
     private lateinit var binding: FragmentChatsBinding
     private val msgList = arrayListOf<Pair<Int, Msg>>()
     private lateinit var preferenceManager: PreferenceManager
+    private val job: Job = Job()
+    private val apiCallScope  = CoroutineScope(Dispatchers.IO + job)
+    private lateinit var chatCompletion: ChatGptCompletions
+    private val personName = "Alia Bhatt"
+    private val message = "What is your favourite movie"
 
     companion object{
         var chatHistory: ChatHistory? = null
+        val chatGptApiKey = "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"
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
 
+        chatCompletion = ChatGptCompletions()
         preferenceManager = PreferenceManager(requireContext())
 
         if(chatHistory!=null){
@@ -69,6 +92,10 @@ class ChatsFragment : Fragment() {
     }
 
     fun addMsgToScrollView(msg: String, type: Int, time: String){
+        apiCallScope.cancel()
+        apiCallScope.launch {
+            chatCompletion.getCompletion(personName, message)
+        }
         if(type == 0){
             val sendMsgView = CustomSendMsgBinding.inflate(LayoutInflater.from(requireContext()))
             sendMsgView.tvMsg.text = msg
