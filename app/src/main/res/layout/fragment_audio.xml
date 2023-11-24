@@ -162,9 +162,11 @@
     <ImageButton
         android:layout_width="70dp"
         android:id="@+id/btnEndCall"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:layout_marginTop="50dp"
         android:src="@drawable/ic_end_call"
         app:layout_constraintTop_toBottomOf="@id/tvMute"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@android:color/transparent"

@@ -82,4 +82,7 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="type_something">Type something</string>
     <string name="suggestions">Suggestions</string>
     <string name="connecting_please_wait">Connecting please wait...</string>
+    <string name="typing">Typing...</string>
+    <string name="please_wait_for_reply">Please wait for reply.</string>
+    <string name="camera_access">Camera Access</string>
 </resources>

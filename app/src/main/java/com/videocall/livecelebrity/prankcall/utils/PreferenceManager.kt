@@ -2,12 +2,15 @@ package com.videocall.livecelebrity.prankcall.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import com.flurry.sdk.cl
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 
 class PreferenceManager(val mContext: Context) {
     private var sharedPref: SharedPreferences = mContext.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
-    private val gson = Gson()
+    private val gson = GsonBuilder().setLenient().create()
 
     companion object {
         const val AUDIO_LIST_KEY = "AudioListKey"
@@ -61,18 +64,10 @@ class PreferenceManager(val mContext: Context) {
     fun getChatsList(): ArrayList<ChatHistory>{
         val chatsJson = sharedPref.getString(CHAT_LIST_KEY, "")
         if(chatsJson == "") return arrayListOf()
+        Log.d("chatJson", chatsJson.toString())
         val typeToken = object : TypeToken<ArrayList<ChatHistory>>(){}.type
         val chatsList: ArrayList<ChatHistory> = gson.fromJson(CHAT_LIST_KEY, typeToken)
         return chatsList
-    }
-
-    fun setChatList(newChat: ChatHistory, oldChat: ChatHistory){
-        val chatsJson = sharedPref.getString(CHAT_LIST_KEY, "")
-        val typeToken = object : TypeToken<ArrayList<ChatHistory>>(){}.type
-        val chatsList: ArrayList<ChatHistory> = gson.fromJson(chatsJson, typeToken)
-        chatsList.remove(oldChat)
-        chatsList.add(newChat)
-        sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(chatsList)).apply()
     }
 
     fun addToChatsList(chat: ChatHistory){
@@ -83,6 +78,15 @@ class PreferenceManager(val mContext: Context) {
         else {
             val typeToken = object : TypeToken<ArrayList<ChatHistory>>(){}.type
             val chatsList: ArrayList<ChatHistory> = gson.fromJson(chatsJson, typeToken)
+            var oldChat: ChatHistory? = null
+            for(c1 in chatsList){
+                if(c1.id == chat.id){
+                    oldChat = c1
+                }
+            }
+            if(oldChat!=null){
+                chatsList.remove(oldChat)
+            }
             chatsList.add(chat)
             sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(chatsList)).apply()
         }

@@ -5,7 +5,6 @@
     android:id="@+id/main_navigation_graph"
     app:startDestination="@id/splashFragment">
 
-
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.videocall.livecelebrity.prankcall.splash.SplashFragment"
@@ -13,10 +12,18 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_termsOfUseFragment"
-            app:destination="@id/termsOfUseFragment" />
+            app:destination="@id/termsOfUseFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_splashFragment_to_getStartedFragment"
-            app:destination="@id/getStartedFragment" />
+            app:destination="@id/getStartedFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
 
     <fragment
@@ -26,7 +33,11 @@
         tools:layout="@layout/fragment_onboarding" >
         <action
             android:id="@+id/action_onboardingFragment_to_permissionFragment"
-            app:destination="@id/permissionFragment" />
+            app:destination="@id/permissionFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/termsOfUseFragment"
@@ -34,10 +45,18 @@
         android:label="TermsOfUseFragment" >
         <action
             android:id="@+id/action_termsOfUseFragment_to_tcsFragment"
-            app:destination="@id/tcsFragment" />
+            app:destination="@id/tcsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_termsOfUseFragment_to_onboardingFragment"
-            app:destination="@id/onboardingFragment" />
+            app:destination="@id/onboardingFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/permissionFragment"
@@ -46,7 +65,11 @@
         tools:layout="@layout/fragment_permission" >
         <action
             android:id="@+id/action_permissionFragment_to_getStartedFragment"
-            app:destination="@id/getStartedFragment" />
+            app:destination="@id/getStartedFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/tcsFragment"
@@ -61,7 +84,11 @@
         tools:layout="@layout/fragment_get_started" >
         <action
             android:id="@+id/action_getStartedFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -70,10 +97,18 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_partnerChooseFragment"
-            app:destination="@id/partnerChooseFragment" />
+            app:destination="@id/partnerChooseFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_homeFragment_to_callLogFragment"
-            app:destination="@id/callLogFragment" />
+            app:destination="@id/callLogFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/partnerChooseFragment"
@@ -82,13 +117,25 @@
         tools:layout="@layout/fragment_partner_choose" >
         <action
             android:id="@+id/action_partnerChooseFragment_to_chatsFragment"
-            app:destination="@id/chatsFragment" />
+            app:destination="@id/chatsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_partnerChooseFragment_to_audioFragment"
-            app:destination="@id/audioFragment" />
+            app:destination="@id/audioFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_partnerChooseFragment_to_videoFragment"
-            app:destination="@id/videoFragment" />
+            app:destination="@id/videoFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/callLogFragment"
@@ -97,13 +144,25 @@
         tools:layout="@layout/fragment_call_log" >
         <action
             android:id="@+id/action_callLogFragment_to_videoFragment"
-            app:destination="@id/videoFragment" />
+            app:destination="@id/videoFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_callLogFragment_to_chatsFragment"
-            app:destination="@id/chatsFragment" />
+            app:destination="@id/chatsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_callLogFragment_to_audioFragment"
-            app:destination="@id/audioFragment" />
+            app:destination="@id/audioFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
@@ -112,16 +171,26 @@
         tools:layout="@layout/fragment_chats" >
         <action
             android:id="@+id/action_chatsFragment_to_audioFragment"
-            app:destination="@id/audioFragment" />
+            app:destination="@id/audioFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
         <action
             android:id="@+id/action_chatsFragment_to_videoFragment"
-            app:destination="@id/videoFragment" />
+            app:destination="@id/videoFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
+
     <fragment
         android:id="@+id/audioFragment"
         android:name="com.videocall.livecelebrity.prankcall.audio.AudioFragment"
         android:label="fragment_audio"
         tools:layout="@layout/fragment_audio" />
+
     <fragment
         android:id="@+id/videoFragment"
         android:name="com.videocall.livecelebrity.prankcall.video.VideoFragment"

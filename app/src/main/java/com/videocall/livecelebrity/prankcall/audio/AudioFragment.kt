@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.FragmentAudioBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
@@ -22,12 +23,12 @@ import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class AudioFragment : Fragment() {
 
     private lateinit var binding: FragmentAudioBinding
     private lateinit var mediaPlayer: MediaPlayer
-    var audioUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
     var holdOn = false;
     var speakerOn = false
     var muteOn = false;
@@ -44,28 +45,35 @@ class AudioFragment : Fragment() {
     ): View {
         binding = FragmentAudioBinding.inflate(inflater, container, false)
 
-        if(audioHistory!=null){
-            binding.tvName.text = audioHistory!!.name
-            mediaPlayer = MediaPlayer()
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            try {
-                mediaPlayer.setDataSource(audioHistory!!.audioUrl)
-                mediaPlayer.prepare()
-                mediaPlayer.start()
-                var lastTime = System.currentTimeMillis()
-                duratoinJob = lifecycleScope.launch {
-                    withContext(Dispatchers.Main){
-                        while (isActive){
-                            delay(1000)
-                            lastTime+=1000
-                            val time = formatTimeFromLong(lastTime)
-                            binding.tvDuratoin.text = time
-                        }
+        audioHistory = CallHistory(
+            "1",
+            "https://unsplash.com/photos/black-and-white-plane-flying-over-the-sea-during-daytime-rNqs9hM0U8I",
+            "Alia Bhatt",
+            "Today 5:30 PM",
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+            Date()
+        )
+        binding.tvName.text = audioHistory!!.name
+        Glide.with(requireContext()).load(audioHistory!!.img).into(binding.ivImg)
+
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        try {
+            mediaPlayer.setDataSource(audioHistory!!.audioUrl)
+            mediaPlayer.prepare()
+            mediaPlayer.start()
+            duratoinJob = lifecycleScope.launch {
+                withContext(Dispatchers.Main){
+                    while (isActive){
+                        delay(1000)
+                        lastTime+=1000
+                        val time = formatTimeFromLong(lastTime)
+                        binding.tvDuratoin.text = time
                     }
                 }
-            }catch (e: Exception){
-                e.printStackTrace()
             }
+        }catch (e: Exception){
+            e.printStackTrace()
         }
 
 
@@ -74,7 +82,7 @@ class AudioFragment : Fragment() {
             if(holdOn){
                 binding.ivHold.setImageResource(R.drawable.ic_hold_selected)
                 binding.ivMute.alpha = 0.4f
-                mediaPlayer.stop()
+                mediaPlayer.pause()
                 duratoinJob.cancel()
             }else {
                 binding.ivHold.setImageResource(R.drawable.ic_hold_unselected)
@@ -115,10 +123,14 @@ class AudioFragment : Fragment() {
         }
 
         binding.btnEndCall.setOnClickListener {
+            mediaPlayer.stop()
+            mediaPlayer.release()
             findNavController().navigateUp()
         }
 
         binding.btnBackArrow.setOnClickListener {
+            mediaPlayer.stop()
+            mediaPlayer.release()
             findNavController().navigateUp()
         }
 
@@ -126,9 +138,11 @@ class AudioFragment : Fragment() {
     }
 
     fun formatTimeFromLong(timeInMillis: Long): String {
-        val date = Date(timeInMillis)
-        val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-        return dateFormat.format(date)
+        val hours = TimeUnit.MILLISECONDS.toHours(timeInMillis)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(timeInMillis) % 60
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(timeInMillis) % 60
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 
 }

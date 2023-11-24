@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
         binding.navView.bringToFront()
 
         binding.clVideoCall.setOnClickListener {
+            PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
         }
 
@@ -53,10 +54,12 @@ class HomeFragment : Fragment() {
         }
 
         binding.clAudio.setOnClickListener {
+            PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
         }
 
         binding.clMsg.setOnClickListener {
+            PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
         }
 

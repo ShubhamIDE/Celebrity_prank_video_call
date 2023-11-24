@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.flurry.sdk.p
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.CustomReceiveMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.CustomSendMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentChatsBinding
@@ -31,6 +34,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class ChatsFragment : Fragment() {
@@ -42,7 +46,8 @@ class ChatsFragment : Fragment() {
     private val apiCallScope  = CoroutineScope(Dispatchers.IO + job)
     private lateinit var chatCompletion: ChatGptCompletions
     private val personName = "Alia Bhatt"
-    private val message = "What is your favourite movie"
+    private var message = "What is your favourite movie"
+    private var systemTyping = false
 
     companion object{
         var chatHistory: ChatHistory? = null
@@ -55,6 +60,15 @@ class ChatsFragment : Fragment() {
     ): View {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
 
+        binding.tvName.text = personName
+
+        chatHistory = ChatHistory(
+            "1",
+            "https://unsplash.com/photos/black-and-white-plane-flying-over-the-sea-during-daytime-rNqs9hM0U8I",
+            "Alia Bhatt",
+            arrayListOf(),
+            Date()
+        )
         chatCompletion = ChatGptCompletions()
         preferenceManager = PreferenceManager(requireContext())
 
@@ -82,33 +96,69 @@ class ChatsFragment : Fragment() {
 
         binding.btnSendMsg.setOnClickListener {
             val msg = binding.edtTxtMsgs.text.toString()
-            if(msg.trim()!=""){
+            if(msg.trim()!="" && !systemTyping){
+                binding.edtTxtMsgs.setText("")
                 val time = getCurrentTimeIn12HourFormat()
                 addMsgToScrollView(msg, 0, time)
+                msgList.add(Pair(0, Msg(msg, time)))
+                addData()
+                getMessageFromSystem(msg)
             }
         }
+
 
         return binding.root
     }
 
-    fun addMsgToScrollView(msg: String, type: Int, time: String){
-        apiCallScope.cancel()
-        apiCallScope.launch {
-            chatCompletion.getCompletion(personName, message)
+    fun addData(){
+        if(chatHistory!=null){
+            chatHistory!!.msgList = msgList
+            preferenceManager.addToChatsList(chatHistory!!)
         }
+    }
+
+    fun getMessageFromSystem(msg: String){
+        apiCallScope.launch {
+            systemTyping = true
+            if(isAdded && !isDetached){
+                withContext(Dispatchers.Main){
+                    binding.tvTyping.visibility = View.VISIBLE
+                    binding.edtTxtMsgs.hint = getString(R.string.please_wait_for_reply)
+                    binding.edtTxtMsgs.isEnabled = false
+                }
+            }
+
+            chatCompletion.getCompletion(personName, msg){
+                systemTyping = false
+                message = it
+                if(isAdded && !isDetached){
+                    val sendMsgView = CustomReceiveMsgBinding.inflate(LayoutInflater.from(requireContext()))
+                    sendMsgView.tvMsg.text = it
+                    val time = getCurrentTimeIn12HourFormat()
+                    sendMsgView.tvTime.text = time
+                    binding.edtTxtMsgs.hint = getString(R.string.type_something)
+                    binding.edtTxtMsgs.isEnabled = true
+                    binding.msgLL.addView(sendMsgView.root)
+                    binding.tvTyping.visibility = View.GONE
+                    msgList.add(Pair(1, Msg(it, time)))
+                    addData()
+                }
+            }
+        }
+    }
+
+    fun addMsgToScrollView(msg: String, type: Int, time: String){
         if(type == 0){
             val sendMsgView = CustomSendMsgBinding.inflate(LayoutInflater.from(requireContext()))
             sendMsgView.tvMsg.text = msg
             sendMsgView.tvTime.text = time
             binding.msgLL.addView(sendMsgView.root)
-            msgList.add(Pair(0, Msg(msg, time)))
         }
         else {
             val sendMsgView = CustomReceiveMsgBinding.inflate(LayoutInflater.from(requireContext()))
             sendMsgView.tvMsg.text = msg
             sendMsgView.tvTime.text = time
             binding.msgLL.addView(sendMsgView.root)
-            msgList.add(Pair(1, Msg(msg, time)))
         }
     }
 
@@ -116,21 +166,5 @@ class ChatsFragment : Fragment() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return dateFormat.format(calendar.time)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if(chatHistory!=null){
-            chatHistory!!.lastChatTime = Calendar.getInstance().time
-            if(!chatHistory!!.msgList.isEmpty()){
-                val oldChat = chatHistory
-                chatHistory!!.msgList = msgList
-                preferenceManager.setChatList(chatHistory!!, oldChat!!)
-            }
-            else{
-                chatHistory!!.msgList = msgList
-                preferenceManager.addToChatsList(chatHistory!!)
-            }
-        }
     }
 }

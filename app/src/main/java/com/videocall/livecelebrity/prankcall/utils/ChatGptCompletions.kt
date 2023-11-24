@@ -2,6 +2,7 @@ package com.videocall.livecelebrity.prankcall.utils
 
 import android.util.Log
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
@@ -12,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import java.util.concurrent.TimeUnit
 
 class ChatGptCompletions {
     private lateinit var chatApi: ChatApi
@@ -19,27 +21,30 @@ class ChatGptCompletions {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.openai.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS) // Adjust timeout duration as needed
+                    .readTimeout(30, TimeUnit.SECONDS) // Adjust timeout duration as needed
+                    .build()
+            )
             .build()
 
         chatApi = retrofit.create(ChatApi::class.java)
     }
 
-    fun getCompletion(personName: String, prompt: String) {
+    fun getCompletion(personName: String, prompt: String, onResponse: (msg: String) -> Unit) {
         val body = createRequestBody(personName, prompt)
         val call = chatApi.getChatCompletions(body)
         call.enqueue(object : Callback<CompletionResponse> {
             override fun onResponse(call: Call<CompletionResponse>, response: Response<CompletionResponse>) {
-                // Handle successful response here
-                Log.d("chatResponse", response.body().toString())
+                val msg = response.body()?.choices?.get(0)?.message?.content
+                msg?.let{onResponse(it)}
             }
 
-            override fun onFailure(call: Call<CompletionResponse>, t: Throwable) {
-                // Handle failure here
-                Log.d("chatResponse", call.toString())
-                Log.d("chatResponse", t.message.toString())
-            }
+            override fun onFailure(call: Call<CompletionResponse>, t: Throwable) {}
         })
     }
+
     fun createRequestBody(personName: String, prompt: String): RequestBody {
         val mediaType = "application/json".toMediaType()
         val requestBodyString = """
@@ -48,7 +53,7 @@ class ChatGptCompletions {
             "messages": [
                 {
                     "role": "user",
-                    "content": "Can you talk as if you are $personName"
+                    "content": "Can you talk as if you are $personName and give replies in not more than 10 lines"
                 },
                 {
                     "role": "system",
@@ -71,7 +76,7 @@ interface ChatApi {
     @Headers(
         "Content-Type: application/json",
         "Authorization: Bearer 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",
-        "Cookie: __cf_bm=HQNR3lqVj4fFaQ7Pd84F5GFAijqJDA94eowKmAUibBs-1700809592-0-AZvV0lUysIXwYihNu0zX+ZlnawhDxXJDiHY5ugPfSzhDdEf9kaRDoQwdYKwfKoZAa2NWMyhAyYiaaSRDx9dzb0Y=; _cfuvid=cF.qri.W7ebj73LF_L6r1mRB5EWuJgbWGxyUfVufxfA-1700809592571-0-604800000"
+//        "Cookie: __cf_bm=HQNR3lqVj4fFaQ7Pd84F5GFAijqJDA94eowKmAUibBs-1700809592-0-AZvV0lUysIXwYihNu0zX+ZlnawhDxXJDiHY5ugPfSzhDdEf9kaRDoQwdYKwfKoZAa2NWMyhAyYiaaSRDx9dzb0Y=; _cfuvid=cF.qri.W7ebj73LF_L6r1mRB5EWuJgbWGxyUfVufxfA-1700809592571-0-604800000"
     )
     @POST("v1/chat/completions")
     fun getChatCompletions(@Body body: RequestBody): Call<CompletionResponse>
@@ -79,12 +84,12 @@ interface ChatApi {
 
 data class CompletionResponse(
     val id: String,
-    val choices: List<ChoiceResponse>
+    val choices: Array<ChoiceResponse>
 )
 
 data class ChoiceResponse(
     val index: Long,
-    val message: List<Message>,
+    val message: Message,
     val finish_reason: String
 )
 

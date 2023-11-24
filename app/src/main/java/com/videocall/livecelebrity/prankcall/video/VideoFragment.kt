@@ -42,8 +42,10 @@ class VideoFragment : Fragment() {
     var cameraProvider: ProcessCameraProvider? = null
     private var cameraExecutor: ExecutorService? = null
     var preview: Preview? = null
-    var videoOn = true;
+    var videoOn = false;
     var baseUrl = "https://www.youtube.com/watch?v="
+    var isMicOn = false
+    var cameraStarted = false
 
     companion object{
         var videoHistory: CallHistory? = null
@@ -56,16 +58,39 @@ class VideoFragment : Fragment() {
 
         Glide.with(requireContext()).load(R.drawable.call_loading_gif).into(binding.ivLoading)
 
-        videoHistory?.let{
-            val iFrameOptions = IFramePlayerOptions.Builder().controls(0).rel(0).ivLoadPolicy(1).ccLoadPolicy(1).build()
-            lifecycle.addObserver(binding.videoView)
+        val iFrameOptions = IFramePlayerOptions.Builder()
+            .controls(0).rel(0).ivLoadPolicy(3).ccLoadPolicy(1).build()
+        lifecycle.addObserver(binding.videoView)
 
-            binding.videoView.matchParent()
-            binding.videoView.initialize(object : AbstractYouTubePlayerListener(){
-                override fun onReady(youTubePlayer: YouTubePlayer) {
-                    super.onReady(youTubePlayer)
-                    binding.loaderCl.visibility = View.VISIBLE
-                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0F)
+        binding.transpBlockingView.setOnClickListener {
+
+        }
+
+        binding.videoView.matchParent()
+        binding.videoView.initialize(object : AbstractYouTubePlayerListener(){
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                super.onReady(youTubePlayer)
+                binding.loaderCl.visibility = View.VISIBLE
+                youTubePlayer.loadVideo("w9bQPb2ZEEc", 0F)
+                youTubePlayer.mute()
+                youTubePlayer.setLoop(true)
+                lifecycleScope.launch {
+                    delay(4000)
+                    withContext(Dispatchers.Main){
+                        binding.loaderCl.visibility = View.GONE
+                        youTubePlayer.unMute()
+                    }
+                }
+            }
+
+            override fun onStateChange(
+                youTubePlayer: YouTubePlayer,
+                state: PlayerConstants.PlayerState
+            ) {
+                super.onStateChange(youTubePlayer, state)
+                if (state === PlayerState.ENDED) {
+                    binding.loaderCl.setVisibility(View.VISIBLE)
+                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
                     youTubePlayer.mute()
                     youTubePlayer.setLoop(true)
                     lifecycleScope.launch {
@@ -76,35 +101,21 @@ class VideoFragment : Fragment() {
                         }
                     }
                 }
+            }
+        }, true, iFrameOptions)
 
-                override fun onStateChange(
-                    youTubePlayer: YouTubePlayer,
-                    state: PlayerConstants.PlayerState
-                ) {
-                    super.onStateChange(youTubePlayer, state)
-                    if (state === PlayerState.ENDED) {
-                        binding.loaderCl.setVisibility(View.VISIBLE)
-                        youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
-                        youTubePlayer.mute()
-                        youTubePlayer.setLoop(true)
-                        lifecycleScope.launch {
-                            delay(4000)
-                            withContext(Dispatchers.Main){
-                                binding.loaderCl.visibility = View.GONE
-                                youTubePlayer.unMute()
-                            }
-                        }
-                    }
-                }
-            }, true, iFrameOptions)
 
-        }
-
-        startCamera(CameraSelector.DEFAULT_BACK_CAMERA);
-        cameraExecutor = Executors.newSingleThreadExecutor();
 
         binding.btnSwitch.setOnClickListener {
             switchCamera()
+        }
+
+        binding.btnMute.setOnClickListener {
+            isMicOn = !isMicOn
+            if(isMicOn){
+                binding.btnMute.setImageResource(R.drawable.ic_mic_on)
+            }
+           else binding.btnMute.setImageResource(R.drawable.ic_mic_off)
         }
 
         binding.btnBackArrow.setOnClickListener {
@@ -118,12 +129,19 @@ class VideoFragment : Fragment() {
         binding.btnVideo.setOnClickListener {
             videoOn = !videoOn
             if(videoOn){
+                if(!cameraStarted){
+                    startCamera(CameraSelector.DEFAULT_BACK_CAMERA);
+                    cameraExecutor = Executors.newSingleThreadExecutor();
+                    cameraStarted = true
+                }
                 binding.btnVideo.setImageResource(R.drawable.ic_video_call_on)
                 binding.cameraPreviewView.visibility = View.VISIBLE
+                binding.btnSwitch.visibility = View.VISIBLE
             }
             else {
                 binding.btnVideo.setImageResource(R.drawable.ic_video_call_off)
                 binding.cameraPreviewView.visibility = View.GONE
+                binding.btnSwitch.visibility = View.GONE
             }
         }
 

@@ -1,5 +1,6 @@
 package com.videocall.livecelebrity.prankcall.home
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.FragmentGetStartedBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -21,6 +23,10 @@ class GetStartedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        val sharedPref = requireContext().getSharedPreferences(MainActivity.ONBOARDING_SHARED_PREF_KEY, Context.MODE_PRIVATE)
+        sharedPref.edit().putBoolean(MainActivity.ONBOARDING_SHOWN, true).apply()
+
         binding = FragmentGetStartedBinding.inflate(inflater, container,false)
 
         binding.bvRateUs.setupWith(binding.llRateUs, RenderScriptBlur(requireContext()))

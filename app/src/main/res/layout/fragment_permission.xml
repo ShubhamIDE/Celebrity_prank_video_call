@@ -76,7 +76,7 @@
 
             <ImageView
                 android:layout_width="30dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_camera"
                 android:layout_height="25dp"
                 android:id="@+id/ivPerm"
                 app:layout_constraintTop_toTopOf="parent"
@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:textSize="14sp"
+                android:text="@string/camera_access"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@id/cbCamera"

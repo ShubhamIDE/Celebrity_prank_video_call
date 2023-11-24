@@ -133,7 +133,7 @@
         </LinearLayout>
         
         <View
-            android:layout_marginStart="43dp"
+            android:layout_marginStart="23dp"
             android:layout_width="1dp"
             android:background="@color/white"
             android:layout_height="40dp"/>
@@ -145,7 +145,7 @@
             android:gravity="center"
             android:id="@+id/llAudio"
             android:paddingVertical="10dp"
-            android:layout_marginStart="43dp"
+            android:layout_marginStart="23dp"
             android:orientation="vertical">
 
             <ImageView
@@ -165,7 +165,7 @@
         </LinearLayout>
 
         <View
-            android:layout_marginStart="43dp"
+            android:layout_marginStart="23dp"
             android:layout_width="1dp"
             android:background="@color/white"
             android:layout_height="40dp"/>
@@ -178,7 +178,7 @@
             android:gravity="center"
             android:id="@+id/llVideo"
             android:alpha="0.4"
-            android:layout_marginStart="43dp"
+            android:layout_marginStart="23dp"
             android:orientation="vertical">
 
             <ImageView

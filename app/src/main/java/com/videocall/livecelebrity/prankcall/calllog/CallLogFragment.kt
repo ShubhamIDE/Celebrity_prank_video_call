@@ -136,7 +136,6 @@ class CallLogRVAdapter(
 
     override fun onBindViewHolder(holder: HistoryVH, position: Int) {
         if(type == TYPE_MESSAGE){
-
             val history = chatsList[holder.adapterPosition]
             Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
             holder.binding.tvName.text = history.name

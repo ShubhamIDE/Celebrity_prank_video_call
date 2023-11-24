@@ -23,13 +23,13 @@ import com.videocall.livecelebrity.prankcall.splash.LanguageClickListener
 class PartnerChooseFragment : Fragment() {
 
     private lateinit var binding: FragmentPartnerChooseBinding
-    private var selectedType: String = TYPE_MESSAGE
 
     companion object{
         const val TYPE_KEY = "type_key"
         const val TYPE_MESSAGE = "Message"
         const val TYPE_AUDIO = "Audio"
         const val TYPE_VIDEO = "video"
+        var selectedType: String = TYPE_MESSAGE
     }
 
     override fun onCreateView(
@@ -37,10 +37,6 @@ class PartnerChooseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPartnerChooseBinding.inflate(inflater, container, false)
-
-        if(arguments!=null){
-            selectedType = requireArguments().getString(TYPE_KEY, TYPE_MESSAGE)
-        }
 
         val partnersList = listOf(
             Pair("Name1", "Profession1"),
@@ -70,10 +66,10 @@ class PartnerChooseFragment : Fragment() {
                 findNavController().navigate(R.id.action_partnerChooseFragment_to_chatsFragment)
             }
             else if(selectedType == TYPE_AUDIO){
-
+                findNavController().navigate(R.id.action_partnerChooseFragment_to_audioFragment)
             }
             else{
-
+                findNavController().navigate(R.id.action_partnerChooseFragment_to_videoFragment)
             }
         }
 
@@ -99,7 +95,7 @@ class ChoosePartnerAdapter(
     override fun getItemCount() = personsList.size
 
     override fun onBindViewHolder(holder: PersonVH, position: Int) {
-        Glide.with(holder.binding.ivImg).load(R.mipmap.ic_launcher).into(holder.binding.ivImg)
+        Glide.with(holder.binding.ivImg).load(R.drawable.bg_blue).into(holder.binding.ivImg)
         val name = personsList[holder.adapterPosition].first
         val profession = personsList[holder.adapterPosition].second
         holder.binding.tvName.text = name
