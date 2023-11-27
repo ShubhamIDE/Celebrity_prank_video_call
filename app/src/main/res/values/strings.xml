@@ -31,16 +31,16 @@ Posting rules you should be taking care of before you start interaction on our w
     </string>
 
     <string name="select_language">Select Language</string>
-    <string name="next">Next</string>
-    <string name="english">English</string>
-    <string name="hindi">Hindi</string>
-    <string name="spanish">Spanish</string>
-    <string name="french">French</string>
-    <string name="portuguese">Portuguese</string>
-    <string name="korean">Korean</string>
-    <string name="russian">Russian</string>
-    <string name="dutch">Dutch</string>
-    <string name="arabic">Arabic</string>
+    <string name="next" >Next</string>
+    <string name="english" translatable="false">English</string>
+    <string name="hindi" translatable="false">हिंदी</string>
+    <string name="spanish" translatable="false">Español</string>
+    <string name="french" translatable="false">Français</string>
+    <string name="portuguese" translatable="false">Português</string>
+    <string name="korean" translatable="false">한국어</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="arabic" translatable="false">العربية</string>
+    <string name="japanese" translatable="false">日本語</string>
     <string name="terms_of_use">Terms of Use</string>
     <string name="permission_required">Permission Required</string>
     <string name="grant_permission">Grant permission</string>
@@ -86,4 +86,16 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="please_wait_for_reply">Please wait for reply.</string>
     <string name="camera_access">Camera Access</string>
     <string name="select_your_partner">Select your partner</string>
+
+    <string name="hold">Hold</string>
+    <string name="privacy_policy_trans">Privacy policy</string>
+
+    <string name="internet_connection_is_required">Internet Connection is required</string>
+    <string name="start_a_new_chat">Start a new chat</string>
+    <string name="no_chats_found">No Chats found</string>
+    <string name="no_audio_call_history_found">No audio call history found</string>
+    <string name="start_a_call">Start a call</string>
+    <string name="no_video_call_history_found">No Video call history found</string>
+    <string name="start_a_video_call">Start a video call</string>
+
 </resources>

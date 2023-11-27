@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.adsmodule.api.adsModule.retrofit.APICallHandler
 import com.adsmodule.api.adsModule.retrofit.AdsDataRequestModel
 import com.adsmodule.api.adsModule.retrofit.AdsResponseModel
@@ -19,7 +18,6 @@ import com.google.gson.JsonObject
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.SingletonClasses.MyApplication
-import com.videocall.livecelebrity.prankcall.databinding.ActivityLanguageBinding
 import com.videocall.livecelebrity.prankcall.databinding.ActivitySplashScreenBinding
 import com.videocall.livecelebrity.prankcall.utils.Celebrity
 import com.videocall.livecelebrity.prankcall.utils.LocaleHelper
@@ -31,10 +29,13 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
 
     companion object{
-        val celebrityList = MutableLiveData<ArrayList<Celebrity>>()
+        val celebrityListBollywood = MutableLiveData<ArrayList<Celebrity>>()
+        val celebrityListHollywood = MutableLiveData<ArrayList<Celebrity>>()
         var baseUrl = ""
         var chatGptAccessToken = ""
         val gson = Gson()
+        val INDUSTRY_BOLLYWOOD = "Bollywood"
+        val INDUSTRY_HOLLYWOOD = "Hollywood"
 
         fun setUpList(){
             val data: JsonObject = Constants.adsResponseModel.extra_data_field.data
@@ -46,7 +47,8 @@ class SplashScreenActivity : AppCompatActivity() {
             }
             val celebrityListJson = Constants.adsResponseModel.extra_data_field.celebrities_list
             if(celebrityListJson!=null){
-                val cbList = arrayListOf<Celebrity>()
+                val cbListBollywood = arrayListOf<Celebrity>()
+                val cbListHollywood = arrayListOf<Celebrity>()
                 for(i in 0 until celebrityListJson.size){
                     val key = celebrityListJson[i]
                     if(key!=null){
@@ -55,12 +57,14 @@ class SplashScreenActivity : AppCompatActivity() {
                             val celebrity = gson.fromJson(celeb, Celebrity::class.java)
                             if(celebrity!=null){
                                 celebrity.profile_url = baseUrl + celebrity.profile_url;
-                                cbList.add(celebrity)
+                                if(celebrity.industry == INDUSTRY_BOLLYWOOD) cbListBollywood.add(celebrity)
+                                else cbListHollywood.add(celebrity)
                             }
                         }
                     }
                 }
-                celebrityList.postValue(cbList)
+                celebrityListBollywood.postValue(cbListBollywood)
+                celebrityListHollywood.postValue(cbListHollywood)
             }
         }
     }
@@ -69,6 +73,10 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref = getSharedPreferences(LanguageActivity.LANG_PREF, Context.MODE_PRIVATE)
+        val locale = pref.getString(LocaleHelper.SELECTED_LANGUAGE, "en").toString()
+        LocaleHelper.setLocale(this,  locale)
 
         this.window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 

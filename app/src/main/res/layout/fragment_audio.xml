@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/audio_bg"
     tools:context=".audio.AudioFragment">
+
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:autoPlay="false"
+        android:clickable="false"
+        app:enableAutomaticInitialization="false"
+        android:id="@+id/videoView">
+
+        <View
+            android:id="@+id/transpBlockingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00ffffff"
+            android:elevation="10dp" />
+    </com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView>
 
 
     <ImageButton
@@ -37,7 +56,6 @@
         app:layout_constraintTop_toTopOf="@id/gdCallImg"
         app:layout_constraintBottom_toBottomOf="@id/gdCallImg"
         android:layout_height="wrap_content"
-
         android:orientation="vertical">
         
         <de.hdodenhof.circleimageview.CircleImageView
@@ -48,7 +66,6 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="Name"
             android:layout_marginTop="24dp"
             android:textSize="24sp"
             android:id="@+id/tvName"
@@ -59,7 +76,6 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:text="00:00"
             android:layout_marginTop="9dp"
             android:textSize="16sp"
             android:id="@+id/tvDuratoin"
@@ -146,7 +162,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="Hold"
+        android:text="@string/hold"
         android:layout_marginTop="9dp"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/ivHold"
@@ -171,5 +187,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@android:color/transparent"
         android:layout_height="70dp"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/loaderCl"
+        android:background="#2C3E50 "
+        android:elevation="20dp"
+        android:visibility="visible"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:id="@+id/ivLoading"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toTopOf="@id/tvLoading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/call_loading_gif"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/tvLoading"
+            app:layout_constraintStart_toStartOf="@id/ivLoading"
+            app:layout_constraintEnd_toEndOf="@id/ivLoading"
+            app:layout_constraintTop_toBottomOf="@id/ivLoading"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/connecting_please_wait"
+            android:fontFamily="@font/inter_semibold"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/bg_blue"
             android:layout_height="match_parent"
             android:id="@+id/ivImg"/>
 
@@ -38,7 +38,6 @@
             android:textColor="@color/white"
             android:fontFamily="@font/inter_medium"
             android:maxLines="1"
-            android:text="Singer"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="15dp"
             android:layout_marginStart="10dp"

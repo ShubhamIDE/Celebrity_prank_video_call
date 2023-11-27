@@ -11,8 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentPartnerChooseBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvPartnerItemBinding
@@ -44,6 +47,9 @@ class PartnerChooseFragment : Fragment() {
         const val TYPE_AUDIO = "Audio"
         const val TYPE_VIDEO = "video"
         var selectedType: String = TYPE_MESSAGE
+        val CELEB_BOLLYWOOD = "Bollywood"
+        val CELEB_HOLLYWOOD = "Hollywood"
+        var CELEBRITY_TYPE: String = CELEB_BOLLYWOOD
     }
 
     override fun onCreateView(
@@ -53,7 +59,12 @@ class PartnerChooseFragment : Fragment() {
         binding = FragmentPartnerChooseBinding.inflate(inflater, container, false)
 
         binding.btnBackArrow.setOnClickListener {
-            findNavController().navigateUp()
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
+            }
         }
 
         binding.searchEdtTxt.addTextChangedListener {
@@ -76,13 +87,26 @@ class PartnerChooseFragment : Fragment() {
             binding.searchEdtTxt.setText("")
         }
 
-        SplashScreenActivity.celebrityList.observe(viewLifecycleOwner){
-            if(it!=null){
-                partnersList.clear()
-                partnersList.addAll(it)
-                originalPartnersList.clear()
-                originalPartnersList.addAll(it)
-                partnersAdapter.notifyDataSetChanged()
+        if(CELEBRITY_TYPE == CELEB_BOLLYWOOD){
+            SplashScreenActivity.celebrityListBollywood.observe(viewLifecycleOwner){
+                if(it!=null){
+                    partnersList.clear()
+                    partnersList.addAll(it)
+                    originalPartnersList.clear()
+                    originalPartnersList.addAll(it)
+                    partnersAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+        else{
+            SplashScreenActivity.celebrityListHollywood.observe(viewLifecycleOwner){
+                if(it!=null){
+                    partnersList.clear()
+                    partnersList.addAll(it)
+                    originalPartnersList.clear()
+                    originalPartnersList.addAll(it)
+                    partnersAdapter.notifyDataSetChanged()
+                }
             }
         }
 
@@ -91,15 +115,30 @@ class PartnerChooseFragment : Fragment() {
         partnersAdapter =  ChoosePartnerAdapter(partnersList){
             if(selectedType == TYPE_MESSAGE){
                 ChatsFragment.celebrity = partnersList[it]
-                findNavController().navigate(R.id.action_partnerChooseFragment_to_chatsFragment)
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    findNavController().navigate(R.id.action_partnerChooseFragment_to_chatsFragment)
+                }
             }
             else if(selectedType == TYPE_AUDIO){
                 AudioFragment.celebrity = partnersList[it]
-                findNavController().navigate(R.id.action_partnerChooseFragment_to_audioFragment)
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    findNavController().navigate(R.id.action_partnerChooseFragment_to_audioFragment)
+                }
             }
             else{
                 VideoFragment.celebrity = partnersList[it]
-                findNavController().navigate(R.id.action_partnerChooseFragment_to_videoFragment)
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    findNavController().navigate(R.id.action_partnerChooseFragment_to_videoFragment)
+                }
             }
         }
         binding.rvPartners.adapter = partnersAdapter
@@ -108,7 +147,12 @@ class PartnerChooseFragment : Fragment() {
         binding.rvPartners.addItemDecoration(ItemOffsetDecoration(30))
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().navigateUp()
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root
@@ -125,7 +169,6 @@ class PartnerChooseFragment : Fragment() {
             partnersAdapter.notifyDataSetChanged()
         }
     }
-
 }
 
 

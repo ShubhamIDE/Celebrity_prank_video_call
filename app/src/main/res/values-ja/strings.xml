@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">言語を選択</string>
+    <string name="next">次へ</string>
+    <string name="terms_of_use">利用規約</string>
+    <string name="permission_required">許可が必要です</string>
+    <string name="grant_permission">許可する</string>
+    <string name="call_any_celebrity">どんな有名人にも電話する</string>
+    <string name="Celebrity_Video_call">有名人とのビデオ通話</string>
+    <string name="Celebrity_chat">有名人とのチャット</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">お気に入りのセレブとの\nワンタップでの通話接続。</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">ご希望のセレブとの対面通話を\n体験してください。</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">直接メッセージとファンの愛を\nお気に入りのセレブに送信。</string>
+    <string name="rate_us">評価する</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">たった一つのタップで\nお気に入りのセレブに簡単に通話。</string>
+    <string name="messages">メッセージ</string>
+    <string name="audio_call">音声通話</string>
+    <string name="video_call">ビデオ通話</string>
+    <string name="call_history">通話履歴</string>
+    <string name="about">About</string>
+    <string name="share">共有</string>
+    <string name="language">言語</string>
+    <string name="txt_download">すばらしいセレブいたずらビデオ通話を今すぐダウンロード！</string>
+    <string name="txt_app_invitattion">招待状をダウンロード</string>
+    <string name="select_category">カテゴリを選択</string>
+    <string name="hollywood">ハリウッド</string>
+    <string name="bollywood">ボリウッド</string>
+    <string name="rate_us1">評価する！</string>
+    <string name="do_you_really_want_to_exit_the_app">本当にアプリを終了しますか？</string>
+    <string name="exit_app">アプリを終了</string>
+    <string name="type_here_to_search_something">ここに何かを検索する</string>
+    <string name="get_started">開始</string>
+    <string name="drawer_close">ドロワーを閉じる</string>
+
+    <string name="drawer_open">ドロワーを開く</string>
+    <string name="chat">チャット</string>
+    <string name="audio">オーディオ</string>
+    <string name="video">ビデオ</string>
+    <string name="speaker">スピーカー</string>
+    <string name="mute">ミュート</string>
+    <string name="type_something">何か入力</string>
+    <string name="suggestions">提案</string>
+    <string name="connecting_please_wait">接続中、お待ちください...</string>
+    <string name="typing">入力中...</string>
+    <string name="please_wait_for_reply">返信をお待ちください。</string>
+    <string name="camera_access">カメラアクセス</string>
+    <string name="select_your_partner">パートナーを選択</string>
+
+    <string name="hold">保持</string>
+    <string name="privacy_policy_trans">プライバシーポリシー</string>
+    <string name="internet_connection_is_required">インターネット接続が必要です</string>
+    <string name="start_a_new_chat">新しいチャットを開始</string>
+    <string name="no_chats_found">チャットは見つかりませんでした</string>
+    <string name="no_audio_call_history_found">オーディオ通話の履歴が見つかりませんでした</string>
+    <string name="start_a_call">通話を開始</string>
+    <string name="no_video_call_history_found">ビデオ通話の履歴が見つかりませんでした</string>
+    <string name="start_a_video_call">ビデオ通話を開始</string>
+
 </resources>

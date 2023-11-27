@@ -117,7 +117,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="14sp"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/white"
         android:text="@string/suggestions"
@@ -134,9 +134,16 @@
         android:visibility="gone"
         android:layout_height="wrap_content"
         android:id="@+id/suggestionsHSV"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toTopOf="@id/llEditText"
         android:layout_marginBottom="10dp"
-        android:maxHeight="87dp"/>
+        android:maxHeight="87dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/llSuggestions"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

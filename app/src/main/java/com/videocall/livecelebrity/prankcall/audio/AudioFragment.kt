@@ -10,8 +10,15 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.databinding.FragmentAudioBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
 import com.videocall.livecelebrity.prankcall.utils.Celebrity
@@ -32,13 +39,13 @@ import kotlin.random.Random
 class AudioFragment : Fragment() {
 
     private lateinit var binding: FragmentAudioBinding
-    private lateinit var mediaPlayer: MediaPlayer
     var holdOn = false;
     var speakerOn = false
     var muteOn = false;
     var lastTime = 0L
     private var duratoinJob: Job = Job()
     private lateinit var preferenceManager: PreferenceManager
+    private lateinit var youTubePlayer: YouTubePlayer
 
     companion object{
         var audioHistory: CallHistory? = null
@@ -66,15 +73,35 @@ class AudioFragment : Fragment() {
 
         binding.tvName.text = audioHistory!!.name
         Glide.with(requireContext()).load(audioHistory!!.img).into(binding.ivImg)
+        Glide.with(requireContext()).load(R.drawable.call_loading_gif).into(binding.ivLoading)
 
-        lifecycleScope.launch {
-            mediaPlayer = MediaPlayer()
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            try {
-                mediaPlayer.setDataSource(audioHistory!!.audioUrl)
-                mediaPlayer.prepare()
-                mediaPlayer.start()
+        val iFrameOptions = IFramePlayerOptions.Builder()
+            .controls(0).rel(0).ivLoadPolicy(3).ccLoadPolicy(1).build()
+        lifecycle.addObserver(binding.videoView)
+
+        binding.transpBlockingView.setOnClickListener {
+
+        }
+
+        binding.videoView.matchParent()
+        binding.videoView.initialize(object : AbstractYouTubePlayerListener(){
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                super.onReady(youTubePlayer)
+                this@AudioFragment.youTubePlayer = youTubePlayer
+                binding.loaderCl.visibility = View.VISIBLE
+                youTubePlayer.loadVideo("w9bQPb2ZEEc", 0F)
+                youTubePlayer.mute()
+                youTubePlayer.setLoop(true)
+                lifecycleScope.launch {
+                    delay(4000)
+                    withContext(Dispatchers.Main){
+                        binding.loaderCl.visibility = View.GONE
+                        youTubePlayer.unMute()
+                    }
+                }
+
                 duratoinJob = lifecycleScope.launch {
+                    delay(4000)
                     withContext(Dispatchers.Main){
                         while (isActive){
                             delay(1000)
@@ -84,22 +111,47 @@ class AudioFragment : Fragment() {
                         }
                     }
                 }
-            }catch (e: Exception){
-                e.printStackTrace()
             }
-        }
+
+            override fun onStateChange(
+                youTubePlayer: YouTubePlayer,
+                state: PlayerConstants.PlayerState
+            ) {
+                super.onStateChange(youTubePlayer, state)
+                this@AudioFragment.youTubePlayer = youTubePlayer
+                if (state === PlayerConstants.PlayerState.ENDED) {
+                    binding.loaderCl.setVisibility(View.VISIBLE)
+                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
+                    youTubePlayer.mute()
+                    youTubePlayer.setLoop(true)
+                    lifecycleScope.launch {
+                        delay(4000)
+                        withContext(Dispatchers.Main){
+                            binding.loaderCl.visibility = View.GONE
+                            youTubePlayer.unMute()
+                        }
+                    }
+                }
+            }
+        }, true, iFrameOptions)
+
+
 
         binding.ivHold.setOnClickListener {
             holdOn = !holdOn
             if(holdOn){
                 binding.ivHold.setImageResource(R.drawable.ic_hold_selected)
                 binding.ivMute.alpha = 0.4f
-                mediaPlayer.pause()
+                if(::youTubePlayer.isInitialized){
+                    youTubePlayer.pause()
+                }
                 duratoinJob.cancel()
             }else {
                 binding.ivHold.setImageResource(R.drawable.ic_hold_unselected)
                 binding.ivMute.alpha = 1f
-                mediaPlayer.start()
+                if(::youTubePlayer.isInitialized){
+                    youTubePlayer.play()
+                }
                 duratoinJob = lifecycleScope.launch {
                     withContext(Dispatchers.Main){
                         while (isActive){
@@ -136,23 +188,59 @@ class AudioFragment : Fragment() {
 
         binding.btnEndCall.setOnClickListener {
             if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
             }
-            else findNavController().navigateUp()
+            else {
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().navigateUp()
+                }
+            }
         }
 
         binding.btnBackArrow.setOnClickListener {
             if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
             }
-            else findNavController().navigateUp()
+            else {
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().navigateUp()
+                }
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
             if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
             }
-            else findNavController().navigateUp()
+            else {
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().navigateUp()
+                }
+            }
         }
 
         return binding.root
@@ -169,7 +257,5 @@ class AudioFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         fromHome = false
-        mediaPlayer.stop()
-        mediaPlayer.release()
     }
 }

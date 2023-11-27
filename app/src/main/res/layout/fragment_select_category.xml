@@ -99,6 +99,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="109dp"
+        android:id="@+id/cardBollywood"
         android:background="@drawable/bollwood_card"
         app:layout_constraintTop_toBottomOf="@id/cardHollywood"
         android:layout_marginTop="32dp"

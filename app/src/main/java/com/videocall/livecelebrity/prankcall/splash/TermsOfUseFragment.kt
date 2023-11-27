@@ -10,8 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.databinding.FragmentTermsOfUseBinding
 
 class TermsOfUseFragment : Fragment() {
@@ -30,21 +33,34 @@ class TermsOfUseFragment : Fragment() {
         }
 
         binding.btnAgree.setOnClickListener {
-            findNavController().navigate(R.id.action_termsOfUseFragment_to_onboardingFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_termsOfUseFragment_to_onboardingFragment)
+            }
         }
 
         binding.btnPrivacy.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://picturesaentertainment.blogspot.com/p/privacy-policy-for-dual-wallpaper.html")
+            intent.data = Uri.parse("https://pixarllwallstudios.blogspot.com/p/privacy-policy.html")
             startActivity(intent)
         }
 
         binding.btnTmc.setOnClickListener {
-            findNavController().navigate(R.id.action_termsOfUseFragment_to_tcsFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_termsOfUseFragment_to_tcsFragment)
+            }
+        }
+
+        binding.btnBackArrow.setOnClickListener {
+            requireActivity().finish()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            startActivity(Intent(requireContext(), LanguageActivity::class.java))
             requireActivity().finish()
         }
 

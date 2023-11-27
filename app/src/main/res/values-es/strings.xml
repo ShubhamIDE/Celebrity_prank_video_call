@@ -1,4 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">Seleccionar Idioma</string>
+    <string name="next">Siguiente</string>
+    <string name="terms_of_use">Términos de Uso</string>
+    <string name="permission_required">Permiso Requerido</string>
+    <string name="grant_permission">Conceder permiso</string>
+    <string name="call_any_celebrity">Llamar a cualquier celebridad</string>
+    <string name="Celebrity_Video_call">Llamada de video con celebridad</string>
+    <string name="Celebrity_chat">Chat con celebridad</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">Llamadas con un toque para conectarte con tus\ncelebridades favoritas.</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">Experimenta llamadas cara a cara con cualquier\ncelebridad que desees.</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">Envía mensajes y amor de fan directamente a\ntu celebridad favorita.</string>
+    <string name="rate_us">Califícanos</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">Llama a tu celebridad\nfavorita con un solo toque.</string>
+    <string name="messages">Mensajes</string>
+    <string name="audio_call">Llamada de audio</string>
+    <string name="video_call">Llamada de video</string>
+    <string name="call_history">Historial de llamadas</string>
+    <string name="about">Acerca de</string>
+    <string name="share">Compartir</string>
+    <string name="language">Idioma</string>
+    <string name="txt_download">¡Descarga la increíble broma de llamada en video con celebridades ahora mismo!</string>
+    <string name="txt_app_invitattion">Descargar invitación</string>
+    <string name="select_category">Seleccionar categoría</string>
+    <string name="hollywood">Hollywood</string>
+    <string name="bollywood">Bollywood</string>
+    <string name="rate_us1">¡Califícanos!</string>
+    <string name="do_you_really_want_to_exit_the_app">¿Realmente quieres salir de la aplicación?</string>
+    <string name="exit_app">Salir de la aplicación</string>
+    <string name="type_here_to_search_something">Escribe aquí para buscar algo</string>
+    <string name="get_started">Comenzar</string>
+    <string name="drawer_close">Cerrar cajón</string>
+
+
+    <string name="drawer_open">Abrir cajón</string>
+    <string name="chat">Chat</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
+    <string name="speaker">Altavoz</string>
+    <string name="mute">Silencio</string>
+    <string name="type_something">Escribir algo</string>
+    <string name="suggestions">Sugerencias</string>
+    <string name="connecting_please_wait">Conectando, por favor espere...</string>
+    <string name="typing">Escribiendo...</string>
+    <string name="please_wait_for_reply">Por favor, espere una respuesta.</string>
+    <string name="camera_access">Acceso a la cámara</string>
+    <string name="select_your_partner">Selecciona tu compañero</string>
+
+    <string name="hold">Espera</string>
+    <string name="privacy_policy_trans">Política de privacidad</string>
+    <string name="internet_connection_is_required">Se requiere conexión a internet</string>
+    <string name="start_a_new_chat">Iniciar un nuevo chat</string>
+    <string name="no_chats_found">No se encontraron chats</string>
+    <string name="no_audio_call_history_found">No se encontró historial de llamadas de audio</string>
+    <string name="start_a_call">Iniciar una llamada</string>
+    <string name="no_video_call_history_found">No se encontró historial de llamadas de video</string>
+    <string name="start_a_video_call">Iniciar una videollamada</string>
+
 </resources>

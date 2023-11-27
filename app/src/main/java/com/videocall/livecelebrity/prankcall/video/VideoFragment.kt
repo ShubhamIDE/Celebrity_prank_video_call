@@ -17,6 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants.PlayerState
@@ -24,6 +26,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentVideoBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
@@ -138,24 +141,39 @@ class VideoFragment : Fragment() {
         }
 
         binding.btnBackArrow.setOnClickListener {
-            if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                if(fromHome){
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
+                else findNavController().navigateUp()
             }
-            else findNavController().navigateUp()
         }
 
         binding.btnEndCall.setOnClickListener {
-            if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                if(fromHome){
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
+                else findNavController().navigateUp()
             }
-            else findNavController().navigateUp()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                if(fromHome){
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
+                else findNavController().navigateUp()
             }
-            else findNavController().navigateUp()
         }
 
         binding.btnVideo.setOnClickListener {

@@ -6,21 +6,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
 import com.flurry.sdk.p
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.CustomReceiveMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.CustomSendMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentChatsBinding
+import com.videocall.livecelebrity.prankcall.databinding.HsvSuggestionItemBinding
 import com.videocall.livecelebrity.prankcall.utils.Celebrity
 import com.videocall.livecelebrity.prankcall.utils.ChatGptCompletions
 import com.videocall.livecelebrity.prankcall.utils.ChatHistory
 import com.videocall.livecelebrity.prankcall.utils.Msg
 import com.videocall.livecelebrity.prankcall.utils.PreferenceManager
+import com.videocall.livecelebrity.prankcall.video.VideoFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -48,6 +57,18 @@ class ChatsFragment : Fragment() {
     private val apiCallScope  = CoroutineScope(Dispatchers.IO + job)
     private lateinit var chatCompletion: ChatGptCompletions
     private var systemTyping = false
+    private var suggestionsList = listOf(
+        "What's an emoji that you think describes me, and one that describes you?",
+        "What's your favorite movie, and how many times do you think you've seen it?",
+        "If you could travel anywhere in the world right now, where would you go?",
+        "Hey, want to try out that restaurant in town that just opened?",
+        "What's the most embarrassing thing that happened to you in your recent memory?",
+        "Who have you been friends with the longest and how did you meet?",
+        "I have an extra ticket to this concert, do you want to come with me?",
+        "I was just thinking about how much fun we have together. I am so relieved that I have you to keep me out of trouble! Where did you learn how to be such a great leader?",
+        "I wanted to remind you how awesome you are! Let's catch up! What have you been up to?",
+        "Pandemics are the worst, but you are the best! I have always admired your ability to look on the bright side. There has never been a better time to remind you of that! What's on your post-pandemic to-do list?"
+    )
 
     companion object{
         var chatHistory: ChatHistory? = null
@@ -97,25 +118,63 @@ class ChatsFragment : Fragment() {
                         msgList = arrayListOf(),
                         lastChatTime = Date()
                     )
+                    binding.tvSuggestions.visibility = View.VISIBLE
+                    binding.suggestionsHSV.visibility = View.VISIBLE
+                    val list = suggestionsList.shuffled()
+                    for(sugg in list){
+                        val suggestionItem = HsvSuggestionItemBinding.inflate(LayoutInflater.from(requireContext()))
+                        suggestionItem.tvSuggestion.text = sugg
+                        withContext(Dispatchers.Main){
+                            val layoutParams = LinearLayout.LayoutParams(450, WRAP_CONTENT)
+                            layoutParams.setMargins(0, 0, 30, 0)
+                            suggestionItem.root.layoutParams = layoutParams
+                            binding.llSuggestions.addView(suggestionItem.root)
+                        }
+                        suggestionItem.root.setOnClickListener {
+                            val time = getCurrentTimeIn12HourFormat()
+                            addMsgToScrollView(sugg, 0, time)
+                            msgList.add(Pair(0, Msg(sugg, time)))
+                            addData()
+                            getMessageFromSystem(sugg)
+                            binding.tvSuggestions.visibility = View.GONE
+                            binding.suggestionsHSV.visibility = View.GONE
+                        }
+                    }
                 }
             }
         }
 
         binding.btnBack.setOnClickListener {
-            if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                if (fromHome) {
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                } else findNavController().navigateUp()
             }
-            else findNavController().navigateUp()
         }
 
         binding.btnVideoCall.setOnClickListener {
-            findNavController().navigate(R.id.action_chatsFragment_to_videoFragment)
+            VideoFragment.celebrity = celebrity
+            VideoFragment.fromHome = false
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_chatsFragment_to_videoFragment)
+            }
         }
 
         binding.ivCall.setOnClickListener {
             AudioFragment.celebrity = celebrity
             AudioFragment.fromHome = false
-            findNavController().navigate(R.id.action_chatsFragment_to_audioFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_chatsFragment_to_audioFragment)
+            }
         }
 
         binding.btnSendMsg.setOnClickListener {
@@ -131,10 +190,15 @@ class ChatsFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            if(fromHome){
-                findNavController().popBackStack(R.id.homeFragment, false)
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                if(fromHome){
+                    findNavController().popBackStack(R.id.homeFragment, false)
+                }
+                else findNavController().navigateUp()
             }
-            else findNavController().navigateUp()
         }
 
         return binding.root

@@ -98,9 +98,9 @@
                 app:layout_constraintStart_toEndOf="@id/ivPerm"/>
             
             <androidx.appcompat.widget.AppCompatRadioButton
-                android:layout_width="25dp"
+                android:layout_width="30dp"
                 android:id="@+id/cbCamera"
-                android:buttonTint="@color/perms_radio_selector"
+                app:buttonTint="@color/perms_radio_selector"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

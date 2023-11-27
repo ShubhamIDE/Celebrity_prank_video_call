@@ -1,4 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="next">التالي</string>
+    <string name="terms_of_use">شروط الاستخدام</string>
+    <string name="permission_required">الإذن مطلوب</string>
+    <string name="grant_permission">منح الإذن</string>
+    <string name="call_any_celebrity">الاتصال بأي شخصية مشهورة</string>
+    <string name="Celebrity_Video_call">مكالمة فيديو مع شخصية مشهورة</string>
+    <string name="Celebrity_chat">محادثة مع شخصية مشهورة</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">اتصال بلمسة واحدة للتواصل مع\nنجومك المفضلين.</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">تجربة المكالمات وجهاً لوجه مع أي\nنجم تريده.</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">إرسال الرسائل ومشاعر المعجبين مباشرةً\nإلى نجمك المفضل.</string>
+    <string name="rate_us">قيمنا</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">الاتصال بنجمك المفضل\nبسهولة بلمسة واحدة.</string>
+    <string name="messages">الرسائل</string>
+    <string name="audio_call">مكالمة صوتية</string>
+    <string name="video_call">مكالمة فيديو</string>
+    <string name="call_history">سجل المكالمات</string>
+    <string name="about">حول</string>
+    <string name="share">مشاركة</string>
+    <string name="language">اللغة</string>
+    <string name="txt_download">حمل الفيديو المزيف المذهل مع المشاهير الآن !!</string>
+    <string name="txt_app_invitattion">تحميل الدعوة</string>
+    <string name="select_category">حدد الفئة</string>
+    <string name="hollywood">هوليوود</string>
+    <string name="bollywood">بوليوود</string>
+    <string name="rate_us1">قيمنا!</string>
+    <string name="do_you_really_want_to_exit_the_app">هل تريد حقًا الخروج من التطبيق؟</string>
+    <string name="exit_app">خروج من التطبيق</string>
+    <string name="type_here_to_search_something">اكتب هنا للبحث عن شيء</string>
+    <string name="get_started">البدء</string>
+    <string name="drawer_close">إغلاق الدرج</string>
+
+    <string name="drawer_open">فتح الدرج</string>
+    <string name="chat">دردشة</string>
+    <string name="audio">صوت</string>
+    <string name="video">فيديو</string>
+    <string name="speaker">مكبر الصوت</string>
+    <string name="mute">كتم الصوت</string>
+    <string name="type_something">اكتب شيئًا</string>
+    <string name="suggestions">اقتراحات</string>
+    <string name="connecting_please_wait">جاري الاتصال، يرجى الانتظار...</string>
+    <string name="typing">الكتابة...</string>
+    <string name="please_wait_for_reply">يرجى الانتظار للرد.</string>
+    <string name="camera_access">وصول الكاميرا</string>
+    <string name="select_your_partner">حدد شريكك</string>
+
+    <string name="hold">احتج</string>
+    <string name="privacy_policy_trans">سياسة الخصوصية</string>
+    <string name="internet_connection_is_required">الاتصال بالإنترنت مطلوب</string>
+    <string name="start_a_new_chat">ابدأ محادثة جديدة</string>
+    <string name="no_chats_found">لم يتم العثور على محادثات</string>
+    <string name="no_audio_call_history_found">لم يتم العثور على سجل مكالمات صوتية</string>
+    <string name="start_a_call">ابدأ مكالمة</string>
+    <string name="no_video_call_history_found">لم يتم العثور على سجل مكالمات فيديو</string>
+    <string name="start_a_video_call">ابدأ مكالمة فيديو</string>
+
 </resources>

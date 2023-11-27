@@ -10,12 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.flurry.android.FlurryAgent
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.android.play.core.review.testing.FakeReviewManager
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.databinding.FragmentNavViewBinding
 import com.videocall.livecelebrity.prankcall.splash.LanguageActivity
 import eightbitlab.com.blurview.BuildConfig
@@ -31,13 +34,19 @@ class NavViewFragment : Fragment() {
         binding = FragmentNavViewBinding.inflate(inflater, container, false)
 
         binding.llLang.setOnClickListener {
-            requireActivity().startActivity(Intent(requireContext(), LanguageActivity::class.java))
+            LanguageActivity.langChange = true
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                requireActivity().startActivity(Intent(requireContext(), LanguageActivity::class.java))
+            }
             HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         binding.llPP.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://picturesaentertainment.blogspot.com/p/privacy-policy-for-dual-wallpaper.html")
+            intent.data = Uri.parse("https://pixarllwallstudios.blogspot.com/p/privacy-policy.html")
             startActivity(intent)
             HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }

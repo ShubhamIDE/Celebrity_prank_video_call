@@ -1,4 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">언어 선택</string>
+    <string name="next">다음</string>
+    <string name="terms_of_use">이용 약관</string>
+    <string name="permission_required">권한 필요</string>
+    <string name="grant_permission">권한 부여</string>
+    <string name="call_any_celebrity">어떤 유명인에게도 전화 걸기</string>
+    <string name="Celebrity_Video_call">유명인과 영상 통화</string>
+    <string name="Celebrity_chat">유명인과 채팅</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">원탭으로 즐겨찾는\n셀러브리티와 연결하는 콜.</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">원하는 어떤 셀러브리티와도\n면대면 콜 체험해보세요.</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">메시지와 팬의 사랑을 바로\n좋아하는 셀러브리티에게 보내세요.</string>
+    <string name="rate_us">평가하기</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">원탭으로 손쉽게\n좋아하는 셀러브리티와 통화.</string>
+    <string name="messages">메시지</string>
+    <string name="audio_call">음성 통화</string>
+    <string name="video_call">비디오 통화</string>
+    <string name="call_history">통화 기록</string>
+    <string name="about">정보</string>
+    <string name="share">공유</string>
+    <string name="language">언어</string>
+    <string name="txt_download">놀라운 셀러브리티 장난 전화 비디오 지금 다운로드!!</string>
+    <string name="txt_app_invitattion">초대장 다운로드</string>
+    <string name="select_category">카테고리 선택</string>
+    <string name="hollywood">할리우드</string>
+    <string name="bollywood">볼리우드</string>
+    <string name="rate_us1">평가하기!</string>
+    <string name="do_you_really_want_to_exit_the_app">정말 앱을 종료하시겠습니까?</string>
+    <string name="exit_app">앱 종료</string>
+    <string name="type_here_to_search_something">여기에 검색할 내용 입력</string>
+    <string name="get_started">시작하기</string>
+    <string name="drawer_close">서랍 닫기</string>
+
+
+    <string name="drawer_open">서랍 열기</string>
+    <string name="chat">채팅</string>
+    <string name="audio">오디오</string>
+    <string name="video">비디오</string>
+    <string name="speaker">스피커</string>
+    <string name="mute">음소거</string>
+    <string name="type_something">무언가 입력</string>
+    <string name="suggestions">제안</string>
+    <string name="connecting_please_wait">연결 중입니다. 잠시 기다려주세요...</string>
+    <string name="typing">입력 중...</string>
+    <string name="please_wait_for_reply">답변을 기다려주세요.</string>
+    <string name="camera_access">카메라 접근</string>
+    <string name="select_your_partner">파트너 선택</string>
+
+    <string name="hold">유지</string>
+    <string name="privacy_policy_trans">개인정보 처리방침</string>
+    <string name="internet_connection_is_required">인터넷 연결이 필요합니다</string>
+    <string name="start_a_new_chat">새 채팅 시작</string>
+    <string name="no_chats_found">채팅이 없습니다</string>
+    <string name="no_audio_call_history_found">오디오 통화 기록을 찾을 수 없습니다</string>
+    <string name="start_a_call">통화 시작</string>
+    <string name="no_video_call_history_found">비디오 통화 기록이 없습니다</string>
+    <string name="start_a_video_call">비디오 통화 시작</string>
+
 </resources>

@@ -52,7 +52,7 @@ public class AppOpenAds implements LifecycleObserver, Application.ActivityLifecy
         AppOpenAds.activity = activity;
         SharedPreferences pref = activity.getSharedPreferences(LanguageActivity.LANG_PREF, Context.MODE_PRIVATE);
         String locale = pref.getString(LocaleHelper.SELECTED_LANGUAGE, "en");
-        LocaleHelper.setLocale(activity.getApplicationContext() , locale);
+        LocaleHelper.setLocale(activity , locale);
         bundle = savedInstanceState;
     }
 
@@ -64,7 +64,7 @@ public class AppOpenAds implements LifecycleObserver, Application.ActivityLifecy
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStart() {
-        if (!activity.getComponentName().getClassName().startsWith("com.videocall.livecelebrity.prankcall") && Constants.adsResponseModel != null && Constants.adsResponseModel.isShow_ads()) {
+        if (!activity.getComponentName().getClassName().startsWith("com.videocall.livecelebrity.prankcall.SplashScreenActivity") && Constants.adsResponseModel != null && Constants.adsResponseModel.isShow_ads()) {
             if (!isAdShowing && AppOpenAds.activity != null && (!AppOpenAds.activity.getClass().getName().equals(MainActivity.class.getName()))) {
                 isAdShowing = true;
 

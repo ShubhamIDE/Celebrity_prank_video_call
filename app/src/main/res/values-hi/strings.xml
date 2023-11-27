@@ -1,4 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">भाषा चुनें</string>
+    <string name="next">आगे</string>
+    <string name="terms_of_use">उपयोग की शर्तें</string>
+    <string name="permission_required">अनुमति आवश्यक है</string>
+    <string name="grant_permission">अनुमति प्रदान करें</string>
+    <string name="call_any_celebrity">किसी भी प्रमुख से कॉल करें</string>
+    <string name="Celebrity_Video_call">प्रमुख वीडियो कॉल</string>
+    <string name="Celebrity_chat">प्रमुख चैट</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">अपने पसंदीदा\nसेलिब्रिटीज़ से जुड़ने के लिए एक-टैप कॉलिंग।</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">जो कोई भी सेलिब्रिटी चाहो, उसके साथ\nचेहरे से चेहरे कॉल का अनुभव करें।</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">अपनी पसंदीदा सेलिब्रिटी को सीधे\nसंदेश और फैन लव भेजें।</string>
+    <string name="rate_us">हमें रेट करें</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">बिना किसी परेशानी के अपने पसंदीदा\nसेलिब्रिटी को एक-टैप में कॉल करें।</string>
+    <string name="messages">संदेश</string>
+    <string name="audio_call">ऑडियो कॉल</string>
+    <string name="video_call">वीडियो कॉल</string>
+    <string name="call_history">कॉल इतिहास</string>
+    <string name="about">बारे में</string>
+    <string name="share">साझा करें</string>
+    <string name="language">भाषा</string>
+    <string name="txt_download">अद्भुत सेलिब्रिटी प्रैंक वीडियो कॉल अभी डाउनलोड करें!!</string>
+    <string name="txt_app_invitattion">डाउनलोड आमंत्रण</string>
+    <string name="select_category">वर्ग चुनें</string>
+    <string name="hollywood">हॉलीवुड</string>
+    <string name="bollywood">बॉलीवुड</string>
+    <string name="rate_us1">हमें रेट करें!</string>
+    <string name="do_you_really_want_to_exit_the_app">क्या आप वाकई ऐप से बाहर निकलना चाहते हैं?</string>
+    <string name="exit_app">ऐप से बाहर निकलें</string>
+    <string name="type_here_to_search_something">कुछ खोजने के लिए यहां लिखें</string>
+    <string name="get_started">शुरू करें</string>
+    <string name="drawer_close">ड्रावर बंद करें</string>
+
+    <string name="drawer_open">ड्रायर खोलें</string>
+    <string name="chat">चैट</string>
+    <string name="audio">ऑडियो</string>
+    <string name="video">वीडियो</string>
+    <string name="speaker">स्पीकर</string>
+    <string name="mute">म्यूट</string>
+    <string name="type_something">कुछ लिखें</string>
+    <string name="suggestions">सुझाव</string>
+    <string name="connecting_please_wait">कनेक्ट हो रहा है, कृपया प्रतीक्षा करें...</string>
+    <string name="typing">लिख रहा है...</string>
+    <string name="please_wait_for_reply">कृपया जवाब का इंतजार करें।</string>
+    <string name="camera_access">कैमरा एक्सेस</string>
+    <string name="select_your_partner">अपने साथी का चयन करें</string>
+    <string name="hold">रोकें</string>
+    <string name="privacy_policy_trans">गोपनीयता नीति</string>
+    <string name="internet_connection_is_required">इंटरनेट कनेक्शन की आवश्यकता है</string>
+    <string name="start_a_new_chat">नयी चैट शुरू करें</string>
+    <string name="no_chats_found">कोई चैट नहीं मिली</string>
+    <string name="no_audio_call_history_found">कोई ऑडियो कॉल का इतिहास नहीं मिला</string>
+    <string name="start_a_call">कॉल शुरू करें</string>
+    <string name="no_video_call_history_found">कोई वीडियो कॉल का इतिहास नहीं मिला</string>
+    <string name="start_a_video_call">वीडियो कॉल शुरू करें</string>
+
 </resources>

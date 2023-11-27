@@ -105,6 +105,37 @@
         app:layout_constraintBottom_toTopOf="@id/llTabOptions"
         android:layout_height="0dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:id="@+id/tvNoChatsFound"
+        app:layout_constraintTop_toBottomOf="@id/llSearchView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:alpha="0.5"
+        android:visibility="gone"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnStart"
+        android:fontFamily="@font/inter_semibold"
+        android:textColor="@color/white"
+        android:text="@string/no_chats_found"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/darkBlue"
+        app:cornerRadius="10dp"
+        android:id="@+id/btnStart"
+        android:visibility="gone"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toTopOf="@id/llTabOptions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNoChatsFound"
+        android:text="@string/start_a_new_chat"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/rvAudioCalls"

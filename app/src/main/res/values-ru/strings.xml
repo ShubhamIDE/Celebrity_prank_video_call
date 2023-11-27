@@ -1,4 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celebrity Prank Video Call</string>
+    <string name="select_language">Выберите язык</string>
+    <string name="next">Далее</string>
+    <string name="terms_of_use">Условия использования</string>
+    <string name="permission_required">Требуется разрешение</string>
+    <string name="grant_permission">Предоставить разрешение</string>
+    <string name="call_any_celebrity">Позвонить любой знаменитости</string>
+    <string name="Celebrity_Video_call">Видеозвонок с знаменитостью</string>
+    <string name="Celebrity_chat">Чат с знаменитостью</string>
+
+    <string name="one_tap_calling_to_connect_with_your_favourite_ncelebrities">Один клик для подключения к вашим\nлюбимым знаменитостям.</string>
+    <string name="experience_face_to_face_calls_with_any_ncelebrity_you_want">Испытайте видеозвонки с любой\nзнаменитостью, которую хотите.</string>
+    <string name="send_messages_and_fan_love_directly_to_nyour_beloved_celebrity">Отправляйте сообщения и любовь фанатов\nнапрямую вашей любимой знаменитости.</string>
+    <string name="rate_us">Оцените нас</string>
+    <string name="effortlessly_call_your_nfavourite_celebrity_with_njust_one_tap">Позвоните вашей\nлюбимой знаменитости всего одним касанием.</string>
+    <string name="messages">Сообщения</string>
+    <string name="audio_call">Голосовой вызов</string>
+    <string name="video_call">Видеозвонок</string>
+    <string name="call_history">История звонков</string>
+    <string name="about">О программе</string>
+    <string name="share">Поделиться</string>
+    <string name="language">Язык</string>
+    <string name="txt_download">Скачайте удивительное видео с звонком с знаменитостью прямо сейчас !!</string>
+    <string name="txt_app_invitattion">Скачать приглашение</string>
+    <string name="select_category">Выберите категорию</string>
+    <string name="hollywood">Голливуд</string>
+    <string name="bollywood">Болливуд</string>
+    <string name="rate_us1">Оцените нас!</string>
+    <string name="do_you_really_want_to_exit_the_app">Вы действительно хотите выйти из приложения?</string>
+    <string name="exit_app">Выйти из приложения</string>
+    <string name="type_here_to_search_something">Введите здесь для поиска чего-то</string>
+    <string name="get_started">Начать</string>
+    <string name="drawer_close">Закрыть ящик</string>
+
+    <string name="drawer_open">Открыть ящик</string>
+    <string name="chat">Чат</string>
+    <string name="audio">Аудио</string>
+    <string name="video">Видео</string>
+    <string name="speaker">Динамик</string>
+    <string name="mute">Без звука</string>
+    <string name="type_something">Введите что-то</string>
+    <string name="suggestions">Предложения</string>
+    <string name="connecting_please_wait">Подключение, пожалуйста, подождите...</string>
+    <string name="typing">Печатает...</string>
+    <string name="please_wait_for_reply">Пожалуйста, подождите ответа.</string>
+    <string name="camera_access">Доступ к камере</string>
+    <string name="select_your_partner">Выберите своего партнера</string>
+    <string name="hold">Удерживать</string>
+    <string name="privacy_policy_trans">Политика конфиденциальности</string>
+    <string name="internet_connection_is_required">Требуется интернет-соединение</string>
+    <string name="start_a_new_chat">Начать новый чат</string>
+    <string name="no_chats_found">Чаты не найдены</string>
+    <string name="no_audio_call_history_found">История аудио-звонков не найдена</string>
+    <string name="start_a_call">Начать звонок</string>
+    <string name="no_video_call_history_found">История видео-звонков не найдена</string>
+    <string name="start_a_video_call">Начать видеозвонок</string>
+
 </resources>

@@ -5,14 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.core.view.doOnPreDraw
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.databinding.FragmentOnboardingBinding
 import com.videocall.livecelebrity.prankcall.databinding.OnboardingItemBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvLangItemBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OnboardingFragment : Fragment() {
 
@@ -28,9 +37,28 @@ class OnboardingFragment : Fragment() {
                 binding.onboardingVP.setCurrentItem(it+1, true)
             }
             else {
-                findNavController().navigate(R.id.action_onboardingFragment_to_permissionFragment)
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    findNavController().navigate(R.id.action_onboardingFragment_to_permissionFragment)
+                }
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
+            }
+        }
+
+        binding.onboardingVP.doOnPreDraw {
+            binding.onboardingVP.setCurrentItem(0, false)
+        }
+
         return binding.root
     }
 }

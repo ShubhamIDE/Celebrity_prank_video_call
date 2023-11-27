@@ -19,6 +19,7 @@ import com.adsmodule.api.adsModule.AdUtils
 import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.MainActivity
+import com.videocall.livecelebrity.prankcall.MainActivity.Companion.MAINACTIVITY_INTENT
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.databinding.ActivityLanguageBinding
@@ -28,7 +29,7 @@ import com.videocall.livecelebrity.prankcall.utils.LocaleHelper
 class LanguageActivity : AppCompatActivity(), LanguageClickListener {
 
     private val localList = listOf("en", "hi", "es", "fr"
-        , "pt-rBR", "ko", "ru", "nl-rBE", "ar", "ja")
+        , "pt-rBR", "ko", "ru", "ja", "ar")
     private var locale = "en"
     private var langSelectedPos = 0
     private val languageList = mutableListOf<String>()
@@ -37,6 +38,7 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
     companion object{
         const val LANG_PREF = "lang_pref"
         var calledFromMain = false
+        var langChange = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +62,7 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
         languageList.add(getString(R.string.portuguese));
         languageList.add(getString(R.string.korean));
         languageList.add(getString(R.string.russian));
-        languageList.add(getString(R.string.dutch));
+        languageList.add(getString(R.string.japanese));
         languageList.add(getString(R.string.arabic));
 
         binding.rvLanguages.adapter = LanguageAdapter(languageList, this, langSelectedPos);
@@ -78,14 +80,25 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
                 AppOpenAds.activity
             ) { state_load: Boolean ->
                 calledFromMain = false
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                if(langChange){
+                    langChange = false
+                    val local = Intent()
+                    local.action = MAINACTIVITY_INTENT
+                    sendBroadcast(local)
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                }
+                else startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }
 
     override fun onItemClicked(position: Int) {
         locale = localList[position]
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
 

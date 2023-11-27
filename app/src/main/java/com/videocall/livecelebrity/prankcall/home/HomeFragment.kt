@@ -9,7 +9,10 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentHomeBinding
 import com.videocall.livecelebrity.prankcall.message.ChatsFragment
@@ -53,23 +56,43 @@ class HomeFragment : Fragment() {
         binding.clVideoCall.setOnClickListener {
             VideoFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
-            findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
+            }
         }
 
         binding.clCallHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_callLogFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_homeFragment_to_callLogFragment)
+            }
         }
 
         binding.clAudio.setOnClickListener {
             AudioFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
-            findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
+            }
         }
 
         binding.clMsg.setOnClickListener {
             ChatsFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
-            findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
@@ -77,7 +100,12 @@ class HomeFragment : Fragment() {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             }
             else {
-                findNavController().navigateUp()
+                AdUtils.showBackPressAds(
+                    AppOpenAds.activity,
+                    Constants.adsResponseModel.app_open_ads.adx,
+                ) { state_load: Boolean ->
+                    findNavController().navigateUp()
+                }
             }
         }
 

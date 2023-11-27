@@ -78,19 +78,15 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_partnerChooseFragment"
-            app:destination="@id/partnerChooseFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out"/>
-        <action
             android:id="@+id/action_homeFragment_to_callLogFragment"
             app:destination="@id/callLogFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_homeFragment_to_selectCategoryFragment"
+            app:destination="@id/selectCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/partnerChooseFragment"
@@ -145,6 +141,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out"/>
+        <action
+            android:id="@+id/action_callLogFragment_to_selectCategoryFragment"
+            app:destination="@id/selectCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatsFragment"
@@ -178,5 +177,14 @@
         android:name="com.videocall.livecelebrity.prankcall.video.VideoFragment"
         android:label="fragment_video"
         tools:layout="@layout/fragment_video" />
+    <fragment
+        android:id="@+id/selectCategoryFragment"
+        android:name="com.videocall.livecelebrity.prankcall.home.SelectCategoryFragment"
+        android:label="fragment_select_category"
+        tools:layout="@layout/fragment_select_category" >
+        <action
+            android:id="@+id/action_selectCategoryFragment_to_partnerChooseFragment"
+            app:destination="@id/partnerChooseFragment" />
+    </fragment>
 
 </navigation>

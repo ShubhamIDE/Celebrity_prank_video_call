@@ -2,6 +2,7 @@ package com.videocall.livecelebrity.prankcall.calllog
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.Telephony.Mms.Part
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentCallLogBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvChatItemBinding
+import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_AUDIO
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_MESSAGE
 import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.TYPE_VIDEO
@@ -70,10 +76,10 @@ class CallLogFragment : Fragment() {
             onCallClicked = {},
             onVideoCallClicked = {},
             onItemClick = {
-                if(SplashScreenActivity.celebrityList.value!=null){
+                if(SplashScreenActivity.celebrityListBollywood.value!=null){
                     ChatsFragment.chatHistory = chatsHistoryList[it]
                     var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityList.value!!){
+                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
                         if(celeb.profile_url == chatsHistoryList[it].img){
                             celebrity = celeb
                             break;
@@ -81,17 +87,22 @@ class CallLogFragment : Fragment() {
                     }
                     if(celebrity!=null){
                         ChatsFragment.celebrity = celebrity
-                        findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
+                        AdUtils.showInterstitialAd(
+                            Constants.adsResponseModel.interstitial_ads.adx,
+                            AppOpenAds.activity
+                        ) { state_load: Boolean ->
+                            findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
+                        }
                     }
                 }
             })
 
         audioAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_AUDIO,
             onCallClicked = {
-                if(SplashScreenActivity.celebrityList.value!=null){
+                if(SplashScreenActivity.celebrityListBollywood.value!=null){
                     AudioFragment.audioHistory = audioCallHistory[it]
                     var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityList.value!!){
+                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
                         if(celeb.profile_url == audioCallHistory[it].img){
                             celebrity = celeb
                             break;
@@ -99,7 +110,12 @@ class CallLogFragment : Fragment() {
                     }
                     if(celebrity!=null){
                         AudioFragment.celebrity = celebrity!!
-                        findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
+                        AdUtils.showInterstitialAd(
+                            Constants.adsResponseModel.interstitial_ads.adx,
+                            AppOpenAds.activity
+                        ) { state_load: Boolean ->
+                            findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
+                        }
                     }
                 }
             },
@@ -109,10 +125,10 @@ class CallLogFragment : Fragment() {
         videoAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_VIDEO,
             onCallClicked = {},
             onVideoCallClicked = {
-                if(SplashScreenActivity.celebrityList.value!=null){
+                if(SplashScreenActivity.celebrityListBollywood.value!=null){
                     VideoFragment.videoHistory = videoCallHistory[it]
                     var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityList.value!!){
+                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
                         if(celeb.profile_url == videoCallHistory[it].img){
                             celebrity = celeb
                             break;
@@ -120,7 +136,12 @@ class CallLogFragment : Fragment() {
                     }
                     if(celebrity!=null){
                         VideoFragment.celebrity = celebrity!!
-                        findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
+                        AdUtils.showInterstitialAd(
+                            Constants.adsResponseModel.interstitial_ads.adx,
+                            AppOpenAds.activity
+                        ) { state_load: Boolean ->
+                            findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
+                        }
                     }
                 }
             },
@@ -135,6 +156,19 @@ class CallLogFragment : Fragment() {
         binding.rvAudioCalls.adapter = audioAdapter
         binding.rvAudioCalls.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        if(chatsHistoryList.isEmpty()){
+            binding.tvNoChatsFound.visibility = View.VISIBLE
+            binding.btnStart.visibility = View.VISIBLE
+            binding.tvNoChatsFound.text = getString(R.string.no_chats_found)
+            binding.btnStart.text = getString(R.string.start_a_new_chat)
+            binding.rvChats.visibility = View.GONE
+        }
+        else {
+            binding.tvNoChatsFound.visibility = View.GONE
+            binding.btnStart.visibility = View.GONE
+            binding.rvChats.visibility = View.VISIBLE
+        }
+
         binding.llChat.setOnClickListener {
             binding.rvAudioCalls.visibility = View.GONE
             binding.rvVideoCalls.visibility = View.GONE
@@ -143,6 +177,20 @@ class CallLogFragment : Fragment() {
             binding.llAudio.alpha = 0.4f
             binding.llVideo.alpha = 0.4f
             binding.tvTitle.text = getString(R.string.chat)
+
+            if(chatsHistoryList.isEmpty()){
+                binding.tvNoChatsFound.visibility = View.VISIBLE
+                binding.btnStart.visibility = View.VISIBLE
+                binding.tvNoChatsFound.text = getString(R.string.no_chats_found)
+                binding.btnStart.text = getString(R.string.start_a_new_chat)
+                binding.rvChats.visibility = View.GONE
+            }
+            else {
+                binding.tvNoChatsFound.visibility = View.GONE
+                binding.btnStart.visibility = View.GONE
+                binding.rvChats.visibility = View.VISIBLE
+            }
+
         }
 
         binding.llAudio.setOnClickListener {
@@ -153,6 +201,18 @@ class CallLogFragment : Fragment() {
             binding.llChat.alpha = 0.4f
             binding.llVideo.alpha = 0.4f
             binding.tvTitle.text = getString(R.string.audio_call)
+            if(audioCallHistory.isEmpty()){
+                binding.tvNoChatsFound.visibility = View.VISIBLE
+                binding.btnStart.visibility = View.VISIBLE
+                binding.tvNoChatsFound.text = getString(R.string.no_audio_call_history_found)
+                binding.btnStart.text = getString(R.string.start_a_call)
+                binding.rvAudioCalls.visibility = View.GONE
+            }
+            else {
+                binding.tvNoChatsFound.visibility = View.GONE
+                binding.btnStart.visibility = View.GONE
+                binding.rvAudioCalls.visibility = View.VISIBLE
+            }
         }
 
         binding.llVideo.setOnClickListener {
@@ -163,12 +223,60 @@ class CallLogFragment : Fragment() {
             binding.llAudio.alpha = 0.4f
             binding.llChat.alpha = 0.4f
             binding.tvTitle.text = getString(R.string.video_call)
+            if(videoCallHistory.isEmpty()){
+                binding.tvNoChatsFound.visibility = View.VISIBLE
+                binding.btnStart.visibility = View.VISIBLE
+                binding.tvNoChatsFound.text = getString(R.string.no_video_call_history_found)
+                binding.btnStart.text = getString(R.string.start_a_video_call)
+                binding.rvVideoCalls.visibility = View.GONE
+            }
+            else {
+                binding.tvNoChatsFound.visibility = View.GONE
+                binding.btnStart.visibility = View.GONE
+                binding.rvVideoCalls.visibility = View.VISIBLE
+            }
         }
 
         binding.btnBackArrow.setOnClickListener {
-            findNavController().navigateUp()
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
+            }
         }
 
+        binding.btnStart.setOnClickListener {
+            if(binding.llAudio.alpha == 1.0f){
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    AudioFragment.fromHome = true
+                    PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
+                    findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
+                }
+            }else if(binding.llChat.alpha == 1.0f){
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    ChatsFragment.fromHome = true
+                    PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
+                    findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
+                }
+            }
+            else {
+                AdUtils.showInterstitialAd(
+                    Constants.adsResponseModel.interstitial_ads.adx,
+                    AppOpenAds.activity
+                ) { state_load: Boolean ->
+                    VideoFragment.fromHome = true
+                    PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
+                    findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
+                }
+            }
+        }
         binding.searchEdtTxt.addTextChangedListener {
             if(it!=null){
                 if(it.toString()!=""){
@@ -190,7 +298,12 @@ class CallLogFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            findNavController().navigateUp()
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root
@@ -251,12 +364,19 @@ class CallLogRVAdapter(
     override fun onBindViewHolder(holder: HistoryVH, position: Int) {
         if(type == TYPE_MESSAGE){
             val history = chatsList[holder.adapterPosition]
-            Glide.with(holder.binding.ivLogo).load("https://images.unsplash.com/photo-1591154669695-5f2a8d20c089?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").into(holder.binding.ivLogo)
+
+            Picasso.get().load(history.img)
+                .resize(500, 500)
+                .placeholder(R.drawable.bg_blue)
+                .into(holder.binding.ivLogo)
+
+
             holder.binding.tvName.text = history.name
             if(history.msgList.isNotEmpty()){
                 holder.binding.tvMessage.text = history.msgList[history.msgList.size-1].second.content
             }
 
+            holder.binding.msgCount.visibility = View.GONE
             holder.binding.msgCount.text = history.msgList.size.toString()
 
             holder.binding.cardMsgCount.visibility = View.VISIBLE
@@ -264,9 +384,13 @@ class CallLogRVAdapter(
             holder.binding.ivVideoCall.visibility = View.GONE
         }
         else if(type == TYPE_AUDIO){
-
             val history = audioList[holder.adapterPosition]
-            Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
+
+            Picasso.get().load(history.img)
+                .resize(500, 500)
+                .placeholder(R.drawable.bg_blue)
+                .into(holder.binding.ivLogo)
+
             val formattedString = formatDate(history.lastcallTime)
             holder.binding.tvMessage.text = formattedString
             holder.binding.tvName.text = history.name
@@ -276,7 +400,12 @@ class CallLogRVAdapter(
         }
         else {
             val history = videoList[holder.adapterPosition]
-            Glide.with(holder.binding.ivLogo).load(history.img).into(holder.binding.ivLogo)
+
+            Picasso.get().load(history.img)
+                .resize(500, 500)
+                .placeholder(R.drawable.bg_blue)
+                .into(holder.binding.ivLogo)
+
             val formattedString = formatDate(history.lastcallTime)
             holder.binding.tvMessage.text = formattedString
             holder.binding.tvName.text = history.name

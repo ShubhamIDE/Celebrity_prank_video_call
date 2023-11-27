@@ -91,7 +91,7 @@
             app:cardCornerRadius="20dp"
             android:id="@+id/cardMsgCount"
             app:strokeWidth="1dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:strokeColor="@color/white">
 
             <TextView

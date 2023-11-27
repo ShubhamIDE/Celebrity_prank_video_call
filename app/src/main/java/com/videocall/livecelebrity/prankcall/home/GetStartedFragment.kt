@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.adsmodule.api.adsModule.AdUtils
+import com.adsmodule.api.adsModule.utils.Constants
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
@@ -57,7 +59,7 @@ class GetStartedFragment : Fragment() {
 
         binding.llPP.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("https://picturesaentertainment.blogspot.com/p/privacy-policy-for-dual-wallpaper.html")
+            intent.data = Uri.parse("https://pixarllwallstudios.blogspot.com/p/privacy-policy.html")
             startActivity(intent)
         }
 
@@ -66,7 +68,12 @@ class GetStartedFragment : Fragment() {
         }
 
         binding.llGetStarted.setOnClickListener {
-            findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
+            AdUtils.showInterstitialAd(
+                Constants.adsResponseModel.interstitial_ads.adx,
+                AppOpenAds.activity
+            ) { state_load: Boolean ->
+                findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
+            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
