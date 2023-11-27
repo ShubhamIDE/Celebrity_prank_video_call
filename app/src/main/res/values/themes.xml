@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.CelebrityPrankVideoCall" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.CelebrityPrankVideoCall" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -8,6 +8,7 @@
         <item name="android:fitsSystemWindows">false</item>
         <item name="android:textColorHint">#45ffffff</item>
         <item name="editTextColor">@color/white</item>
+        <item name="android:windowBackground">@color/darkBlue</item>
         <item name="android:navigationBarColor">@color/darkBlue</item>
     </style>
 

@@ -1,5 +1,6 @@
 package com.videocall.livecelebrity.prankcall.splash
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,12 @@ class TermsOfUseFragment : Fragment() {
     ): View {
         binding = FragmentTermsOfUseBinding.inflate(inflater, container, false)
 
+        val sharedPref = requireContext().getSharedPreferences(MainActivity.ONBOARDING_SHARED_PREF_KEY, Context.MODE_PRIVATE)
+        val onBoardingShown = sharedPref.getBoolean(MainActivity.ONBOARDING_SHOWN, false)
+        if(onBoardingShown){
+            findNavController().navigate(R.id.action_termsOfUseFragment_to_getStartedFragment)
+        }
+
         binding.btnAgree.setOnClickListener {
             findNavController().navigate(R.id.action_termsOfUseFragment_to_onboardingFragment)
         }
@@ -37,7 +44,7 @@ class TermsOfUseFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            requireContext().startActivity(Intent(requireContext(), MainActivity::class.java))
+            startActivity(Intent(requireContext(), LanguageActivity::class.java))
             requireActivity().finish()
         }
 

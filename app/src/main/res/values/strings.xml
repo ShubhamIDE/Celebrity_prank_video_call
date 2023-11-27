@@ -85,4 +85,5 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="typing">Typing...</string>
     <string name="please_wait_for_reply">Please wait for reply.</string>
     <string name="camera_access">Camera Access</string>
+    <string name="select_your_partner">Select your partner</string>
 </resources>

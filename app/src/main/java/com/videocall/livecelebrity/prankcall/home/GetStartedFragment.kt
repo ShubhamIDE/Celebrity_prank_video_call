@@ -1,23 +1,33 @@
 package com.videocall.livecelebrity.prankcall.home
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.databinding.ExitDialogBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentGetStartedBinding
 import eightbitlab.com.blurview.RenderScriptBlur
+import java.util.Objects
+
 
 class GetStartedFragment : Fragment() {
 
     private lateinit var binding: FragmentGetStartedBinding
+    private lateinit var dialog: AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +69,36 @@ class GetStartedFragment : Fragment() {
             findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
         }
 
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if(!::dialog.isInitialized || !dialog.isShowing){
+                showExitDialog()
+            }
+        }
+
         return binding.root
+    }
+
+    fun showExitDialog(){
+        val builder = AlertDialog.Builder(requireActivity())
+        val exitDialogBinding: ExitDialogBinding = ExitDialogBinding.inflate(
+            LayoutInflater.from(requireActivity()),
+            null,
+            false
+        )
+        builder.setView(exitDialogBinding.getRoot())
+        dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        Objects.requireNonNull(dialog.window)?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+        exitDialogBinding.llStars.setOnClickListener {
+            reviewDialog(requireActivity())
+        }
+        exitDialogBinding.btnClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        exitDialogBinding.btnExit.setOnClickListener {
+            dialog.dismiss()
+            requireActivity().finish()
+        }
     }
 }

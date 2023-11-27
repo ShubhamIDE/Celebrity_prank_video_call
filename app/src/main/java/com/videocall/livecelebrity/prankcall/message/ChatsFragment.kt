@@ -16,6 +16,7 @@ import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.CustomReceiveMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.CustomSendMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentChatsBinding
+import com.videocall.livecelebrity.prankcall.utils.Celebrity
 import com.videocall.livecelebrity.prankcall.utils.ChatGptCompletions
 import com.videocall.livecelebrity.prankcall.utils.ChatHistory
 import com.videocall.livecelebrity.prankcall.utils.Msg
@@ -43,15 +44,15 @@ class ChatsFragment : Fragment() {
     private val msgList = arrayListOf<Pair<Int, Msg>>()
     private lateinit var preferenceManager: PreferenceManager
     private val job: Job = Job()
+    private var addMsgJob: Job = Job()
     private val apiCallScope  = CoroutineScope(Dispatchers.IO + job)
     private lateinit var chatCompletion: ChatGptCompletions
-    private val personName = "Alia Bhatt"
-    private var message = "What is your favourite movie"
     private var systemTyping = false
 
     companion object{
         var chatHistory: ChatHistory? = null
-        val chatGptApiKey = "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"
+        lateinit var celebrity: Celebrity
+        var fromHome = false
     }
 
     override fun onCreateView(
@@ -60,30 +61,51 @@ class ChatsFragment : Fragment() {
     ): View {
         binding = FragmentChatsBinding.inflate(inflater, container, false)
 
-        binding.tvName.text = personName
-
-        chatHistory = ChatHistory(
-            "1",
-            "https://unsplash.com/photos/black-and-white-plane-flying-over-the-sea-during-daytime-rNqs9hM0U8I",
-            "Alia Bhatt",
-            arrayListOf(),
-            Date()
-        )
         chatCompletion = ChatGptCompletions()
         preferenceManager = PreferenceManager(requireContext())
+        binding.tvName.text = celebrity.name
 
-        if(chatHistory!=null){
-            msgList.addAll(chatHistory!!.msgList)
-            for(i in msgList.size-1 downTo 0){
-                val time = msgList[i].second.time
-                val msg = msgList[i].second.content
-                val type = msgList[i].first
-                addMsgToScrollView(msg, type, time)
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO){
+                val chatList = preferenceManager.getChatsList()
+                for(chat in chatList){
+                    if(chat.id.equals(celebrity.profile_url)){
+                        chatHistory = chat
+                        break
+                    }
+                }
+
+                if(chatHistory!=null){
+                    msgList.clear()
+                    msgList.addAll(chatHistory!!.msgList.reversed())
+                    for(i in msgList.size-1 downTo 0){
+                        val time = msgList[i].second.time
+                        val msg = msgList[i].second.content
+                        val type = msgList[i].first
+                        withContext(Dispatchers.Main){
+                            addMsgToScrollView(msg, type, time)
+                        }
+                    }
+                }
+                else {
+                    chatHistory = ChatHistory(
+                        id = celebrity.profile_url,
+                        name = celebrity.name,
+                        profession = celebrity.profession,
+                        img = celebrity.profile_url,
+                        msgList = arrayListOf(),
+                        lastChatTime = Date()
+                    )
+                }
             }
         }
 
         binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
         }
 
         binding.btnVideoCall.setOnClickListener {
@@ -91,6 +113,8 @@ class ChatsFragment : Fragment() {
         }
 
         binding.ivCall.setOnClickListener {
+            AudioFragment.celebrity = celebrity
+            AudioFragment.fromHome = false
             findNavController().navigate(R.id.action_chatsFragment_to_audioFragment)
         }
 
@@ -106,13 +130,20 @@ class ChatsFragment : Fragment() {
             }
         }
 
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
+        }
 
         return binding.root
     }
 
     fun addData(){
-        if(chatHistory!=null){
-            chatHistory!!.msgList = msgList
+        chatHistory!!.msgList = msgList
+        addMsgJob.cancel()
+        addMsgJob = lifecycleScope.launch {
             preferenceManager.addToChatsList(chatHistory!!)
         }
     }
@@ -128,9 +159,8 @@ class ChatsFragment : Fragment() {
                 }
             }
 
-            chatCompletion.getCompletion(personName, msg){
+            chatCompletion.getCompletion(chatHistory!!.name, msg){
                 systemTyping = false
-                message = it
                 if(isAdded && !isDetached){
                     val sendMsgView = CustomReceiveMsgBinding.inflate(LayoutInflater.from(requireContext()))
                     sendMsgView.tvMsg.text = it
@@ -166,5 +196,10 @@ class ChatsFragment : Fragment() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return dateFormat.format(calendar.time)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fromHome = false
     }
 }

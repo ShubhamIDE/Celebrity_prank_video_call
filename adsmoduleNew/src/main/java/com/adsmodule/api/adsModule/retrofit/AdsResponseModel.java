@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdsResponseModel {
 
@@ -413,122 +414,43 @@ public class AdsResponseModel {
     }
 
     public static class ExtraDataFieldDTO {
-        // import com.fasterxml.jackson.databind.ObjectMapper; // version 2.11.1
-// import com.fasterxml.jackson.annotation.JsonProperty; // version 2.11.1
-/* ObjectMapper om = new ObjectMapper();
-Root root = om.readValue(myJsonString, Root.class); */
-        public class Category{
-            public String getCategory() {
-                return this.category; }
-            public void setCategory(String category) {
-                this.category = category; }
-            String category;
-            public String getImage() {
-                return this.image; }
-            public void setImage(String image) {
-                this.image = image; }
-            String image;
-            public ArrayList<String> getIds() {
-                return this.ids; }
-            public void setIds(ArrayList<String> ids) {
-                this.ids = ids; }
-            ArrayList<String> ids;
-        }
-
-        public class Color{
-            public String getColor_name() {
-                return this.color_name; }
-            public void setColor_name(String color_name) {
-                this.color_name = color_name; }
-            String color_name;
-            public String getColor() {
-                return this.color; }
-            public void setColor(String color) {
-                this.color = color; }
-            String color;
-            public ArrayList<String> getIds() {
-                return this.ids; }
-            public void setIds(ArrayList<String> ids) {
-                this.ids = ids; }
-            ArrayList<String> ids;
-        }
 
         public class Data{
         }
+        String base_url;
+        ArrayList<String> celebrities_list;
+        JsonObject data;
+        String chatGptAccessToken;
 
-            public String getBase_url() {
-                return this.base_url; }
-            public void setBase_url(String base_url) {
-                this.base_url = base_url; }
-
-        public String getMyBaseUrl() {
-            return this.dualWpUrl; }
-        public void setMyBaseUrl(String base_url) {
-            this.dualWpUrl = base_url; }
-            String base_url;
-        String dualWpUrl;
-            public ArrayList<String> getTrending() {
-                return this.trending; }
-            public void setTrending(ArrayList<String> trending) {
-                this.trending = trending; }
-            ArrayList<String> trending;
-
-        ArrayList<String> trending_dual;
-
-        public ArrayList<String> getTrending_dual() {
-            return this.trending_dual;
+        public String getChatGptAccessToken() {
+            return chatGptAccessToken;
         }
-        public void setTrending_dual(ArrayList<String> trending_dual) {
-            this.trending_dual = trending_dual; }
 
+        public void setChatGptAccessToken(String chatGptAccessToken) {
+            this.chatGptAccessToken = chatGptAccessToken;
+        }
 
+        public String getBase_url() {
+            return this.base_url;
+        }
+        public void setBase_url(String base_url) {
+            this.base_url = base_url;
+        }
 
-            ArrayList<String> dual_wp_lock;
-            ArrayList<String> dual_wp_home;
+        public ArrayList<String> getCelebrities_list() {
+            return this.celebrities_list;
+        }
+        public void setCelebrities_list(ArrayList<String> celebrities_list) {
+            this.celebrities_list = celebrities_list;
+        }
 
-            public ArrayList<String> getDual_wp_lock() {
-                return this.dual_wp_lock;
-            }
-            public void setDual_wp_lock(ArrayList<String> dual_wp_lock) {
-                this.dual_wp_lock = dual_wp_lock; }
+        public JsonObject getData() {
+            return data;
+        }
 
-            public ArrayList<String> getDual_wp_home() {
-                return this.dual_wp_home;
-            }
-            public void setDual_wp_home(ArrayList<String> dual_wp_home) {
-                this.dual_wp_home = dual_wp_home; }
-
-            public ArrayList<String> getRecently_uploaded() {
-                return this.recently_uploaded; }
-            public void setRecently_uploaded(ArrayList<String> recently_uploaded) {
-                this.recently_uploaded = recently_uploaded; }
-            ArrayList<String> recently_uploaded;
-            public ArrayList<String> getTrending_page() {
-                return this.trending_page; }
-            public void setTrending_page(ArrayList<String> trending_page) {
-                this.trending_page = trending_page; }
-            ArrayList<String> trending_page;
-            public ArrayList<Category> getCategories() {
-                return this.categories; }
-            public void setCategories(ArrayList<Category> categories) {
-                this.categories = categories; }
-            ArrayList<Category> categories;
-            public ArrayList<Color> getColors() {
-                return this.colors; }
-            public void setColors(ArrayList<Color> colors) {
-                this.colors = colors; }
-            ArrayList<Color> colors;
-            JsonObject data;
-
-            public JsonObject getData() {
-                return data;
-            }
-
-            public void setData(JsonObject data) {
-                this.data = data;
-            }
-
-
+        public void setData(JsonObject data) {
+            this.data = data;
+        }
 
     }
 
@@ -562,3 +484,4 @@ Root root = om.readValue(myJsonString, Root.class); */
         }
     }
 }
+

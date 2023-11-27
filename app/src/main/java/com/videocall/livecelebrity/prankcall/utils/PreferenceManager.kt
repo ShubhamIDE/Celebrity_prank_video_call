@@ -53,7 +53,7 @@ class PreferenceManager(val mContext: Context) {
         if(videoListJson == ""){
             sharedPref.edit().putString(VIDEO_LIST_KEY, gson.toJson(arrayListOf(videoHistory))).apply()
         }
-        else{
+        else {
             val typeToken = object : TypeToken<ArrayList<CallHistory>>(){}.type
             val videoList: ArrayList<CallHistory> = gson.fromJson(videoListJson, typeToken)
             videoList.add(videoHistory)
@@ -66,14 +66,14 @@ class PreferenceManager(val mContext: Context) {
         if(chatsJson == "") return arrayListOf()
         Log.d("chatJson", chatsJson.toString())
         val typeToken = object : TypeToken<ArrayList<ChatHistory>>(){}.type
-        val chatsList: ArrayList<ChatHistory> = gson.fromJson(CHAT_LIST_KEY, typeToken)
+        val chatsList: ArrayList<ChatHistory> = gson.fromJson(chatsJson, typeToken)
         return chatsList
     }
 
     fun addToChatsList(chat: ChatHistory){
         val chatsJson = sharedPref.getString(CHAT_LIST_KEY, "")
         if(chatsJson == ""){
-            sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(arrayListOf(chat))).apply()
+            sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(arrayListOf(chat))).commit()
         }
         else {
             val typeToken = object : TypeToken<ArrayList<ChatHistory>>(){}.type
@@ -88,7 +88,7 @@ class PreferenceManager(val mContext: Context) {
                 chatsList.remove(oldChat)
             }
             chatsList.add(chat)
-            sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(chatsList)).apply()
+            sharedPref.edit().putString(CHAT_LIST_KEY, gson.toJson(chatsList)).commit()
         }
     }
 }

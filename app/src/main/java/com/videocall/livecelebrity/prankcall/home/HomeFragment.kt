@@ -5,15 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.findNavController
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentHomeBinding
+import com.videocall.livecelebrity.prankcall.message.ChatsFragment
+import com.videocall.livecelebrity.prankcall.video.VideoFragment
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentHomeBinding
+    companion object{
+        lateinit var binding: FragmentHomeBinding
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +51,7 @@ class HomeFragment : Fragment() {
         binding.navView.bringToFront()
 
         binding.clVideoCall.setOnClickListener {
+            VideoFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
         }
@@ -54,13 +61,24 @@ class HomeFragment : Fragment() {
         }
 
         binding.clAudio.setOnClickListener {
+            AudioFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
         }
 
         binding.clMsg.setOnClickListener {
+            ChatsFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
             findNavController().navigate(R.id.action_homeFragment_to_partnerChooseFragment)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if(binding.drawerLayout.isDrawerVisible(GravityCompat.START)){
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            }
+            else {
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root

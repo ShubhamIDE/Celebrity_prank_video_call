@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import com.flurry.android.FlurryAgent
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
@@ -31,20 +32,24 @@ class NavViewFragment : Fragment() {
 
         binding.llLang.setOnClickListener {
             requireActivity().startActivity(Intent(requireContext(), LanguageActivity::class.java))
+            HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         binding.llPP.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://picturesaentertainment.blogspot.com/p/privacy-policy-for-dual-wallpaper.html")
             startActivity(intent)
+            HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         binding.llShare.setOnClickListener {
             shareApp(requireContext())
+            HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         binding.llRateUs.setOnClickListener {
             reviewDialog(requireActivity())
+            HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         return binding.root

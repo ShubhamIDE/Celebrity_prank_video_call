@@ -1,0 +1,21 @@
+{
+  "base_url": "https://www.api.idecloudstoragepanel.com/media/Applications_Data/com.videocall.livecelebrity.prankcall/Image_Files/celebrityprofiles/",
+  "chatGptAccessToken": "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",
+  "celebrities_list": [
+    "alia_bhatt"
+  ],
+  "data": {
+    "alia_bhatt": {
+      "profile_url": "alia_bhatt.png",
+      "name": "Alia Bhatt",
+      "profession": "Actress",
+      "audio_url_list": [
+        "https://www.youtube.com/shorts/nLFLceIbonU"
+      ],
+      "video_url_list": [
+        "https://www.youtube.com/shorts/nLFLceIbonU",
+        "https://www.youtube.com/watch?v=sl0UUhmaiDU"
+      ]
+    }
+  }
+}

@@ -7,12 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.databinding.FragmentAudioBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
+import com.videocall.livecelebrity.prankcall.utils.Celebrity
+import com.videocall.livecelebrity.prankcall.utils.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -24,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 class AudioFragment : Fragment() {
 
@@ -34,9 +38,12 @@ class AudioFragment : Fragment() {
     var muteOn = false;
     var lastTime = 0L
     private var duratoinJob: Job = Job()
+    private lateinit var preferenceManager: PreferenceManager
 
     companion object{
         var audioHistory: CallHistory? = null
+        lateinit var celebrity: Celebrity
+        var fromHome = false
     }
 
     override fun onCreateView(
@@ -45,37 +52,42 @@ class AudioFragment : Fragment() {
     ): View {
         binding = FragmentAudioBinding.inflate(inflater, container, false)
 
+        preferenceManager = PreferenceManager(requireContext())
+
         audioHistory = CallHistory(
-            "1",
-            "https://unsplash.com/photos/black-and-white-plane-flying-over-the-sea-during-daytime-rNqs9hM0U8I",
-            "Alia Bhatt",
-            "Today 5:30 PM",
-            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-            Date()
+            id = celebrity.profile_url,
+            img = celebrity.profile_url,
+            name = celebrity.name,
+            audioUrl = celebrity.audio_url_list[Random.nextInt(celebrity.audio_url_list.size)],
+            lastcallTime = Date()
         )
+
+        preferenceManager.addToAudioList(audioHistory!!)
+
         binding.tvName.text = audioHistory!!.name
         Glide.with(requireContext()).load(audioHistory!!.img).into(binding.ivImg)
 
-        mediaPlayer = MediaPlayer()
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        try {
-            mediaPlayer.setDataSource(audioHistory!!.audioUrl)
-            mediaPlayer.prepare()
-            mediaPlayer.start()
-            duratoinJob = lifecycleScope.launch {
-                withContext(Dispatchers.Main){
-                    while (isActive){
-                        delay(1000)
-                        lastTime+=1000
-                        val time = formatTimeFromLong(lastTime)
-                        binding.tvDuratoin.text = time
+        lifecycleScope.launch {
+            mediaPlayer = MediaPlayer()
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            try {
+                mediaPlayer.setDataSource(audioHistory!!.audioUrl)
+                mediaPlayer.prepare()
+                mediaPlayer.start()
+                duratoinJob = lifecycleScope.launch {
+                    withContext(Dispatchers.Main){
+                        while (isActive){
+                            delay(1000)
+                            lastTime+=1000
+                            val time = formatTimeFromLong(lastTime)
+                            binding.tvDuratoin.text = time
+                        }
                     }
                 }
+            }catch (e: Exception){
+                e.printStackTrace()
             }
-        }catch (e: Exception){
-            e.printStackTrace()
         }
-
 
         binding.ivHold.setOnClickListener {
             holdOn = !holdOn
@@ -123,15 +135,24 @@ class AudioFragment : Fragment() {
         }
 
         binding.btnEndCall.setOnClickListener {
-            mediaPlayer.stop()
-            mediaPlayer.release()
-            findNavController().navigateUp()
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
         }
 
         binding.btnBackArrow.setOnClickListener {
-            mediaPlayer.stop()
-            mediaPlayer.release()
-            findNavController().navigateUp()
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
         }
 
         return binding.root
@@ -145,4 +166,10 @@ class AudioFragment : Fragment() {
         return String.format("%02d:%02d:%02d", hours, minutes, seconds)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        fromHome = false
+        mediaPlayer.stop()
+        mediaPlayer.release()
+    }
 }

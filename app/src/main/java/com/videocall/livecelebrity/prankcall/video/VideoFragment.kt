@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -23,15 +24,20 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
 import com.videocall.livecelebrity.prankcall.R
+import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentVideoBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
+import com.videocall.livecelebrity.prankcall.utils.Celebrity
+import com.videocall.livecelebrity.prankcall.utils.PreferenceManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Date
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.random.Random
 
 
 class VideoFragment : Fragment() {
@@ -46,9 +52,12 @@ class VideoFragment : Fragment() {
     var baseUrl = "https://www.youtube.com/watch?v="
     var isMicOn = false
     var cameraStarted = false
+    private lateinit var preferenceManager: PreferenceManager
 
     companion object{
         var videoHistory: CallHistory? = null
+        lateinit var celebrity: Celebrity
+        var fromHome = false
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +65,16 @@ class VideoFragment : Fragment() {
     ): View {
         binding = FragmentVideoBinding.inflate(inflater, container, false)
 
+        videoHistory = CallHistory(
+            id = celebrity.profile_url,
+            img = celebrity.profile_url,
+            name = celebrity.name,
+            audioUrl = celebrity.video_url_list[Random.nextInt(celebrity.video_url_list.size)],
+            lastcallTime = Date()
+        )
+
+        preferenceManager = PreferenceManager(requireContext())
+        preferenceManager.addToVideoList(videoHistory!!)
         Glide.with(requireContext()).load(R.drawable.call_loading_gif).into(binding.ivLoading)
 
         val iFrameOptions = IFramePlayerOptions.Builder()
@@ -119,11 +138,24 @@ class VideoFragment : Fragment() {
         }
 
         binding.btnBackArrow.setOnClickListener {
-            findNavController().navigateUp()
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
         }
 
         binding.btnEndCall.setOnClickListener {
-            findNavController().navigateUp()
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback {
+            if(fromHome){
+                findNavController().popBackStack(R.id.homeFragment, false)
+            }
+            else findNavController().navigateUp()
         }
 
         binding.btnVideo.setOnClickListener {
@@ -197,5 +229,10 @@ class VideoFragment : Fragment() {
                 e.printStackTrace()
             }
         }, ContextCompat.getMainExecutor(requireContext()))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fromHome = false
     }
 }

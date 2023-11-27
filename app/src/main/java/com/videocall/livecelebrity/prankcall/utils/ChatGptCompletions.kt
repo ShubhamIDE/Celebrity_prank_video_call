@@ -1,6 +1,6 @@
 package com.videocall.livecelebrity.prankcall.utils
 
-import android.util.Log
+import com.videocall.livecelebrity.prankcall.splash.SplashScreenActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -11,6 +11,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
@@ -34,7 +35,8 @@ class ChatGptCompletions {
 
     fun getCompletion(personName: String, prompt: String, onResponse: (msg: String) -> Unit) {
         val body = createRequestBody(personName, prompt)
-        val call = chatApi.getChatCompletions(body)
+        val authToken = "Bearer ${SplashScreenActivity.chatGptAccessToken}"
+        val call = chatApi.getChatCompletions(authToken, body)
         call.enqueue(object : Callback<CompletionResponse> {
             override fun onResponse(call: Call<CompletionResponse>, response: Response<CompletionResponse>) {
                 val msg = response.body()?.choices?.get(0)?.message?.content
@@ -75,11 +77,13 @@ class ChatGptCompletions {
 interface ChatApi {
     @Headers(
         "Content-Type: application/json",
-        "Authorization: Bearer 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",
 //        "Cookie: __cf_bm=HQNR3lqVj4fFaQ7Pd84F5GFAijqJDA94eowKmAUibBs-1700809592-0-AZvV0lUysIXwYihNu0zX+ZlnawhDxXJDiHY5ugPfSzhDdEf9kaRDoQwdYKwfKoZAa2NWMyhAyYiaaSRDx9dzb0Y=; _cfuvid=cF.qri.W7ebj73LF_L6r1mRB5EWuJgbWGxyUfVufxfA-1700809592571-0-604800000"
     )
     @POST("v1/chat/completions")
-    fun getChatCompletions(@Body body: RequestBody): Call<CompletionResponse>
+    fun getChatCompletions(
+        @Header("Authorization") authToken: String,
+        @Body body: RequestBody
+    ): Call<CompletionResponse>
 }
 
 data class CompletionResponse(
