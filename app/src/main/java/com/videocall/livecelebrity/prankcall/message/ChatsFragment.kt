@@ -125,6 +125,7 @@ class ChatsFragment : Fragment() {
                     binding.suggestionsHSV.visibility = View.VISIBLE
                     val list = suggestionsList.shuffled()
                     for(sugg in list){
+
                         val suggestionItem = HsvSuggestionItemBinding.inflate(LayoutInflater.from(requireContext()))
                         suggestionItem.tvSuggestion.text = sugg
                         withContext(Dispatchers.Main){
@@ -132,15 +133,16 @@ class ChatsFragment : Fragment() {
                             layoutParams.setMargins(0, 0, 30, 0)
                             suggestionItem.root.layoutParams = layoutParams
                             binding.llSuggestions.addView(suggestionItem.root)
-                        }
-                        suggestionItem.root.setOnClickListener {
-                            val time = getCurrentTimeIn12HourFormat()
-                            addMsgToScrollView(sugg, 0, time)
-                            msgList.add(Pair(0, Msg(sugg, time)))
-                            addData()
-                            getMessageFromSystem(sugg)
-                            binding.tvSuggestions.visibility = View.GONE
-                            binding.suggestionsHSV.visibility = View.GONE
+
+                            suggestionItem.root.setOnClickListener {
+                                val time = getCurrentTimeIn12HourFormat()
+                                addMsgToScrollView(sugg, 0, time)
+                                msgList.add(Pair(0, Msg(sugg, time)))
+                                addData()
+                                getMessageFromSystem(sugg)
+                                binding.tvSuggestions.visibility = View.GONE
+                                binding.suggestionsHSV.visibility = View.GONE
+                            }
                         }
                     }
                 }
@@ -152,9 +154,10 @@ class ChatsFragment : Fragment() {
                 AppOpenAds.activity,
                 Constants.adsResponseModel.app_open_ads.adx,
             ) { state_load: Boolean ->
-                if (fromHome) {
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                } else findNavController().navigateUp()
+//                if (fromHome) {
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                } else
+                findNavController().navigateUp()
             }
         }
 
@@ -197,10 +200,11 @@ class ChatsFragment : Fragment() {
                 AppOpenAds.activity,
                 Constants.adsResponseModel.app_open_ads.adx,
             ) { state_load: Boolean ->
-                if(fromHome){
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-                else findNavController().navigateUp()
+//                if(fromHome){
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//                else
+                findNavController().navigateUp()
             }
         }
 

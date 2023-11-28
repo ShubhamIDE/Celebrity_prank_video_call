@@ -48,12 +48,13 @@ class PermissionFragment : Fragment() {
     val launcher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){
         val granted = it.all { it.value }
         if(granted){
-            AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
-            ) { state_load: Boolean ->
-                findNavController().navigate(R.id.action_permissionFragment_to_getStartedFragment)
-            }
+//            AdUtils.showInterstitialAd(
+//                Constants.adsResponseModel.interstitial_ads.adx,
+//                AppOpenAds.activity
+//            ) { state_load: Boolean ->
+//                findNavController().navigate(R.id.action_permissionFragment_to_getStartedFragment)
+//            }
+            findNavController().navigate(R.id.action_permissionFragment_to_getStartedFragment)
         }
         else {
             Toast.makeText(requireContext(), "All permissions are required by the app", Toast.LENGTH_SHORT).show()

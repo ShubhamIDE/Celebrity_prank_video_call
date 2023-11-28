@@ -145,10 +145,11 @@ class VideoFragment : Fragment() {
                 AppOpenAds.activity,
                 Constants.adsResponseModel.app_open_ads.adx,
             ) { state_load: Boolean ->
-                if(fromHome){
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-                else findNavController().navigateUp()
+//                if(fromHome){
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//                else findNavController().navigateUp()
+                findNavController().navigateUp()
             }
         }
 
@@ -157,10 +158,11 @@ class VideoFragment : Fragment() {
                 AppOpenAds.activity,
                 Constants.adsResponseModel.app_open_ads.adx,
             ) { state_load: Boolean ->
-                if(fromHome){
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-                else findNavController().navigateUp()
+//                if(fromHome){
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//                else
+                findNavController().navigateUp()
             }
         }
 
@@ -169,10 +171,11 @@ class VideoFragment : Fragment() {
                 AppOpenAds.activity,
                 Constants.adsResponseModel.app_open_ads.adx,
             ) { state_load: Boolean ->
-                if(fromHome){
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-                else findNavController().navigateUp()
+//                if(fromHome){
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//                else
+                findNavController().navigateUp()
             }
         }
 

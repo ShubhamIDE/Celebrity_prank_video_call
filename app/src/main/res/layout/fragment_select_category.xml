@@ -128,4 +128,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.adsmodule.api.adsModule.interfaces.CustomView
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:adType="full"
+        android:id="@+id/fullNativeAd"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

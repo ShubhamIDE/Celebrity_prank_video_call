@@ -187,59 +187,77 @@ class AudioFragment : Fragment() {
         }
 
         binding.btnEndCall.setOnClickListener {
-            if(fromHome){
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-            }
-            else {
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().navigateUp()
-                }
+//            if(fromHome){
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//            }
+//            else {
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().navigateUp()
+//                }
+//            }
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
             }
         }
 
         binding.btnBackArrow.setOnClickListener {
-            if(fromHome){
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-            }
-            else {
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().navigateUp()
-                }
+//            if(fromHome){
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//            }
+//            else {
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().navigateUp()
+//                }
+//            }
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
             }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            if(fromHome){
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().popBackStack(R.id.homeFragment, false)
-                }
-            }
-            else {
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
-                ) { state_load: Boolean ->
-                    findNavController().navigateUp()
-                }
+//            if(fromHome){
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().popBackStack(R.id.homeFragment, false)
+//                }
+//            }
+//            else {
+//                AdUtils.showBackPressAds(
+//                    AppOpenAds.activity,
+//                    Constants.adsResponseModel.app_open_ads.adx,
+//                ) { state_load: Boolean ->
+//                    findNavController().navigateUp()
+//                }
+//            }
+            AdUtils.showBackPressAds(
+                AppOpenAds.activity,
+                Constants.adsResponseModel.app_open_ads.adx,
+            ) { state_load: Boolean ->
+                findNavController().navigateUp()
             }
         }
 

@@ -188,4 +188,11 @@
 
     </LinearLayout>
 
+    <com.adsmodule.api.adsModule.interfaces.CustomView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/smallNativeAd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:adType="small"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
