@@ -118,6 +118,9 @@ class ChatsFragment : Fragment() {
                         msgList = arrayListOf(),
                         lastChatTime = Date()
                     )
+                }
+
+                if(chatHistory!!.msgList.isEmpty()){
                     binding.tvSuggestions.visibility = View.VISIBLE
                     binding.suggestionsHSV.visibility = View.VISIBLE
                     val list = suggestionsList.shuffled()
@@ -265,5 +268,6 @@ class ChatsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         fromHome = false
+        chatHistory = null
     }
 }

@@ -93,7 +93,7 @@ class VideoFragment : Fragment() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 super.onReady(youTubePlayer)
                 binding.loaderCl.visibility = View.VISIBLE
-                youTubePlayer.loadVideo("w9bQPb2ZEEc", 0F)
+                youTubePlayer.loadVideo(videoHistory!!.audioUrl, 0F)
                 youTubePlayer.mute()
                 youTubePlayer.setLoop(true)
                 lifecycleScope.launch {
@@ -112,7 +112,7 @@ class VideoFragment : Fragment() {
                 super.onStateChange(youTubePlayer, state)
                 if (state === PlayerState.ENDED) {
                     binding.loaderCl.setVisibility(View.VISIBLE)
-                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
+                    youTubePlayer.loadVideo(videoHistory!!.audioUrl, 0f)
                     youTubePlayer.mute()
                     youTubePlayer.setLoop(true)
                     lifecycleScope.launch {

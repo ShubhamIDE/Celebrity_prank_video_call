@@ -65,7 +65,7 @@ class AudioFragment : Fragment() {
             id = celebrity.profile_url,
             img = celebrity.profile_url,
             name = celebrity.name,
-            audioUrl = celebrity.audio_url_list[Random.nextInt(celebrity.audio_url_list.size)],
+            audioUrl = celebrity.video_url_list[Random.nextInt(celebrity.video_url_list.size)],
             lastcallTime = Date()
         )
 
@@ -89,7 +89,7 @@ class AudioFragment : Fragment() {
                 super.onReady(youTubePlayer)
                 this@AudioFragment.youTubePlayer = youTubePlayer
                 binding.loaderCl.visibility = View.VISIBLE
-                youTubePlayer.loadVideo("w9bQPb2ZEEc", 0F)
+                youTubePlayer.loadVideo(audioHistory!!.audioUrl, 0F)
                 youTubePlayer.mute()
                 youTubePlayer.setLoop(true)
                 lifecycleScope.launch {
@@ -121,7 +121,7 @@ class AudioFragment : Fragment() {
                 this@AudioFragment.youTubePlayer = youTubePlayer
                 if (state === PlayerConstants.PlayerState.ENDED) {
                     binding.loaderCl.setVisibility(View.VISIBLE)
-                    youTubePlayer.loadVideo("Z5VjmLhnoJU", 0f)
+                    youTubePlayer.loadVideo(audioHistory!!.audioUrl, 0f)
                     youTubePlayer.mute()
                     youTubePlayer.setLoop(true)
                     lifecycleScope.launch {

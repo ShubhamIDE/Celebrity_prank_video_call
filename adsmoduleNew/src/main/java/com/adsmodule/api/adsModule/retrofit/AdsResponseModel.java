@@ -418,6 +418,7 @@ public class AdsResponseModel {
         public class Data{
         }
         String base_url;
+        String youtubeBaseUrl;
         ArrayList<String> celebrities_list;
         JsonObject data;
         String chatGptAccessToken;
@@ -435,6 +436,14 @@ public class AdsResponseModel {
         }
         public void setBase_url(String base_url) {
             this.base_url = base_url;
+        }
+
+        public String getYoutubeBaseUrl() {
+            return youtubeBaseUrl;
+        }
+
+        public void setYoutubeBaseUrl(String youtubeBaseUrl) {
+            this.youtubeBaseUrl = youtubeBaseUrl;
         }
 
         public ArrayList<String> getCelebrities_list() {

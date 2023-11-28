@@ -36,6 +36,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val gson = Gson()
         val INDUSTRY_BOLLYWOOD = "Bollywood"
         val INDUSTRY_HOLLYWOOD = "Hollywood"
+        var youTubeBaseUrl = ""
 
         fun setUpList(){
             val data: JsonObject = Constants.adsResponseModel.extra_data_field.data
@@ -44,6 +45,9 @@ class SplashScreenActivity : AppCompatActivity() {
             }
             if(Constants.adsResponseModel.extra_data_field.chatGptAccessToken!=null){
                 chatGptAccessToken = Constants.adsResponseModel.extra_data_field.chatGptAccessToken
+            }
+            if(Constants.adsResponseModel.extra_data_field.youtubeBaseUrl!=null){
+                youTubeBaseUrl = Constants.adsResponseModel.extra_data_field.youtubeBaseUrl
             }
             val celebrityListJson = Constants.adsResponseModel.extra_data_field.celebrities_list
             if(celebrityListJson!=null){

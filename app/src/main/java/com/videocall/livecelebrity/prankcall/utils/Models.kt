@@ -28,7 +28,6 @@ data class Celebrity(
     val name: String,
     val profession: String,
     var profile_url: String,
-    val audio_url_list: ArrayList<String>,
     val video_url_list: ArrayList<String>,
     val industry: String
 )
