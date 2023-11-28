@@ -33,16 +33,16 @@ class HomeFragment : Fragment() {
         val toggle = ActionBarDrawerToggle(requireActivity(), binding.drawerLayout, binding.toolbarCard,
             R.string.drawer_open, R.string.drawer_close)
         toggle.isDrawerIndicatorEnabled = false
-        toggle.setToolbarNavigationClickListener {
-            if (binding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
-                binding.drawerLayout.closeDrawer(GravityCompat.START);
-            } else {
-                binding.drawerLayout.openDrawer(GravityCompat.START);
-            }
-        }
+//        toggle.setToolbarNavigationClickListener {
+//            if (binding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
+//                binding.drawerLayout.closeDrawer(GravityCompat.START);
+//            } else {
+//                binding.drawerLayout.openDrawer(GravityCompat.START);
+//            }
+//        }
 
         binding.ivMenu.setOnClickListener {
-            if (binding.drawerLayout.isDrawerVisible(GravityCompat.START)) {
+            if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
             } else {
                 binding.drawerLayout.openDrawer(GravityCompat.START);

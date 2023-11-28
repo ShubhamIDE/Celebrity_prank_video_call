@@ -33,6 +33,7 @@
         android:id="@+id/btnBackArrow"
         android:layout_marginTop="35dp"
         android:layout_marginStart="10dp"
+        android:visibility="gone"
         android:backgroundTint="@android:color/transparent"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_back_arrow"

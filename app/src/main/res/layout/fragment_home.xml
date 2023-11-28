@@ -42,12 +42,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingTop="40dp"
-                android:paddingHorizontal="15dp"
+                android:paddingTop="50dp"
                 android:paddingBottom="10dp"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <ImageButton
+                    android:backgroundTint="@android:color/transparent"
                     android:src="@drawable/ic_menu"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
             android:id="@+id/mediumNativeAd"
             android:visibility="gone"
             android:layout_height="wrap_content"
-            app:adType="medium"/>
+            app:adType="full"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

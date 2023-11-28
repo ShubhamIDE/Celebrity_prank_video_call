@@ -13,6 +13,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import com.dualwallpaper.livehd.wallpaper.utils.NetworkViewModel
 import com.flurry.sdk.it
+import com.videocall.livecelebrity.prankcall.SingletonClasses.MyApplication
 import com.videocall.livecelebrity.prankcall.databinding.ActivityMainBinding
 import com.videocall.livecelebrity.prankcall.home.HomeFragment.Companion.binding
 
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 
         networkViewModel = NetworkViewModel(this)
+        if (!MyApplication.getConnectionStatus().isConnectingToInternet) {
+            binding.noInternetCl.visibility = View.VISIBLE
+        }
+
         networkViewModel.isConnected.observeForever {
             if(it==null || !it){
                 binding.noInternetCl.visibility = View.VISIBLE

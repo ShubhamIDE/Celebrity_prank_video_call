@@ -23,7 +23,9 @@
             android:paddingBottom="10dp"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <ImageButton
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/ic_back_arrow"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_width="wrap_content"
