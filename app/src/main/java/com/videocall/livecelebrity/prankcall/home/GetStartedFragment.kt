@@ -66,12 +66,13 @@ class GetStartedFragment : Fragment() {
         }
 
         binding.llGetStarted.setOnClickListener {
-            AdUtils.showInterstitialAd(
-                
-                LifeCycleOwner.activity
-            ) { state_load: Boolean ->
-                findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
-            }
+            findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
+//            AdUtils.showInterstitialAd(
+//
+//                LifeCycleOwner.activity
+//            ) { state_load: Boolean ->
+//                findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
+//            }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {

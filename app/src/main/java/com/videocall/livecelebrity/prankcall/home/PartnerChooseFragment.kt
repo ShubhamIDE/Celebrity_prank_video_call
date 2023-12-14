@@ -59,8 +59,7 @@ class PartnerChooseFragment : Fragment() {
 
         binding.btnBackArrow.setOnClickListener {
             AdUtils.showBackPressAd(
-                LifeCycleOwner.activity,
-                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
