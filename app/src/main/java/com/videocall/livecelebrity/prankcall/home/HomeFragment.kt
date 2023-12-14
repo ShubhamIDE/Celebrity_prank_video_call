@@ -1,18 +1,17 @@
 package com.videocall.livecelebrity.prankcall.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentHomeBinding
 import com.videocall.livecelebrity.prankcall.message.ChatsFragment
@@ -57,8 +56,8 @@ class HomeFragment : Fragment() {
             VideoFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
@@ -66,8 +65,8 @@ class HomeFragment : Fragment() {
 
         binding.clCallHistory.setOnClickListener {
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_homeFragment_to_callLogFragment)
             }
@@ -77,8 +76,8 @@ class HomeFragment : Fragment() {
             AudioFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
@@ -88,8 +87,8 @@ class HomeFragment : Fragment() {
             ChatsFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
@@ -100,9 +99,9 @@ class HomeFragment : Fragment() {
                 binding.drawerLayout.closeDrawer(GravityCompat.START)
             }
             else {
-                AdUtils.showBackPressAds(
-                    AppOpenAds.activity,
-                    Constants.adsResponseModel.app_open_ads.adx,
+                AdUtils.showBackPressAd(
+                    LifeCycleOwner.activity,
+                    
                 ) { state_load: Boolean ->
                     findNavController().navigateUp()
                 }

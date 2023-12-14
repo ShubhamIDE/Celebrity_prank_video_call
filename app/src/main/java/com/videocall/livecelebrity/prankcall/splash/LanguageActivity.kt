@@ -3,25 +3,21 @@ package com.videocall.livecelebrity.prankcall.splash
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.DimenRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.bumptech.glide.Glide
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.MainActivity.Companion.MAINACTIVITY_INTENT
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.databinding.ActivityLanguageBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvLangItemBinding
 import com.videocall.livecelebrity.prankcall.utils.LocaleHelper
@@ -76,8 +72,7 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
             }.commit()
             LocaleHelper.setLocale(this, locale)
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 calledFromMain = false
                 if(langChange){

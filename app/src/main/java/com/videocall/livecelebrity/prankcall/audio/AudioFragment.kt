@@ -1,24 +1,22 @@
 package com.videocall.livecelebrity.prankcall.audio
 
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.bumptech.glide.Glide
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.databinding.FragmentAudioBinding
 import com.videocall.livecelebrity.prankcall.utils.CallHistory
 import com.videocall.livecelebrity.prankcall.utils.Celebrity
@@ -29,10 +27,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
@@ -72,7 +67,16 @@ class AudioFragment : Fragment() {
         preferenceManager.addToAudioList(audioHistory!!)
 
         binding.tvName.text = audioHistory!!.name
-        Glide.with(requireContext()).load(audioHistory!!.img).into(binding.ivImg)
+
+        Picasso.get().load(audioHistory!!.img)
+            .resize(500, 500)
+            .placeholder(R.drawable.bg_blue)
+            .into(binding.ivImg)
+
+//
+//        Glide.with(requireContext()).
+//        load(audioHistory!!.img)
+//            .into(binding.ivImg)
         Glide.with(requireContext()).load(R.drawable.call_loading_gif).into(binding.ivLoading)
 
         val iFrameOptions = IFramePlayerOptions.Builder()
@@ -188,24 +192,23 @@ class AudioFragment : Fragment() {
 
         binding.btnEndCall.setOnClickListener {
 //            if(fromHome){
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().popBackStack(R.id.homeFragment, false)
 //                }
 //            }
 //            else {
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().navigateUp()
 //                }
 //            }
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
@@ -213,24 +216,24 @@ class AudioFragment : Fragment() {
 
         binding.btnBackArrow.setOnClickListener {
 //            if(fromHome){
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().popBackStack(R.id.homeFragment, false)
 //                }
 //            }
 //            else {
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().navigateUp()
 //                }
 //            }
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
@@ -238,24 +241,24 @@ class AudioFragment : Fragment() {
 
         requireActivity().onBackPressedDispatcher.addCallback {
 //            if(fromHome){
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().popBackStack(R.id.homeFragment, false)
 //                }
 //            }
 //            else {
-//                AdUtils.showBackPressAds(
-//                    AppOpenAds.activity,
-//                    Constants.adsResponseModel.app_open_ads.adx,
+//                AdUtils.showBackPressAd(
+//                    LifeCycleOwner.activity,
+//                    
 //                ) { state_load: Boolean ->
 //                    findNavController().navigateUp()
 //                }
 //            }
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }

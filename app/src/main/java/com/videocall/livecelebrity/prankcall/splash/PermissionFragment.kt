@@ -1,20 +1,17 @@
 package com.videocall.livecelebrity.prankcall.splash
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
-import com.videocall.livecelebrity.prankcall.MainActivity
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.databinding.FragmentPermissionBinding
 
 class PermissionFragment : Fragment() {
@@ -34,9 +31,9 @@ class PermissionFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
@@ -49,8 +46,8 @@ class PermissionFragment : Fragment() {
         val granted = it.all { it.value }
         if(granted){
 //            AdUtils.showInterstitialAd(
-//                Constants.adsResponseModel.interstitial_ads.adx,
-//                AppOpenAds.activity
+//                
+//                LifeCycleOwner.activity
 //            ) { state_load: Boolean ->
 //                findNavController().navigate(R.id.action_permissionFragment_to_getStartedFragment)
 //            }

@@ -1,24 +1,18 @@
 package com.videocall.livecelebrity.prankcall.message
 
 import android.os.Bundle
-import android.telecom.Call
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.activity.addCallback
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
-import com.bumptech.glide.Glide
-import com.flurry.sdk.p
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.CustomReceiveMsgBinding
 import com.videocall.livecelebrity.prankcall.databinding.CustomSendMsgBinding
@@ -33,15 +27,8 @@ import com.videocall.livecelebrity.prankcall.video.VideoFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -150,9 +137,9 @@ class ChatsFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
 //                if (fromHome) {
 //                    findNavController().popBackStack(R.id.homeFragment, false)
@@ -165,8 +152,8 @@ class ChatsFragment : Fragment() {
             VideoFragment.celebrity = celebrity
             VideoFragment.fromHome = false
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_chatsFragment_to_videoFragment)
             }
@@ -176,8 +163,8 @@ class ChatsFragment : Fragment() {
             AudioFragment.celebrity = celebrity
             AudioFragment.fromHome = false
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_chatsFragment_to_audioFragment)
             }
@@ -196,9 +183,9 @@ class ChatsFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
 //                if(fromHome){
 //                    findNavController().popBackStack(R.id.homeFragment, false)

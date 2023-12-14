@@ -45,12 +45,12 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarCard"
         android:layout_height="1dp"/>
 
-    <com.adsmodule.api.adsModule.interfaces.CustomView
+    <com.adsmodule.api.adsModule.views.NativeView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         app:borderColor="@color/white"
-        app:adType="full"
+        app:adType="FULL"
         android:id="@+id/fullNativeAd"
         app:layout_constraintTop_toBottomOf="@id/whiteLine"
         android:layout_marginTop="20dp"

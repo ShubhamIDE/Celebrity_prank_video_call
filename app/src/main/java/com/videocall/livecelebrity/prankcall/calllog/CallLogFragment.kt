@@ -2,23 +2,20 @@ package com.videocall.livecelebrity.prankcall.calllog
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.Telephony.Mms.Part
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
-import com.bumptech.glide.Glide
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentCallLogBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvChatItemBinding
@@ -88,8 +85,8 @@ class CallLogFragment : Fragment() {
                     if(celebrity!=null){
                         ChatsFragment.celebrity = celebrity
                         AdUtils.showInterstitialAd(
-                            Constants.adsResponseModel.interstitial_ads.adx,
-                            AppOpenAds.activity
+                            
+                            LifeCycleOwner.activity
                         ) { state_load: Boolean ->
                             findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
                         }
@@ -111,8 +108,8 @@ class CallLogFragment : Fragment() {
                     if(celebrity!=null){
                         AudioFragment.celebrity = celebrity!!
                         AdUtils.showInterstitialAd(
-                            Constants.adsResponseModel.interstitial_ads.adx,
-                            AppOpenAds.activity
+                            
+                            LifeCycleOwner.activity
                         ) { state_load: Boolean ->
                             findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
                         }
@@ -137,8 +134,8 @@ class CallLogFragment : Fragment() {
                     if(celebrity!=null){
                         VideoFragment.celebrity = celebrity!!
                         AdUtils.showInterstitialAd(
-                            Constants.adsResponseModel.interstitial_ads.adx,
-                            AppOpenAds.activity
+                            
+                            LifeCycleOwner.activity
                         ) { state_load: Boolean ->
                             findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
                         }
@@ -238,9 +235,9 @@ class CallLogFragment : Fragment() {
         }
 
         binding.btnBackArrow.setOnClickListener {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
@@ -249,8 +246,8 @@ class CallLogFragment : Fragment() {
         binding.btnStart.setOnClickListener {
             if(binding.llAudio.alpha == 1.0f){
                 AdUtils.showInterstitialAd(
-                    Constants.adsResponseModel.interstitial_ads.adx,
-                    AppOpenAds.activity
+                    
+                    LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     AudioFragment.fromHome = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
@@ -258,8 +255,8 @@ class CallLogFragment : Fragment() {
                 }
             }else if(binding.llChat.alpha == 1.0f){
                 AdUtils.showInterstitialAd(
-                    Constants.adsResponseModel.interstitial_ads.adx,
-                    AppOpenAds.activity
+                    
+                    LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     ChatsFragment.fromHome = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
@@ -268,8 +265,8 @@ class CallLogFragment : Fragment() {
             }
             else {
                 AdUtils.showInterstitialAd(
-                    Constants.adsResponseModel.interstitial_ads.adx,
-                    AppOpenAds.activity
+                    
+                    LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     VideoFragment.fromHome = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
@@ -298,9 +295,9 @@ class CallLogFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }

@@ -289,10 +289,10 @@
         android:textColor="@color/darkBlue"
         android:textSize="16sp" />
 
-    <com.adsmodule.api.adsModule.interfaces.CustomView
+    <com.adsmodule.api.adsModule.views.NativeView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:adType="small"
+        app:adType="SMALL"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/smallNativeAdd"/>
 

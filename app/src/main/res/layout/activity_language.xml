@@ -69,10 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mediumNativeAd"/>
 
-    <com.adsmodule.api.adsModule.interfaces.CustomView
+    <com.adsmodule.api.adsModule.views.NativeView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:adType="medium"
+        app:adType="MEDIUM"
         android:visibility="gone"
         android:id="@+id/mediumNativeAd"
         app:layout_constraintBottom_toBottomOf="parent"/>

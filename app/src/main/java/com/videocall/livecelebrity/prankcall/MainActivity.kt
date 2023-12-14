@@ -5,17 +5,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.adsmodule.api.adsModule.utils.Globals
 import com.dualwallpaper.livehd.wallpaper.utils.NetworkViewModel
-import com.flurry.sdk.it
-import com.videocall.livecelebrity.prankcall.SingletonClasses.MyApplication
 import com.videocall.livecelebrity.prankcall.databinding.ActivityMainBinding
-import com.videocall.livecelebrity.prankcall.home.HomeFragment.Companion.binding
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
 
         networkViewModel = NetworkViewModel(this)
-        if (!MyApplication.getConnectionStatus().isConnectingToInternet) {
+        if (!Globals.isConnectingToInternet(this)) {
             binding.noInternetCl.visibility = View.VISIBLE
         }
 

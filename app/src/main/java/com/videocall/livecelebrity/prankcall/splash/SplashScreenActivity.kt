@@ -2,26 +2,26 @@ package com.videocall.livecelebrity.prankcall.splash
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
-import com.adsmodule.api.adsModule.retrofit.APICallHandler
-import com.adsmodule.api.adsModule.retrofit.AdsDataRequestModel
-import com.adsmodule.api.adsModule.retrofit.AdsResponseModel
+import com.adsmodule.api.adsModule.models.AdsDataRequestModel
+import com.adsmodule.api.adsModule.retrofit.AdsApiHandler
 import com.adsmodule.api.adsModule.utils.Constants
-import com.adsmodule.api.adsModule.utils.Global
+import com.adsmodule.api.adsModule.utils.Globals
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.MyApplication
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner.activity
 import com.videocall.livecelebrity.prankcall.databinding.ActivitySplashScreenBinding
 import com.videocall.livecelebrity.prankcall.utils.Celebrity
 import com.videocall.livecelebrity.prankcall.utils.LocaleHelper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -86,26 +86,19 @@ class SplashScreenActivity : AppCompatActivity() {
 
         Glide.with(this).load(R.drawable.call_loading_gif).into(binding.loadingGif)
 
-        // ads call and checking whether activity restarted for language change
-        Global.showLoader = false
         val sharedPref = this.getSharedPreferences(MainActivity.ONBOARDING_SHARED_PREF_KEY, Context.MODE_PRIVATE)
         val onBoardingShown = sharedPref.getBoolean(MainActivity.ONBOARDING_SHOWN, false)
 
         lifecycleScope.launch {
             withContext(Dispatchers.IO){
-                if (MyApplication.getConnectionStatus().isConnectingToInternet) {
-                    APICallHandler.callAdsApi(
-                        this@SplashScreenActivity, Constants.MAIN_BASE_URL, AdsDataRequestModel(packageName, "")
-                    ) { adsResponseModel: AdsResponseModel? ->
-                        if (adsResponseModel != null) {
-
+                if(Globals.isConnectingToInternet(this@SplashScreenActivity)) {
+                    AdsApiHandler.callAdsApi(
+                        activity,
+                        Constants.BASE_URL,
+                        AdsDataRequestModel(getPackageName(), "")
+                    ) {
+                        if(it!=null) {
                             setUpList()
-
-//                                AdUtils.showAppOpenAds(
-//                                    Constants.adsResponseModel.getApp_open_ads().getAdx(),
-//                                    activity
-//                                ) { state_load: Boolean ->
-//                                }
 
                             if(onBoardingShown){
                                 startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
@@ -129,6 +122,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     }
                 }
                 else {
+                    delay(1200)
                     if(onBoardingShown){
                         startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                         finish()

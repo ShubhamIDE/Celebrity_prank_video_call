@@ -12,14 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.databinding.ExitDialogBinding
 import com.videocall.livecelebrity.prankcall.databinding.FragmentGetStartedBinding
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -69,8 +67,8 @@ class GetStartedFragment : Fragment() {
 
         binding.llGetStarted.setOnClickListener {
             AdUtils.showInterstitialAd(
-                Constants.adsResponseModel.interstitial_ads.adx,
-                AppOpenAds.activity
+                
+                LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigate(R.id.action_getStartedFragment_to_homeFragment)
             }

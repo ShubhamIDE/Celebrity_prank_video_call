@@ -1,27 +1,20 @@
 package com.videocall.livecelebrity.prankcall.splash
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.adsmodule.api.adsModule.AdUtils
-import com.adsmodule.api.adsModule.utils.Constants
-import com.bumptech.glide.Glide
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.videocall.livecelebrity.prankcall.R
-import com.videocall.livecelebrity.prankcall.SingletonClasses.AppOpenAds
+import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.databinding.FragmentOnboardingBinding
 import com.videocall.livecelebrity.prankcall.databinding.OnboardingItemBinding
-import com.videocall.livecelebrity.prankcall.databinding.RvLangItemBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class OnboardingFragment : Fragment() {
 
@@ -34,12 +27,12 @@ class OnboardingFragment : Fragment() {
         binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         binding.onboardingVP.adapter = OnboardingAdapter{
             if(it != 2){
-                binding.onboardingVP.setCurrentItem(it+1, true)
+                binding.onboardingVP.setCurrentItem(it+1)
             }
             else {
                 AdUtils.showInterstitialAd(
-                    Constants.adsResponseModel.interstitial_ads.adx,
-                    AppOpenAds.activity
+                    
+                    LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     findNavController().navigate(R.id.action_onboardingFragment_to_permissionFragment)
                 }
@@ -47,16 +40,16 @@ class OnboardingFragment : Fragment() {
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-            AdUtils.showBackPressAds(
-                AppOpenAds.activity,
-                Constants.adsResponseModel.app_open_ads.adx,
+            AdUtils.showBackPressAd(
+                LifeCycleOwner.activity,
+                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }
         }
 
         binding.onboardingVP.doOnPreDraw {
-            binding.onboardingVP.setCurrentItem(0, false)
+            binding.onboardingVP.setCurrentItem(0)
         }
 
         return binding.root

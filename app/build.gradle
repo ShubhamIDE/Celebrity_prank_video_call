@@ -80,7 +80,7 @@ dependencies {
     // ads module
     implementation 'androidx.lifecycle:lifecycle-process:2.6.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(path: ':adsmoduleNew')
+    implementation project(path: ':adsmodule')
 
     // blur view
     implementation 'com.github.Dimezis:BlurView:version-2.0.3'

@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Celebrity Prank Video Call"
 include ':app'
-include ':adsmoduleNew'
+include ':adsmodule'
