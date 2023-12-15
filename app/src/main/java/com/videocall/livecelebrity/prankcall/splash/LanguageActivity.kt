@@ -66,6 +66,7 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
         binding.rvLanguages.addItemDecoration(ItemOffsetDecoration(20))
 
         binding.btnNext.setOnClickListener {
+            it.isClickable = false
             MainActivity.LANG_CHANGED = true
             with(pref.edit()){
                 putString(LocaleHelper.SELECTED_LANGUAGE , locale)
@@ -74,6 +75,7 @@ class LanguageActivity : AppCompatActivity(), LanguageClickListener {
             AdUtils.showInterstitialAd(
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 calledFromMain = false
                 if(langChange){
                     langChange = false

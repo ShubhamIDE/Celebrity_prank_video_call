@@ -1,5 +1,6 @@
 package com.videocall.livecelebrity.prankcall.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adsmodule.api.adsModule.utils.AdUtils
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.cache.DiskCache
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper
+import com.squareup.picasso.Cache
+import com.squareup.picasso.LruCache
 import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentPartnerChooseBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvPartnerItemBinding
+import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.picasso
 import com.videocall.livecelebrity.prankcall.message.ChatsFragment
 import com.videocall.livecelebrity.prankcall.splash.ItemOffsetDecoration
 import com.videocall.livecelebrity.prankcall.splash.SplashScreenActivity
@@ -29,6 +36,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.LinkedList
 import java.util.Queue
 
@@ -49,6 +57,23 @@ class PartnerChooseFragment : Fragment() {
         val CELEB_BOLLYWOOD = "Bollywood"
         val CELEB_HOLLYWOOD = "Hollywood"
         var CELEBRITY_TYPE: String = CELEB_BOLLYWOOD
+
+        lateinit var picasso: Picasso
+        fun initializePicasso(context: Context) {
+            if(::picasso.isInitialized) return
+            picasso = Picasso.Builder(context)
+                .memoryCache(LruCache(10 * 1024 * 1024)) // 10 MB memory cache
+//                .diskCache(object : DiskCache.Factory {
+//                    override fun build(): DiskCache? {
+//                        val cacheDir = File(context.applicationContext.cacheDir, "picasso_cache")
+//                        return DiskLruCacheWrapper.create(cacheDir, 50 * 1024 * 1024) // 50 MB disk cache
+//                    }
+//                })
+                .build()
+
+            Picasso.setSingletonInstance(picasso)
+        }
+
     }
 
     override fun onCreateView(
@@ -58,9 +83,11 @@ class PartnerChooseFragment : Fragment() {
         binding = FragmentPartnerChooseBinding.inflate(inflater, container, false)
 
         binding.btnBackArrow.setOnClickListener {
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
@@ -87,7 +114,7 @@ class PartnerChooseFragment : Fragment() {
 
         if(CELEBRITY_TYPE == CELEB_BOLLYWOOD){
             SplashScreenActivity.celebrityListBollywood.observe(viewLifecycleOwner){
-                if(it!=null){
+                if(it!=null && partnersList.isEmpty()){
                     partnersList.clear()
                     partnersList.addAll(it)
                     originalPartnersList.clear()
@@ -98,7 +125,7 @@ class PartnerChooseFragment : Fragment() {
         }
         else{
             SplashScreenActivity.celebrityListHollywood.observe(viewLifecycleOwner){
-                if(it!=null){
+                if(it!=null && partnersList.isEmpty()){
                     partnersList.clear()
                     partnersList.addAll(it)
                     originalPartnersList.clear()
@@ -114,7 +141,6 @@ class PartnerChooseFragment : Fragment() {
             if(selectedType == TYPE_MESSAGE){
                 ChatsFragment.celebrity = partnersList[it]
                 AdUtils.showInterstitialAd(
-                    
                     LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     findNavController().navigate(R.id.action_partnerChooseFragment_to_chatsFragment)
@@ -178,6 +204,7 @@ class ChoosePartnerAdapter(
     private var jobQueue: Queue<Job> = LinkedList<Job>()
     private var scopeList: Queue<CoroutineScope> = LinkedList<CoroutineScope>()
     private var count = 0;
+    private var firstTime = true;
 
     inner class PersonVH(val binding: RvPartnerItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -202,10 +229,12 @@ class ChoosePartnerAdapter(
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Main + job)
         scope.launch {
-            Picasso.get().load(person.profile_url)
+            delay(200)
+            picasso.load(person.profile_url)
                 .resize(400, 600)
                 .placeholder(R.drawable.bg_blue)
                 .into(holder.binding.ivImg)
+//            Glide.with(holder.binding.ivImg).load(person.profile_url).into(holder.binding.ivImg)
         }
 
         jobQueue.add(job)
@@ -215,6 +244,18 @@ class ChoosePartnerAdapter(
         holder.binding.tvProfession.text = person.profession
         holder.itemView.setOnClickListener {
             onClick(holder.adapterPosition)
+        }
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        while(jobQueue.isNotEmpty()){
+            val job = jobQueue.poll()
+            job?.cancel()
+        }
+        while(scopeList.isNotEmpty()){
+            val scope = scopeList.poll()
+            scope?.cancel()
         }
     }
 }

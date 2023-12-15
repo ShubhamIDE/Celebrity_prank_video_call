@@ -235,40 +235,42 @@ class CallLogFragment : Fragment() {
         }
 
         binding.btnBackArrow.setOnClickListener {
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
-                findNavController().navigateUp()
+                it.isClickable = true
+                    findNavController().navigateUp()
             }
         }
 
         binding.btnStart.setOnClickListener {
+            it.isClickable = false
             if(binding.llAudio.alpha == 1.0f){
                 AdUtils.showInterstitialAd(
-                    
                     LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     AudioFragment.fromHome = true
+                    it.isClickable = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
                     findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
                 }
             }else if(binding.llChat.alpha == 1.0f){
                 AdUtils.showInterstitialAd(
-                    
                     LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     ChatsFragment.fromHome = true
+                    it.isClickable = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
                     findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
                 }
             }
             else {
                 AdUtils.showInterstitialAd(
-                    
                     LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     VideoFragment.fromHome = true
+                    it.isClickable = true
                     PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
                     findNavController().navigate(R.id.action_callLogFragment_to_selectCategoryFragment)
                 }
@@ -297,7 +299,6 @@ class CallLogFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback {
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }

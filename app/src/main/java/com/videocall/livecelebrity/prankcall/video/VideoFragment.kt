@@ -54,6 +54,7 @@ class VideoFragment : Fragment() {
     var isMicOn = false
     var cameraStarted = false
     private lateinit var preferenceManager: PreferenceManager
+    private var youtubePlayer: YouTubePlayer? = null
 
     companion object{
         var videoHistory: CallHistory? = null
@@ -90,6 +91,7 @@ class VideoFragment : Fragment() {
         binding.videoView.initialize(object : AbstractYouTubePlayerListener(){
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 super.onReady(youTubePlayer)
+                youtubePlayer = youTubePlayer
                 binding.loaderCl.visibility = View.VISIBLE
                 youTubePlayer.loadVideo(videoHistory!!.audioUrl, 0F)
                 youTubePlayer.mute()
@@ -107,6 +109,7 @@ class VideoFragment : Fragment() {
                 youTubePlayer: YouTubePlayer,
                 state: PlayerConstants.PlayerState
             ) {
+                youtubePlayer = youTubePlayer
                 super.onStateChange(youTubePlayer, state)
                 if (state === PlayerState.ENDED) {
                     binding.loaderCl.setVisibility(View.VISIBLE)
@@ -139,40 +142,32 @@ class VideoFragment : Fragment() {
         }
 
         binding.btnBackArrow.setOnClickListener {
+            it.isClickable = false
+            youtubePlayer?.mute()
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
-//                if(fromHome){
-//                    findNavController().popBackStack(R.id.homeFragment, false)
-//                }
-//                else findNavController().navigateUp()
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
 
         binding.btnEndCall.setOnClickListener {
+            it.isClickable = false
+            youtubePlayer?.mute()
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
-//                if(fromHome){
-//                    findNavController().popBackStack(R.id.homeFragment, false)
-//                }
-//                else
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
+            youtubePlayer?.mute()
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
-//                if(fromHome){
-//                    findNavController().popBackStack(R.id.homeFragment, false)
-//                }
-//                else
                 findNavController().navigateUp()
             }
         }

@@ -31,7 +31,6 @@ class OnboardingFragment : Fragment() {
             }
             else {
                 AdUtils.showInterstitialAd(
-                    
                     LifeCycleOwner.activity
                 ) { state_load: Boolean ->
                     findNavController().navigate(R.id.action_onboardingFragment_to_permissionFragment)

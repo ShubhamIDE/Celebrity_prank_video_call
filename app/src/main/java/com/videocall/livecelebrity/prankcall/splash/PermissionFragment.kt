@@ -33,7 +33,6 @@ class PermissionFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback {
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }

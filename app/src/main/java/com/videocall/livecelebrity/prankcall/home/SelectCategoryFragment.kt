@@ -23,30 +23,33 @@ class SelectCategoryFragment : Fragment() {
         binding = FragmentSelectCategoryBinding.inflate(inflater, container, false)
 
         binding.cardHollywood.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 PartnerChooseFragment.CELEBRITY_TYPE = PartnerChooseFragment.CELEB_HOLLYWOOD
                 findNavController().navigate(R.id.action_selectCategoryFragment_to_partnerChooseFragment)
             }
         }
 
         binding.cardBollywood.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 PartnerChooseFragment.CELEBRITY_TYPE = PartnerChooseFragment.CELEB_BOLLYWOOD
                 findNavController().navigate(R.id.action_selectCategoryFragment_to_partnerChooseFragment)
             }
         }
 
         binding.ivMenu.setOnClickListener {
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }

@@ -21,17 +21,17 @@ class TCSFragment : Fragment() {
     ): View {
         binding = FragmentTcsBinding.inflate(inflater, container, false)
         binding.btnBackArrow.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
                 findNavController().navigateUp()

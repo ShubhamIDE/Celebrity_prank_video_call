@@ -32,10 +32,11 @@ class TermsOfUseFragment : Fragment() {
         }
 
         binding.btnAgree.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_termsOfUseFragment_to_onboardingFragment)
             }
         }
@@ -47,10 +48,11 @@ class TermsOfUseFragment : Fragment() {
         }
 
         binding.btnTmc.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_termsOfUseFragment_to_tcsFragment)
             }
         }

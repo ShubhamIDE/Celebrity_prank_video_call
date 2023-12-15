@@ -53,43 +53,48 @@ class HomeFragment : Fragment() {
         binding.navView.bringToFront()
 
         binding.clVideoCall.setOnClickListener {
+            it.isClickable = false
             VideoFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_VIDEO
             AdUtils.showInterstitialAd(
                 
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
         }
 
         binding.clCallHistory.setOnClickListener {
+            it.isClickable = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_homeFragment_to_callLogFragment)
             }
         }
 
         binding.clAudio.setOnClickListener {
+            it.isClickable = false
             AudioFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_AUDIO
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
         }
 
         binding.clMsg.setOnClickListener {
+            it.isClickable = false
             ChatsFragment.fromHome = true
             PartnerChooseFragment.selectedType = PartnerChooseFragment.TYPE_MESSAGE
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_homeFragment_to_selectCategoryFragment)
             }
         }

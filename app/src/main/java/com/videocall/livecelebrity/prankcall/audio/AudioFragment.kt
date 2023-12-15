@@ -191,6 +191,9 @@ class AudioFragment : Fragment() {
         }
 
         binding.btnEndCall.setOnClickListener {
+            if(::youTubePlayer.isInitialized){
+                youTubePlayer.mute()
+            }
 //            if(fromHome){
 //                AdUtils.showBackPressAd(
 //                    LifeCycleOwner.activity,
@@ -207,58 +210,34 @@ class AudioFragment : Fragment() {
 //                    findNavController().navigateUp()
 //                }
 //            }
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
 
         binding.btnBackArrow.setOnClickListener {
-//            if(fromHome){
-//                AdUtils.showBackPressAd(
-//                    LifeCycleOwner.activity,
-//                    
-//                ) { state_load: Boolean ->
-//                    findNavController().popBackStack(R.id.homeFragment, false)
-//                }
-//            }
-//            else {
-//                AdUtils.showBackPressAd(
-//                    LifeCycleOwner.activity,
-//                    
-//                ) { state_load: Boolean ->
-//                    findNavController().navigateUp()
-//                }
-//            }
+            if(::youTubePlayer.isInitialized){
+                youTubePlayer.mute()
+            }
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigateUp()
             }
         }
 
         requireActivity().onBackPressedDispatcher.addCallback {
-//            if(fromHome){
-//                AdUtils.showBackPressAd(
-//                    LifeCycleOwner.activity,
-//                    
-//                ) { state_load: Boolean ->
-//                    findNavController().popBackStack(R.id.homeFragment, false)
-//                }
-//            }
-//            else {
-//                AdUtils.showBackPressAd(
-//                    LifeCycleOwner.activity,
-//                    
-//                ) { state_load: Boolean ->
-//                    findNavController().navigateUp()
-//                }
-//            }
+            if(::youTubePlayer.isInitialized){
+                youTubePlayer.mute()
+            }
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
                 findNavController().navigateUp()
             }

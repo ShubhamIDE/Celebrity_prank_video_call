@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import com.adsmodule.api.adsModule.utils.Globals
 import com.dualwallpaper.livehd.wallpaper.utils.NetworkViewModel
 import com.videocall.livecelebrity.prankcall.databinding.ActivityMainBinding
+import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment
+import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.picasso
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        PartnerChooseFragment.initializePicasso(this)
 
         val intentFilter = IntentFilter()
         intentFilter.addAction(MAINACTIVITY_INTENT)

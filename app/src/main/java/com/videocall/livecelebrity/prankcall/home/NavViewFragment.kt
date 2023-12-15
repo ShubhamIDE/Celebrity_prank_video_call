@@ -33,11 +33,12 @@ class NavViewFragment : Fragment() {
         binding = FragmentNavViewBinding.inflate(inflater, container, false)
 
         binding.llLang.setOnClickListener {
+            it.isClickable = false
             LanguageActivity.langChange = true
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 requireActivity().startActivity(Intent(requireContext(), LanguageActivity::class.java))
             }
             HomeFragment.binding.drawerLayout.closeDrawer(GravityCompat.START)

@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.adsmodule.api.adsModule.models.AdsDataRequestModel
 import com.adsmodule.api.adsModule.retrofit.AdsApiHandler
+import com.adsmodule.api.adsModule.utils.AdUtils
 import com.adsmodule.api.adsModule.utils.Constants
 import com.adsmodule.api.adsModule.utils.Globals
 import com.bumptech.glide.Glide
@@ -98,15 +99,16 @@ class SplashScreenActivity : AppCompatActivity() {
                         AdsDataRequestModel(getPackageName(), "")
                     ) {
                         if(it!=null) {
-                            setUpList()
-
-                            if(onBoardingShown){
-                                startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-                                finish()
-                            }
-                            else {
-                                startActivity(Intent(this@SplashScreenActivity, LanguageActivity::class.java))
-                                finish()
+                            AdUtils.showAppOpenAd(this@SplashScreenActivity){
+                                setUpList()
+                                if(onBoardingShown){
+                                    startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+                                    finish()
+                                }
+                                else {
+                                    startActivity(Intent(this@SplashScreenActivity, LanguageActivity::class.java))
+                                    finish()
+                                }
                             }
                         }
                         else {

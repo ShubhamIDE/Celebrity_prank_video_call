@@ -17,7 +17,7 @@
 
     <ImageView
         android:layout_width="150dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/ic_logo_celebrity_prank"
         android:layout_height="150dp"
         android:id="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"

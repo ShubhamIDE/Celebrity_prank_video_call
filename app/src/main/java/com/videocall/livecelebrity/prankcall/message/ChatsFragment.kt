@@ -137,10 +137,11 @@ class ChatsFragment : Fragment() {
         }
 
         binding.btnBack.setOnClickListener {
+            it.isClickable = false
             AdUtils.showBackPressAd(
                 LifeCycleOwner.activity,
-                
             ) { state_load: Boolean ->
+                it.isClickable = true
 //                if (fromHome) {
 //                    findNavController().popBackStack(R.id.homeFragment, false)
 //                } else
@@ -149,23 +150,25 @@ class ChatsFragment : Fragment() {
         }
 
         binding.btnVideoCall.setOnClickListener {
+            it.isClickable = false
             VideoFragment.celebrity = celebrity
             VideoFragment.fromHome = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_chatsFragment_to_videoFragment)
             }
         }
 
         binding.ivCall.setOnClickListener {
+            it.isClickable = false
             AudioFragment.celebrity = celebrity
             AudioFragment.fromHome = false
             AdUtils.showInterstitialAd(
-                
                 LifeCycleOwner.activity
             ) { state_load: Boolean ->
+                it.isClickable = true
                 findNavController().navigate(R.id.action_chatsFragment_to_audioFragment)
             }
         }
