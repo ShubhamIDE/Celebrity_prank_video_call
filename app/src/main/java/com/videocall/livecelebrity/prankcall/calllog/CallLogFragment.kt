@@ -73,46 +73,64 @@ class CallLogFragment : Fragment() {
             onCallClicked = {},
             onVideoCallClicked = {},
             onItemClick = {
-                if(SplashScreenActivity.celebrityListBollywood.value!=null){
+                var celebrity: Celebrity? = null
+                if(SplashScreenActivity.celebrityListBollywood.value!=null) {
                     ChatsFragment.chatHistory = chatsHistoryList[it]
-                    var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
-                        if(celeb.profile_url == chatsHistoryList[it].img){
+                    for (celeb in SplashScreenActivity.celebrityListBollywood.value!!) {
+                        if (celeb.profile_url == chatsHistoryList[it].img) {
                             celebrity = celeb
                             break;
                         }
                     }
-                    if(celebrity!=null){
-                        ChatsFragment.celebrity = celebrity
-                        AdUtils.showInterstitialAd(
-                            
-                            LifeCycleOwner.activity
-                        ) { state_load: Boolean ->
-                            findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
+                }
+                if(celebrity == null && SplashScreenActivity.celebrityListHollywood.value!=null){
+                    ChatsFragment.chatHistory = chatsHistoryList[it]
+                    for (celeb in SplashScreenActivity.celebrityListHollywood.value!!) {
+                        if (celeb.profile_url == chatsHistoryList[it].img) {
+                            celebrity = celeb
+                            break;
                         }
+                    }
+                }
+                if(celebrity!=null){
+                    ChatsFragment.celebrity = celebrity
+                    AdUtils.showInterstitialAd(
+
+                        LifeCycleOwner.activity
+                    ) { state_load: Boolean ->
+                        findNavController().navigate(R.id.action_callLogFragment_to_chatsFragment)
                     }
                 }
             })
 
         audioAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_AUDIO,
             onCallClicked = {
-                if(SplashScreenActivity.celebrityListBollywood.value!=null){
+                var celebrity: Celebrity? = null
+                if(SplashScreenActivity.celebrityListBollywood.value!=null) {
                     AudioFragment.audioHistory = audioCallHistory[it]
-                    var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
-                        if(celeb.profile_url == audioCallHistory[it].img){
+                    for (celeb in SplashScreenActivity.celebrityListBollywood.value!!) {
+                        if (celeb.profile_url == audioCallHistory[it].img) {
                             celebrity = celeb
                             break;
                         }
                     }
-                    if(celebrity!=null){
-                        AudioFragment.celebrity = celebrity!!
-                        AdUtils.showInterstitialAd(
-                            
-                            LifeCycleOwner.activity
-                        ) { state_load: Boolean ->
-                            findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
+                }
+                if(celebrity == null && SplashScreenActivity.celebrityListHollywood.value!=null) {
+                    AudioFragment.audioHistory = audioCallHistory[it]
+                    for (celeb in SplashScreenActivity.celebrityListHollywood.value!!) {
+                        if (celeb.profile_url == audioCallHistory[it].img) {
+                            celebrity = celeb
+                            break;
                         }
+                    }
+                }
+                if(celebrity!=null){
+                    AudioFragment.celebrity = celebrity!!
+                    AdUtils.showInterstitialAd(
+
+                        LifeCycleOwner.activity
+                    ) { state_load: Boolean ->
+                        findNavController().navigate(R.id.action_callLogFragment_to_audioFragment)
                     }
                 }
             },
@@ -122,23 +140,32 @@ class CallLogFragment : Fragment() {
         videoAdapter = CallLogRVAdapter(chatsHistoryList, audioCallHistory, videoCallHistory, TYPE_VIDEO,
             onCallClicked = {},
             onVideoCallClicked = {
-                if(SplashScreenActivity.celebrityListBollywood.value!=null){
+                var celebrity: Celebrity? = null
+                if(SplashScreenActivity.celebrityListBollywood.value!=null) {
                     VideoFragment.videoHistory = videoCallHistory[it]
-                    var celebrity: Celebrity? = null
-                    for(celeb in SplashScreenActivity.celebrityListBollywood.value!!){
-                        if(celeb.profile_url == videoCallHistory[it].img){
+                    for (celeb in SplashScreenActivity.celebrityListBollywood.value!!) {
+                        if (celeb.profile_url == videoCallHistory[it].img) {
                             celebrity = celeb
                             break;
                         }
                     }
-                    if(celebrity!=null){
-                        VideoFragment.celebrity = celebrity!!
-                        AdUtils.showInterstitialAd(
-                            
-                            LifeCycleOwner.activity
-                        ) { state_load: Boolean ->
-                            findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
+                }
+                if(celebrity == null && SplashScreenActivity.celebrityListHollywood.value!=null) {
+                    VideoFragment.videoHistory = videoCallHistory[it]
+                    for (celeb in SplashScreenActivity.celebrityListHollywood.value!!) {
+                        if (celeb.profile_url == videoCallHistory[it].img) {
+                            celebrity = celeb
+                            break;
                         }
+                    }
+                }
+                if(celebrity!=null){
+                    VideoFragment.celebrity = celebrity!!
+                    AdUtils.showInterstitialAd(
+
+                        LifeCycleOwner.activity
+                    ) { state_load: Boolean ->
+                        findNavController().navigate(R.id.action_callLogFragment_to_videoFragment)
                     }
                 }
             },

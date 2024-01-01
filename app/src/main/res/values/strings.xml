@@ -97,5 +97,6 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="start_a_call">Start a call</string>
     <string name="no_video_call_history_found">No Video call history found</string>
     <string name="start_a_video_call">Start a video call</string>
+    <string name="online">online</string>
 
 </resources>

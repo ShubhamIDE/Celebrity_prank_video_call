@@ -57,5 +57,6 @@
     <string name="start_a_call">ابدأ مكالمة</string>
     <string name="no_video_call_history_found">لم يتم العثور على سجل مكالمات فيديو</string>
     <string name="start_a_video_call">ابدأ مكالمة فيديو</string>
+    <string name="online">عبر الإنترنت</string>
 
 </resources>

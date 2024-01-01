@@ -33,7 +33,7 @@
     <string name="type_here_to_search_something">Введите здесь для поиска чего-то</string>
     <string name="get_started">Начать</string>
     <string name="drawer_close">Закрыть ящик</string>
-
+    <string name="online">онлайн</string>
     <string name="drawer_open">Открыть ящик</string>
     <string name="chat">Чат</string>
     <string name="audio">Аудио</string>

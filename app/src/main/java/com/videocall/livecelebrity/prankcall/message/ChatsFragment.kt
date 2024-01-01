@@ -198,6 +198,22 @@ class ChatsFragment : Fragment() {
             }
         }
 
+        binding.edtTxtMsgs.setOnClickListener {
+            binding.svMsgs.postDelayed({
+                binding.svMsgs.fullScroll(View.FOCUS_DOWN)
+            }, 200)
+        }
+
+        binding.svMsgs.postDelayed({
+            binding.svMsgs.fullScroll(View.FOCUS_DOWN)
+        }, 200)
+
+        binding.edtTxtMsgs.setOnFocusChangeListener { view, b ->
+            binding.svMsgs.postDelayed({
+                binding.svMsgs.fullScroll(View.FOCUS_DOWN)
+            }, 200)
+        }
+
         return binding.root
     }
 
@@ -214,7 +230,8 @@ class ChatsFragment : Fragment() {
             systemTyping = true
             if(isAdded && !isDetached){
                 withContext(Dispatchers.Main){
-                    binding.tvTyping.visibility = View.VISIBLE
+                    binding.tvTyping.text = getString(R.string.typing)
+                  //  binding.tvTyping.visibility = View.VISIBLE
                     binding.edtTxtMsgs.hint = getString(R.string.please_wait_for_reply)
                     binding.edtTxtMsgs.isEnabled = false
                 }
@@ -230,9 +247,13 @@ class ChatsFragment : Fragment() {
                     binding.edtTxtMsgs.hint = getString(R.string.type_something)
                     binding.edtTxtMsgs.isEnabled = true
                     binding.msgLL.addView(sendMsgView.root)
-                    binding.tvTyping.visibility = View.GONE
+                    binding.tvTyping.text = getString(R.string.online)
+                   // binding.tvTyping.visibility = View.GONE
                     msgList.add(Pair(1, Msg(it, time)))
                     addData()
+                    binding.svMsgs.post {
+                        binding.svMsgs.fullScroll(View.FOCUS_DOWN)
+                    }
                 }
             }
         }

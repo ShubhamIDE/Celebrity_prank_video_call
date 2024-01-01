@@ -58,4 +58,6 @@
     <string name="no_video_call_history_found">ビデオ通話の履歴が見つかりませんでした</string>
     <string name="start_a_video_call">ビデオ通話を開始</string>
 
+    <string name="online">オンライン</string>
+
 </resources>

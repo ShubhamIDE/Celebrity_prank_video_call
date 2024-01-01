@@ -57,5 +57,7 @@
     <string name="start_a_call">Iniciar uma ligação</string>
     <string name="no_video_call_history_found">Nenhum histórico de chamada de vídeo encontrado</string>
     <string name="start_a_video_call">Iniciar uma chamada de vídeo</string>
+    <string name="online">online</string>
+
 
 </resources>
