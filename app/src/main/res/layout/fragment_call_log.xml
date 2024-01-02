@@ -42,7 +42,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textAlignment="center"
-                android:text="@string/chat"
+                android:text="History"
                 android:id="@+id/tvTitle"
                 android:fontFamily="@font/inter_medium"
                 android:maxLines="1"

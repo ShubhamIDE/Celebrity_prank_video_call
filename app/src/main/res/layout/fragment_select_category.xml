@@ -61,7 +61,7 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintGuide_percent="0.25"
         android:id="@+id/gdCardHollywood"
         android:orientation="horizontal"/>
     
