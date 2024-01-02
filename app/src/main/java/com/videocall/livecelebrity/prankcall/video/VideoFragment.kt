@@ -49,7 +49,7 @@ class VideoFragment : Fragment() {
     var cameraProvider: ProcessCameraProvider? = null
     private var cameraExecutor: ExecutorService? = null
     var preview: Preview? = null
-    var videoOn = false;
+    var videoOn = true;
     var baseUrl = "https://www.youtube.com/watch?v="
     var isMicOn = false
     var cameraStarted = false
@@ -96,9 +96,17 @@ class VideoFragment : Fragment() {
                 youTubePlayer.loadVideo(videoHistory!!.audioUrl, 0F)
                 youTubePlayer.mute()
                 youTubePlayer.setLoop(true)
+                if(videoOn){
+                    binding.btnSwitch.visibility = View.VISIBLE
+                    binding.cameraPreviewView.visibility = View.VISIBLE
+                }
                 lifecycleScope.launch {
                     delay(4000)
                     withContext(Dispatchers.Main){
+                        if(videoOn){
+                            binding.btnSwitch.visibility = View.VISIBLE
+                            binding.cameraPreviewView.visibility = View.VISIBLE
+                        }
                         binding.loaderCl.visibility = View.GONE
                         youTubePlayer.unMute()
                     }
@@ -116,9 +124,17 @@ class VideoFragment : Fragment() {
                     youTubePlayer.loadVideo(videoHistory!!.audioUrl, 0f)
                     youTubePlayer.mute()
                     youTubePlayer.setLoop(true)
+                    if(videoOn){
+                        binding.btnSwitch.visibility = View.VISIBLE
+                        binding.cameraPreviewView.visibility = View.VISIBLE
+                    }
                     lifecycleScope.launch {
                         delay(4000)
                         withContext(Dispatchers.Main){
+                            if(videoOn){
+                                binding.btnSwitch.visibility = View.VISIBLE
+                                binding.cameraPreviewView.visibility = View.VISIBLE
+                            }
                             binding.loaderCl.visibility = View.GONE
                             youTubePlayer.unMute()
                         }
@@ -190,6 +206,10 @@ class VideoFragment : Fragment() {
                 binding.btnSwitch.visibility = View.GONE
             }
         }
+
+        startCamera(CameraSelector.DEFAULT_BACK_CAMERA);
+        cameraExecutor = Executors.newSingleThreadExecutor();
+        cameraStarted = true
 
         return binding.root
     }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "864129807037",
+    "project_id": "celebrity-prank-video-call",
+    "storage_bucket": "celebrity-prank-video-call.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864129807037:android:56b7ce6c1ce5175c76bdd4",
+        "android_client_info": {
+          "package_name": "com.videocall.livecelebrity.prankcall"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHfLmBqjiapbkv3gd7SW4S7qamZoc7Wwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

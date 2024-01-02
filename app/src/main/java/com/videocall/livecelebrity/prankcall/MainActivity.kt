@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         val MAINACTIVITY_INTENT: String = "com.videocall.livecelebrity.prankcall.MainActivityIntent"
-        const val ONBOARDING_SHOWN = "onboarding_shown1"
+        const val ONBOARDING_SHOWN = "onboarding_shown2"
         const val ONBOARDING_SHARED_PREF_KEY = "onboarding_shared_pref"
         var LANG_CHANGED = false
     }

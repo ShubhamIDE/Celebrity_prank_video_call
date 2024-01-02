@@ -49,6 +49,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
 
     // OneSignal Dependency {Enable Only if you require OneSignal Notification}
-    // implementation 'com.onesignal:OneSignal:[5.0.0, 5.99.99]'
+     implementation 'com.onesignal:OneSignal:[5.0.0, 5.99.99]'
 
 }

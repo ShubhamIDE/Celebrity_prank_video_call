@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.adsmodule.api.adsModule.utils.AdUtils
+import com.adsmodule.api.adsModule.utils.Globals
 import com.videocall.livecelebrity.prankcall.MainActivity
 import com.videocall.livecelebrity.prankcall.R
 import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
@@ -80,7 +81,7 @@ class GetStartedFragment : Fragment() {
                 showExitDialog()
             }
         }
-
+        Globals.askOneSignalPermission(requireContext())
         return binding.root
     }
 

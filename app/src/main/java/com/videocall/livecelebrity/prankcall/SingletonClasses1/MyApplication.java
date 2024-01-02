@@ -69,7 +69,7 @@ public class MyApplication extends Application {
         preferences = getPreference();
         setUpConnectionDetector();
         // UnComment this line if you require onesignal
-        // Globals.initOneSignal(app.getApplicationContext(), "**YOUR_ONE_SIGNAL_APP_ID**");
+        Globals.initOneSignal(app.getApplicationContext(), "263dae44-e109-443c-a50d-f7d11b39760e");
 
         // Increase app download count
         if (preferences.isAdsFirstRun()) {

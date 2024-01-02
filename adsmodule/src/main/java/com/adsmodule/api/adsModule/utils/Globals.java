@@ -31,6 +31,9 @@ import com.adsmodule.api.adsModule.R;
 import com.adsmodule.api.adsModule.enums.NativeAdHeight;
 import com.adsmodule.api.adsModule.enums.NativeAdType;
 import com.google.android.gms.ads.MobileAds;
+import com.onesignal.Continue;
+import com.onesignal.OneSignal;
+import com.onesignal.debug.LogLevel;
 
 import java.util.List;
 import java.util.Objects;
@@ -165,20 +168,23 @@ public class Globals {
         return apiVersionName.replaceAll("[A-Za-z]", "");
     }
 
-    public static void initOneSignal(Context context, String ONESIGNAL_APP_ID) {
-        /*OneSignal.getDebug().setLogLevel(LogLevel.DEBUG);
-        OneSignal.initWithContext(context, ONESIGNAL_APP_ID);
+    public static void askOneSignalPermission(Context context){
         OneSignal.getNotifications().requestPermission(true, Continue.with(r -> {
             if (r.isSuccess()) {
-                if (r.getData()) {
-                    Toast.makeText(context, "requestPermission completed successfully and the user has accepted permission", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "requestPermission successfully but the user has rejected permission", Toast.LENGTH_SHORT).show();
-                }
+//                if (r.getData()) {
+//                    Toast.makeText(context, "requestPermission completed successfully and the user has accepted permission", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(context, "requestPermission successfully but the user has rejected permission", Toast.LENGTH_SHORT).show();
+//                }
             } else {
-                Toast.makeText(context, "requestPermission completed unsuccessfully, check `r.getThrowable()` for more info on the failure reason", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "requestPermission completed unsuccessfully, check `r.getThrowable()` for more info on the failure reason", Toast.LENGTH_SHORT).show();
             }
-        }));*/
+        }));
+    }
+
+    public static void initOneSignal(Context context, String ONESIGNAL_APP_ID) {
+        OneSignal.getDebug().setLogLevel(LogLevel.DEBUG);
+        OneSignal.initWithContext(context, ONESIGNAL_APP_ID);
     }
 
     public static ImageView getAdPlaceholderImage(Activity activity, Drawable adPlaceholder, NativeAdType adType) {
