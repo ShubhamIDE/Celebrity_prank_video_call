@@ -1,6 +1,7 @@
 package com.videocall.livecelebrity.prankcall.home
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adsmodule.api.adsModule.utils.AdUtils
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.cache.DiskCache
-import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper
-import com.squareup.picasso.Cache
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.squareup.picasso.LruCache
 import com.squareup.picasso.Picasso
 import com.videocall.livecelebrity.prankcall.R
@@ -24,7 +25,6 @@ import com.videocall.livecelebrity.prankcall.SingletonClasses1.LifeCycleOwner
 import com.videocall.livecelebrity.prankcall.audio.AudioFragment
 import com.videocall.livecelebrity.prankcall.databinding.FragmentPartnerChooseBinding
 import com.videocall.livecelebrity.prankcall.databinding.RvPartnerItemBinding
-import com.videocall.livecelebrity.prankcall.home.PartnerChooseFragment.Companion.picasso
 import com.videocall.livecelebrity.prankcall.message.ChatsFragment
 import com.videocall.livecelebrity.prankcall.splash.ItemOffsetDecoration
 import com.videocall.livecelebrity.prankcall.splash.SplashScreenActivity
@@ -36,9 +36,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.io.File
 import java.util.LinkedList
 import java.util.Queue
+
 
 class PartnerChooseFragment : Fragment() {
 
@@ -229,11 +229,28 @@ class ChoosePartnerAdapter(
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Main + job)
         scope.launch {
-            delay(200)
-            picasso.load(person.profile_url)
-                .resize(400, 600)
-                .placeholder(R.drawable.bg_blue)
-                .into(holder.binding.ivImg)
+           // delay(200)
+            Glide
+                .with(holder.binding.ivImg)
+                .asBitmap()
+                .load(person.profile_url)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .override(400, 600)
+                .skipMemoryCache(true)
+                .dontAnimate()
+                .into(object : SimpleTarget<Bitmap?>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap?>?
+                    ) {
+                        holder.binding.ivImg.setImageBitmap(resource)
+                    }
+                })
+
+//            picasso.load(person.profile_url)
+//                .resize(400, 600)
+//                .placeholder(R.drawable.bg_blue)
+//                .into(holder.binding.ivImg)
 //            Glide.with(holder.binding.ivImg).load(person.profile_url).into(holder.binding.ivImg)
         }
 

@@ -58,5 +58,6 @@
     <string name="start_a_call">통화 시작</string>
     <string name="no_video_call_history_found">비디오 통화 기록이 없습니다</string>
     <string name="start_a_video_call">비디오 통화 시작</string>
+    <string name="history">역사</string>
 
 </resources>

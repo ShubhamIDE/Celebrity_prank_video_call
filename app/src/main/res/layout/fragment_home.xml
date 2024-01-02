@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
+    tools:openDrawer="start"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/darkBlue"
+    android:background="@drawable/bg_home"
     tools:context=".home.HomeFragment">
 
 
@@ -228,7 +229,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"
                 android:textColor="@color/white"
-                android:text="@string/call_history"/>
+                android:text="@string/history"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

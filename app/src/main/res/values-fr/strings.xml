@@ -57,5 +57,6 @@
     <string name="start_a_call">Démarrer un appel</string>
     <string name="no_video_call_history_found">Aucun historique d\'appels vidéo trouvé</string>
     <string name="start_a_video_call">Démarrer une visioconférence</string>
+    <string name="history">Histoire</string>
 
 </resources>

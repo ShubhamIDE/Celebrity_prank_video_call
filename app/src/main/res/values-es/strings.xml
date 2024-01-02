@@ -58,5 +58,7 @@
     <string name="start_a_call">Iniciar una llamada</string>
     <string name="no_video_call_history_found">No se encontró historial de llamadas de video</string>
     <string name="start_a_video_call">Iniciar una videollamada</string>
+    <string name="history">Historia</string>
+
 
 </resources>

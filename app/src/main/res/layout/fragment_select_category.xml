@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/home_bg"
+    android:background="@drawable/bg_home"
     tools:context=".home.SelectCategoryFragment">
 
     <com.google.android.material.card.MaterialCardView
@@ -36,10 +36,11 @@
                 android:layout_width="0dp"
                 app:layout_constraintStart_toEndOf="@id/ivMenu"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginHorizontal="15dp"
+                android:textAlignment="center"
                 app:layout_constraintTop_toTopOf="@id/ivMenu"
                 app:layout_constraintBottom_toBottomOf="@id/ivMenu"
                 android:textColor="@color/white"
+                android:layout_marginEnd="50dp"
                 android:textSize="16sp"
                 android:text="@string/select_category"
                 android:fontFamily="@font/inter_medium"
@@ -64,12 +65,12 @@
         app:layout_constraintGuide_percent="0.25"
         android:id="@+id/gdCardHollywood"
         android:orientation="horizontal"/>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="109dp"
         android:id="@+id/cardHollywood"
-        android:background="@drawable/ic_hollywood_card_bg"
+        android:background="@drawable/bg_hollywood_card"
         app:layout_constraintTop_toTopOf="@id/gdCardHollywood"
         app:layout_constraintBottom_toBottomOf="@id/gdCardHollywood"
         android:layout_marginHorizontal="30dp">
@@ -77,7 +78,7 @@
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.6"
+            app:layout_constraintGuide_percent="0.35"
             android:id="@+id/gdTvHollywood"
             android:layout_height="wrap_content"/>
 
@@ -90,7 +91,7 @@
             android:textColor="@color/white"
             android:maxLines="1"
             android:ellipsize="end"
-            app:layout_constraintEnd_toStartOf="@id/gdTvHollywood"
+            app:layout_constraintStart_toEndOf="@id/gdTvHollywood"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="wrap_content"/>
@@ -101,7 +102,7 @@
         android:layout_width="match_parent"
         android:layout_height="109dp"
         android:id="@+id/cardBollywood"
-        android:background="@drawable/bollwood_card"
+        android:background="@drawable/bg_bollywood_card"
         app:layout_constraintTop_toBottomOf="@id/cardHollywood"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="30dp">

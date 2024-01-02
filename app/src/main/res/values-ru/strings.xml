@@ -56,5 +56,6 @@
     <string name="start_a_call">Начать звонок</string>
     <string name="no_video_call_history_found">История видео-звонков не найдена</string>
     <string name="start_a_video_call">Начать видеозвонок</string>
+    <string name="history">История</string>
 
 </resources>

@@ -56,5 +56,6 @@
     <string name="start_a_call">कॉल शुरू करें</string>
     <string name="no_video_call_history_found">कोई वीडियो कॉल का इतिहास नहीं मिला</string>
     <string name="start_a_video_call">वीडियो कॉल शुरू करें</string>
+    <string name="history">इतिहास</string>
 
 </resources>
