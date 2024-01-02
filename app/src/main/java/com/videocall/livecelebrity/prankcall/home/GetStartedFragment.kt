@@ -104,7 +104,8 @@ class GetStartedFragment : Fragment() {
         }
         exitDialogBinding.btnExit.setOnClickListener {
             dialog.dismiss()
-            requireActivity().finish()
+            requireActivity().finishAffinity()
+         //   requireActivity().finish()
         }
     }
 }

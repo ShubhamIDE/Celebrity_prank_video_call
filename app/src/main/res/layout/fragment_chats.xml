@@ -60,8 +60,8 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:id="@+id/tvTyping"
-                android:visibility="gone"
-                android:text="@string/typing"
+                android:visibility="visible"
+                android:text="@string/online"
                 android:ellipsize="end"
                 android:fontFamily="@font/inter_medium"
                 android:maxLines="1"
@@ -82,6 +82,7 @@
                 android:src="@drawable/ic_video"
                 android:layout_width="35dp"
                 android:id="@+id/btnVideoCall"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:backgroundTint="@android:color/transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -99,86 +100,94 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarCard"
         android:layout_height="1dp"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/svMsgs"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@id/llEditText"
-        app:layout_constraintTop_toBottomOf="@id/whiteLine">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/msgLL"
-            android:paddingBottom="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </ScrollView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="@font/inter_medium"
-        android:textColor="@color/white"
-        android:text="@string/suggestions"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/suggestionsHSV"
-        android:layout_marginStart="23dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/tvSuggestions"/>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:id="@+id/suggestionsHSV"
-        android:layout_marginStart="20dp"
-        app:layout_constraintBottom_toTopOf="@id/llEditText"
-        android:layout_marginBottom="10dp"
-        android:maxHeight="87dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/llSuggestions"
-            android:layout_height="match_parent"
-            android:orientation="horizontal" />
-    </HorizontalScrollView>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/llEditText"
-        android:background="@drawable/white_bg_stroke"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="25dp">
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-        <EditText
-            android:backgroundTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/edtTxtMsgs"
-            android:layout_marginStart="15dp"
-            android:hint="@string/type_something"
-            android:textColor="@color/white"
-            android:textColorHint="#65ffffff"
-            android:layout_marginVertical="10dp"
-            android:layout_height="match_parent"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_width="0dp"/>
+            android:id="@+id/svMsgs"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/llEditText"
+            app:layout_constraintTop_toBottomOf="@id/whiteLine">
 
-        <ImageButton
-            android:layout_width="60dp"
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/msgLL"
+                android:paddingBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/white"
+            android:text="@string/suggestions"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/suggestionsHSV"
+            android:layout_marginStart="23dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:id="@+id/tvSuggestions"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:id="@+id/suggestionsHSV"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toTopOf="@id/llEditText"
+            android:layout_marginBottom="10dp"
+            android:maxHeight="87dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/llSuggestions"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:id="@+id/btnSendMsg"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/btn_send_msg"/>
+            android:id="@+id/llEditText"
+            android:background="@drawable/white_bg_stroke"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="25dp">
+
+            <EditText
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/edtTxtMsgs"
+                android:layout_marginStart="15dp"
+                android:hint="@string/type_something"
+                android:textColor="@color/white"
+                android:textColorHint="#65ffffff"
+                android:layout_marginVertical="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_width="0dp"/>
+
+            <ImageButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/btnSendMsg"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/btn_send_msg"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,6 +1,7 @@
 package com.videocall.livecelebrity.prankcall.home
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -82,20 +83,15 @@ fun shareApp(context: Context) {
     context.startActivity(intent)
 }
 
-fun reviewDialog(activity: Activity?) {
-    FlurryAgent.logEvent("Review is clicked")
-    val manager = if (BuildConfig.DEBUG) FakeReviewManager(activity) else ReviewManagerFactory.create(
-        activity!!
-    )
-    val request = manager.requestReviewFlow()
-    request.addOnCompleteListener { task: Task<ReviewInfo?> ->
-        if (task.isSuccessful) {
-            val reviewInfo = task.result
-            val flow = manager.launchReviewFlow(
-                activity!!,
-                reviewInfo!!
-            )
-            flow.addOnCompleteListener { task1: Task<Void?>? -> }
-        }
+fun reviewDialog(activity: Activity) {
+    try {
+        val uri = Uri.parse("market://details?id=" + activity.getPackageName() + "")
+        val goMarket = Intent(Intent.ACTION_VIEW, uri)
+        activity.startActivity(goMarket)
+    } catch (e: ActivityNotFoundException) {
+        val uri =
+            Uri.parse("https://play.google.com/store/apps/details?id=" + activity.getPackageName() + "")
+        val goMarket = Intent(Intent.ACTION_VIEW, uri)
+        activity.startActivity(goMarket)
     }
 }
