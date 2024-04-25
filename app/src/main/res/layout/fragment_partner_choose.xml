@@ -59,20 +59,10 @@
         app:layout_constraintTop_toBottomOf="@id/toolbarCard"
         android:layout_height="1dp"/>
 
-    <com.adsmodule.api.adsModule.views.NativeView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:adType="SMALL"
-        app:borderColor="@color/white"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/whiteLine"
-        android:layout_margin="15dp"
-        android:id="@+id/smallNativeAd1"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@drawable/white_bg_stroke"
-        app:layout_constraintTop_toBottomOf="@id/smallNativeAd1"
+        app:layout_constraintTop_toBottomOf="@id/whiteLine"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="15dp"
         android:id="@+id/llSearchView"

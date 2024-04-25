@@ -67,14 +67,6 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mediumNativeAd"/>
-
-    <com.adsmodule.api.adsModule.views.NativeView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:adType="MEDIUM"
-        android:visibility="gone"
-        android:id="@+id/mediumNativeAd"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

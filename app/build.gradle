@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.videocall.livecelebrity.prankcall'
+    namespace 'com.ide.codekit.celebrityprankvideocall'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.videocall.livecelebrity.prankcall"
+        applicationId "com.ide.codekit.celebrityprankvideocall"
         minSdk 24
         //noinspection EditedTargetSdkVersion
         targetSdk 34
@@ -80,8 +81,6 @@ dependencies {
     // ads module
     implementation 'androidx.lifecycle:lifecycle-process:2.6.1'
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(path: ':adsmodule')
-
     // blur view
     implementation 'com.github.Dimezis:BlurView:version-2.0.3'
 
@@ -112,4 +111,14 @@ dependencies {
 
     // youtube player view
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
+
+    // firebase
+    implementation("com.google.android.gms:play-services-ads:22.3.0")
+    implementation("com.airbnb.android:lottie:6.3.0")
+    implementation 'com.google.firebase:firebase-config:21.6.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
 }

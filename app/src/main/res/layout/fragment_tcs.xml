@@ -103,13 +103,4 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
-    <com.adsmodule.api.adsModule.views.NativeView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:adType="SMALL"
-        android:id="@+id/smallNativeAd"/>
-
 </LinearLayout>

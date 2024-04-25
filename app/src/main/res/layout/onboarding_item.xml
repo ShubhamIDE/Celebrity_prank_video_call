@@ -57,12 +57,4 @@
         android:fontFamily="@font/inter_medium"
         android:backgroundTint="#45ffffff"/>
 
-    <com.adsmodule.api.adsModule.views.NativeView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/smallNativeAd"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:adType="SMALL"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

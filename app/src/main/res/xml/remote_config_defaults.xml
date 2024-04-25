@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+    <entry>
+        <key>interstitial_ad</key>
+        <value>ca-app-pub-3940256099942544/1033173712</value>
+    </entry>
+    <entry>
+        <key>rewarded_ad</key>
+        <value>ca-app-pub-3940256099942544/5224354917</value>
+    </entry>
+    <entry>
+        <key>native_ad</key>
+        <value>ca-app-pub-3940256099942544/2247696110</value>
+    </entry>
+    <entry>
+        <key>show_ads</key>
+        <value>true</value>
+    </entry>
+    <entry>
+        <key>app_open_ad</key>
+        <value>ca-app-pub-3940256099942544/9257395921</value>
+    </entry>
+    <entry>
+        <key>banner_ad</key>
+        <value>ca-app-pub-3940256099942544/6300978111</value>
+    </entry>
+</defaults>

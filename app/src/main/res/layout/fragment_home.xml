@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/navFragContainer"
-            android:name="com.videocall.livecelebrity.prankcall.home.NavViewFragment"/>
+            android:name="com.ide.codekit.celebrityprankvideocall.home.NavViewFragment"/>
 
     </com.google.android.material.navigation.NavigationView>
 
@@ -232,13 +232,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.adsmodule.api.adsModule.views.NativeView
-            android:layout_width="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/mediumNativeAd"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            app:adType="FULL"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

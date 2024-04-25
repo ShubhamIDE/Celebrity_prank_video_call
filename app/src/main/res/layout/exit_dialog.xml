@@ -91,26 +91,13 @@
 
         </LinearLayout>
 
-        <com.adsmodule.api.adsModule.views.NativeView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/mediumNativeAd"
-            app:adType="MEDIUM"
-            app:cardCornerRadius="20dp"
-            android:visibility="gone"
-            app:borderColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="37dp"
-            android:layout_marginHorizontal="15dp"
-            app:layout_constraintTop_toBottomOf="@id/llStars"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvExitMsg"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/mediumNativeAd"
+            app:layout_constraintTop_toBottomOf="@id/llStars"
             android:fontFamily="@font/inter_semibold"
             android:layout_marginTop="27dp"
             android:textSize="14sp"

@@ -19,3 +19,11 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class com.ide.codekit.celebrityprankvideocall.utils.CallHistory.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.ChatHistory.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.Msg.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.CompletionResponse.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.Celebrity.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.calllog.PersonCallHistory.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.Messagege.*{*;}
+-keep class com.ide.codekit.celebrityprankvideocall.utils.ChoiceResponse.*{*;}

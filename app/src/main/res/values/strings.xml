@@ -99,5 +99,6 @@ Posting rules you should be taking care of before you start interaction on our w
     <string name="start_a_video_call">Start a video call</string>
     <string name="history">History</string>
     <string name="online">online</string>
+    <string name="this_function_needs_to_be_implemented">This function needs to be implemented</string>
 
 </resources>

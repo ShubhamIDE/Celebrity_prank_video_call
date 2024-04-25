@@ -130,11 +130,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.adsmodule.api.adsModule.views.NativeView
-        android:layout_width="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:adType="FULL"
-        android:id="@+id/fullNativeAd"
-        android:layout_height="wrap_content"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
