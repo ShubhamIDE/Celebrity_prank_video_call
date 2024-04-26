@@ -188,5 +188,10 @@
 
     </LinearLayout>
 
+    <com.ide.codekit.celebrityprankvideocall.ads.BannerView
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
